@@ -2,6 +2,10 @@ body {
 	background-color: #0B1622;
 }
 
+.app {
+	display: grid;
+}
+
 nav {
 	position: fixed;
 	width: 100%;
@@ -9,8 +13,20 @@ nav {
 	height: 75px;
 	top: 0px;
 	background-color: #152232;
+	background-color: rgba(35,38,67,.5);
 	display: flex;
-	justify-content: space-around;
+	// justify-content: space-around;
+	place-content: center;
+	z-index: 100;
+
+	img {
+		width: 75px;
+		height: 75px;
+		object-fit: cover;
+		border-radius: 50%;
+		top: -15px;
+		position: relative;
+	}
 
 	> a {
 		font-family: Overpass,-apple-system,BlinkMacSystemFont,Segoe UI,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif;
@@ -19,6 +35,7 @@ nav {
 		text-decoration: none;
 		color: #a0b1c5;
 		margin: 0px;
+		margin: 0px 10px;
 		margin-top: 15px;
 
 		&:hover {
@@ -30,6 +47,7 @@ nav {
 .animes {
 	display: flex;
 	flex-wrap: wrap;
+	place-content: center;
 
 	.anime {
 		width: 200px;

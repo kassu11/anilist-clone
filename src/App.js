@@ -16,18 +16,25 @@ function App() {
   return (
     <div className="App">
       <HashRouter>
-        <Header setData={setData}/>
+        <Header />
         <Routes>
           <Route path="/" element={
             <>
               <h1>Home</h1>
               <AnimeSearchBar/>
-              <AnimeSearchResults data={data} />
+              <AnimeSearchResults data={data} setData={setData}/>
             </>
           } />
           <Route path="/about" element={<h1>About</h1>} />
           <Route path="/contact" element={<h1>Contact</h1>} />
           <Route path="/anime/:id" element={<AnimeInfo siteData={siteData} setSiteData={setSiteData} />} />
+          <Route path="/search/:search" element={
+            <>
+              <h1>Search</h1>
+              <AnimeSearchBar/>
+              <AnimeSearchResults data={data} setData={setData}/>
+            </>
+          } />
         </Routes>
       </HashRouter>
     </div>

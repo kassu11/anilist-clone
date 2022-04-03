@@ -1,14 +1,12 @@
 .animeInfoBody {
-	margin-top: 75px;
 	position: absolute;
 	width: 100%;
-	left: 0px;
 	
 	> .banner {
-		height: 300px;
+		height: 400px;
 		position: relative;
 		width: 100%;
-		top: -5px;
+		top: 0px;
 		background-color: #152232;
 		display: flex;
 		justify-content: space-around;
@@ -19,6 +17,10 @@
 			object-fit: cover;
 			width: 100%;
 		}
+	}
+
+	div.wmde-markdown {
+		background: none
 	}
 
 	p {
