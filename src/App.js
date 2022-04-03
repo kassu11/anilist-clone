@@ -1,25 +1,37 @@
-import logo from './logo.svg';
-import './App.css';
+import "./scss/tyyli.scss";
+import Header from "./Components/Header";
+import {Route, Routes, HashRouter} from "react-router-dom";
+import AnimeSearchResults from "./Components/AnimeSearchResults";
+import AnimeSearchBar from "./Components/AnimeSearchBar";
+import AnimeInfo from "./Pages/AnimeInfo";
+import {useEffect, useState} from "react";
 
 function App() {
+  const [data, setData] = useState([]);
+  const [siteData, setSiteData] = useState([]);
+
+  useEffect(() => {
+		console.log(data);
+	}, [data]);
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <HashRouter>
+        <Header setData={setData}/>
+        <Routes>
+          <Route path="/" element={
+            <>
+              <h1>Home</h1>
+              <AnimeSearchBar/>
+              <AnimeSearchResults data={data} />
+            </>
+          } />
+          <Route path="/about" element={<h1>About</h1>} />
+          <Route path="/contact" element={<h1>Contact</h1>} />
+          <Route path="/anime/:id" element={<AnimeInfo siteData={siteData} setSiteData={setSiteData} />} />
+        </Routes>
+      </HashRouter>
     </div>
-  );
+  )
 }
 
 export default App;
