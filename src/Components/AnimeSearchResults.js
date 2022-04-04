@@ -7,8 +7,8 @@ function AnimeSearchResults({data, setData}) {
 	const {search} = useParams();
 
 	const query = `
-	query ($id: Int, $page: Int, $perPage: Int${search ? "" : ", $search: String"}) {
-		Page (page: $page, perPage: $perPage) {
+	query ($page: Int, $search: String, $sort:[MediaSort], $isAdult: Boolean) {
+		Page (page: $page) {
 			pageInfo {
 				total
 				currentPage
@@ -16,7 +16,7 @@ function AnimeSearchResults({data, setData}) {
 				hasNextPage
 				perPage
 			}
-			media (id: $id, search: ${search ? `"${search}"` : "$search"}) {
+			media (search: $search, sort: $sort, isAdult: $isAdult) {
 				id
 				title {
 					userPreferred
@@ -27,14 +27,12 @@ function AnimeSearchResults({data, setData}) {
 			}
 		}
 	}`
-
-	console.log(query, search)
 	
-
 	const variables = {
 		"page": 1,
-		"type": "ANIME",
-		"sort": "SEARCH_MATCH"
+		"sort": search ? "SEARCH_MATCH" : "POPULARITY_DESC",
+		search: search || undefined,
+		"isAdult": undefined
 	};
 
 	useEffect(() => {
@@ -45,6 +43,7 @@ function AnimeSearchResults({data, setData}) {
 			})
 			.then(({data: {data}}) => {
 				setData(data.Page.media);
+				console.log(data)
 			});
 	}, [search]);
 

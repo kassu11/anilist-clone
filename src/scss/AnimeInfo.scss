@@ -1,9 +1,15 @@
+nav {
+	background-color: rgba(35,38,67,.5);
+}
+
 .animeInfoBody {
 	position: absolute;
 	width: 100%;
+	top: 0px;
+	left: 0px;
 	
 	> .banner {
-		height: 400px;
+		height: 342px;
 		position: relative;
 		width: 100%;
 		top: 0px;
@@ -16,8 +22,48 @@
 		img {
 			object-fit: cover;
 			width: 100%;
+			filter: brightness(.9);
 		}
 	}
+
+	.info {
+		background-color: #151F2E;
+		position: relative;
+		display: grid;
+		place-items: center;
+
+		.container {
+			max-width: 1520px;
+			margin: 0px 40px;
+		}
+
+		.textContainer {
+			position: relative;
+			left: 265px;
+			top: -340px;
+			width: calc(100% - 280px);
+		}
+
+		h1 {
+			font-family: Overpass, -apple-system, BlinkMacSystemFont, Segoe UI, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+			font-size: 25px;
+			font-weight: 700;
+			text-decoration: none;
+			color: #a0b1c5;
+			margin: 0px;
+		}
+		a.coverImage {
+			position: relative;
+			top: -100px;
+	
+			img {
+				width: 250px;
+				height: 300;
+				object-fit: cover;
+			}
+		}
+	}
+
 
 	div.wmde-markdown {
 		background: none
@@ -25,8 +71,8 @@
 
 	p {
 		font-family: Overpass,-apple-system,BlinkMacSystemFont,Segoe UI,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif;
-		font-size: 25px;
-		font-weight: 700;
+		font-size: 14px;
+		font-weight: 400;
 		text-decoration: none;
 		color: #a0b1c5;
 		margin: 0px;

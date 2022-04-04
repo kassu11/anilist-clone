@@ -10,9 +10,6 @@ function App() {
   const [data, setData] = useState([]);
   const [siteData, setSiteData] = useState([]);
 
-  useEffect(() => {
-		console.log(data);
-	}, [data]);
   return (
     <div className="App">
       <HashRouter>

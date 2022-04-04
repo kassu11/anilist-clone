@@ -13,6 +13,7 @@ function AnimeInfo({siteData, setSiteData}) {
 	query media($id:Int, $type:MediaType) {
 		Media (id: $id, type: $type) {
 			id
+			type
 			title {
 				romaji
 				english
@@ -53,11 +54,17 @@ function AnimeInfo({siteData, setSiteData}) {
 			<div className="banner">
 				<img src={siteData.bannerImage}></img>
 			</div>
-			<h1>{siteData?.title?.english}</h1>
-			<a href={`https://anilist.co/anime/${siteData?.id}`}>
-				<img src={siteData?.coverImage?.extraLarge}></img>
-			</a>
-			<MDEditor.Markdown source={siteData?.description} />
+			<div className="info">
+				<div className="container">
+					<a className="coverImage" href={`https://anilist.co/${siteData.type?.toLowerCase()}/${siteData?.id}`}>
+						<img src={siteData?.coverImage?.extraLarge}></img>
+					</a>
+					<div className="textContainer">
+						<h1>{siteData?.title?.english}</h1>
+						<MDEditor.Markdown source={siteData?.description} />
+					</div>
+				</div>
+			</div>
 		</div>
 	)
 }

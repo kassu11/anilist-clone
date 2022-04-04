@@ -13,7 +13,6 @@ nav {
 	height: 75px;
 	top: 0px;
 	background-color: #152232;
-	background-color: rgba(35,38,67,.5);
 	display: flex;
 	// justify-content: space-around;
 	place-content: center;
@@ -72,18 +71,24 @@ nav {
 
 		img {
 			width: 180px;
-			height: auto;
+			height: 250px;
+			object-fit: cover;
 			border-radius: 10px;
 		}
 
-		.title {
+		p {
+			position: relative;
 			font-family: Overpass,-apple-system,BlinkMacSystemFont,Segoe UI,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif;
-			font-size: 20px;
+			font-size: 15px;
 			font-weight: 700;
 			text-decoration: none;
+			word-break: break-word;
 			color: #a0b1c5;
 			margin: 0px;
 			margin-top: 15px;
+			max-height: 100px;
+			overflow: hidden;
+			text-overflow: ellipsis;
 		}
 
 		.description {
