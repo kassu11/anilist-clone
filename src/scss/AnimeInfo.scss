@@ -33,7 +33,9 @@ nav {
 		place-items: center;
 
 		.container {
+			position: relative;
 			max-width: 1520px;
+			width: 100%;
 			margin: 0px 40px;
 		}
 

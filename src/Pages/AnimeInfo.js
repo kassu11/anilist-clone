@@ -18,6 +18,7 @@ function AnimeInfo({siteData, setSiteData}) {
 				romaji
 				english
 				native
+				userPreferred
 			}
 			bannerImage
 			coverImage {
@@ -45,22 +46,22 @@ function AnimeInfo({siteData, setSiteData}) {
 			})
 			.then(({data: {data}}) => {
 				setSiteData(data.Media);
-				console.log(data.Media)
+				document.title = data.Media?.title?.english || data.Media?.title?.userPreferred
 			});
 	}, []);
 
 	return (
 		<div className="animeInfoBody">
 			<div className="banner">
-				<img src={siteData.bannerImage}></img>
+				<img src={siteData.bannerImage} key={siteData?.id}></img>
 			</div>
 			<div className="info">
 				<div className="container">
 					<a className="coverImage" href={`https://anilist.co/${siteData.type?.toLowerCase()}/${siteData?.id}`}>
-						<img src={siteData?.coverImage?.extraLarge}></img>
+						<img src={siteData?.coverImage?.extraLarge} key={siteData?.id}></img>
 					</a>
 					<div className="textContainer">
-						<h1>{siteData?.title?.english}</h1>
+						<h1>{siteData?.title?.english || siteData?.title?.userPreferred}</h1>
 						<MDEditor.Markdown source={siteData?.description} />
 					</div>
 				</div>

@@ -2,6 +2,10 @@ body {
 	background-color: #0B1622;
 }
 
+img[src=""] {
+	visibility: hidden;
+}
+
 .app {
 	display: grid;
 }
@@ -59,8 +63,11 @@ nav {
 		flex-direction: column;
 		justify-content: space-between;
 		align-items: center;
+		min-height: 325px;
 
 		a {
+			position: relative;
+			width: 180px;
 			text-decoration: none;
 			color: #a0b1c5;
 			font-size: 20px;

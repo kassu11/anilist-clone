@@ -1,10 +1,13 @@
-import {Link} from "react-router-dom";
 import axios from "axios";
 import {useEffect, useState} from "react";
 import { useParams } from "react-router";
 
-function AnimeSearchResults({data, setData}) {
+import AnimeResultElement from "./AnimeResultElement";
+import BottomAnimeResultElem from "./BottomAnimeResultElem";
+
+function AnimeSearchResults() {
 	const {search} = useParams();
+	const [data, setData] = useState([]);
 
 	const query = `
 	query ($page: Int, $search: String, $sort:[MediaSort], $isAdult: Boolean) {
@@ -19,10 +22,12 @@ function AnimeSearchResults({data, setData}) {
 			media (search: $search, sort: $sort, isAdult: $isAdult) {
 				id
 				title {
+					english
 					userPreferred
 				}
 				coverImage {
 					large
+					color
 				}
 			}
 		}
@@ -42,22 +47,14 @@ function AnimeSearchResults({data, setData}) {
 				variables: variables
 			})
 			.then(({data: {data}}) => {
-				setData(data.Page.media);
-				console.log(data)
+				setData(data.Page);
 			});
 	}, [search]);
 
-
 	return (
-		<div className="animes">
-			{data?.map(data => (
-				<div className="anime" key={data.id}>
-					<Link to={`/anime/${data.id}`}>
-						<img src={data.coverImage.large}></img>
-						<p>{data.title.userPreferred}</p>
-					</Link>
-				</div>
-			))}
+		<div className="animes" key={search}>
+			{data.media?.map((animeData, i) => <AnimeResultElement data={animeData} key={animeData.id} />)}
+			{data?.pageInfo?.hasNextPage ? <BottomAnimeResultElem query={query} variables={variables} /> : null}
 		</div>
 	);
 }
