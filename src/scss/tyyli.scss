@@ -20,7 +20,7 @@ nav {
 	display: flex;
 	// justify-content: space-around;
 	place-content: center;
-	z-index: 100;
+	z-index: 1;
 
 	img {
 		width: 75px;
@@ -51,6 +51,9 @@ nav {
 	display: flex;
 	flex-wrap: wrap;
 	place-content: center;
+	right: 0px;
+	position: absolute;
+	width: calc(100% - 250px);
 
 	.anime {
 		width: 200px;

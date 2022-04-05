@@ -22,7 +22,7 @@ function App() {
           <Route path="/anime/:id" element={
             <AnimeInfo siteData={siteData} setSiteData={setSiteData} />
           } />
-          <Route path="/search/:search" element={
+          <Route path="/search" element={
             <AnimeSearchPage />
           } />
         </Routes>
