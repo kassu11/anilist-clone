@@ -16,6 +16,7 @@
 		margin: 10px;
 		box-shadow: 2px 2px 5px rgb(0 0 0 / 50%);
 		overflow: hidden;
+		margin-bottom: 20px;
 
 		.search-icon {
 			position: absolute;
@@ -45,7 +46,7 @@
 		}
 	}
 
-	.ageRating {
+	.ageRating, .searchType {
 		position: relative;
 		width: 100px;
 		height: 30px;
@@ -99,7 +100,7 @@
 				color: transparent;
 				transition: color .2s, transform .2s;
 
-				@at-root .ageRating:hover .custom-range p {
+				@at-root :is(.ageRating, .searchType):hover .custom-range p {
 					transform: translateY(-50%) scale(1.1);
 					text-shadow: 0 0 hsl(216deg 37% 25%);
 					color: white;
@@ -122,5 +123,10 @@
 			font-weight: 600;
 			opacity: .8;
 		}
+	}
+
+	.searchType {
+		left: 120px;
+		top: -30px;
 	}
 }

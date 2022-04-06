@@ -25,6 +25,7 @@ function App() {
           <Route path="/search" element={
             <AnimeSearchPage />
           } />
+          <Route path="/:id" element={<h1>404 Error</h1>} />
         </Routes>
       </HashRouter>
     </div>

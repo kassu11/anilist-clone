@@ -1,22 +1,32 @@
 import axios from "axios";
 import {useEffect, useState} from "react";
-import { useParams, useLocation } from "react-router";
+import { useLocation } from "react-router";
 
 import AnimeResultElement from "./AnimeResultElement";
 import BottomAnimeResultElem from "./BottomAnimeResultElem";
-
-function formatSearch(search) {
-	return new URLSearchParams(search)
-}
+import formatSearchUrlToObject from "../Lib/formatSearchUrlToObject";
 
 function AnimeSearchResults() {
-	// const {search} = useParams();
 	const {search} = useLocation();
 	const [data, setData] = useState([]);
 
-	const searchResults = formatSearch(search);
+	const searchResults = formatSearchUrlToObject(search);
 
-	console.log(searchResults);
+	const variables = {
+		"page": 1,
+		"sort": searchResults["search"] ? "SEARCH_MATCH" : "TRENDING_DESC",
+		// "sort": ["TITLE_ENGLISH", "ID_DESC"],
+		"type": searchResults["type"]?.toUpperCase(), // "ANIME", "MANGA"
+		"genre_in": undefined,
+		"genre_not_in": undefined,
+		"tag_in:": undefined,
+		"format_in": undefined,
+		"seasonYear": undefined,
+		"season": undefined,
+		"isAdult": searchResults["isAdult"] == "only" ? true : searchResults["isAdult"] == "both" ? undefined : false,
+		"status": undefined,
+		"search": searchResults["search"] || undefined,
+	};
 
 	const query = `
 	query ($page: Int, $search: String, $sort:[MediaSort], $isAdult: Boolean, $type: MediaType, $genre_in: [String], $genre_not_in: [String], $tag_in: [String], $season: MediaSeason, $seasonYear: Int, $format_in: [MediaFormat], $status: MediaStatus) {
@@ -42,22 +52,6 @@ function AnimeSearchResults() {
 		}
 	}`
 	
-	const variables = {
-		"page": 1,
-		"sort": searchResults.get("search") ? "SEARCH_MATCH" : "POPULARITY_DESC",
-		// "sort": ["TITLE_ENGLISH", "ID_DESC"],
-		"type": undefined, // "ANIME", "MANGA"
-		"genre_in": undefined,
-		"genre_not_in": undefined,
-		"tag_in:": undefined,
-		"format_in": undefined,
-		"seasonYear": undefined,
-		"season": undefined,
-		"search": searchResults.get("search") || undefined,
-		"isAdult": false,
-		"status": undefined,
-	};
-
 	useEffect(() => {
 		axios
 			.post("https://graphql.anilist.co", {
@@ -66,11 +60,12 @@ function AnimeSearchResults() {
 			})
 			.then(({data: {data}}) => {
 				setData(data.Page);
+				window.scrollTo(0, 0)
 			});
 	}, [search]);
 
 	return (
-		<div className="animes" key={search}>
+		<div className="animes" key={`${search}`}>
 			{data.media?.map((animeData, i) => <AnimeResultElement data={animeData} key={animeData.id} />)}
 			{data?.pageInfo?.hasNextPage ? <BottomAnimeResultElem query={query} variables={variables} /> : null}
 		</div>
