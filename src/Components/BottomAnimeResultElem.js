@@ -26,7 +26,7 @@ function BottomAnimeResultElem({animeData, query, variables}) {
 		observer.observe(myRef.current);
 	}, [])
 
-	if(!data) return <div className="anime" ref={myRef}></div>
+	if(!data) return <div className="anime bottom" ref={myRef}></div>
 	else {
 		return (
 			<>

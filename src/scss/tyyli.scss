@@ -2,7 +2,7 @@ body {
 	background-color: #0B1622;
 }
 
-img[src=""] {
+img[src=""], img:not(img[src]) {
 	visibility: hidden;
 }
 
@@ -54,6 +54,7 @@ nav {
 	right: 0px;
 	position: absolute;
 	width: calc(100% - 250px);
+	top: 75px;
 
 	.anime {
 		width: 200px;
@@ -83,7 +84,7 @@ nav {
 			width: 180px;
 			height: 250px;
 			object-fit: cover;
-			border-radius: 10px;
+			border-radius: 5px;
 		}
 
 		p {

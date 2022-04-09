@@ -40,6 +40,7 @@ function AnimeSearchResults() {
 			}
 			media (search: $search, sort: $sort, isAdult: $isAdult, type: $type, genre_in: $genre_in, genre_not_in: $genre_not_in, tag_in: $tag_in, season: $season, seasonYear: $seasonYear, format_in: $format_in, status: $status, onList: true) {
 				id
+				type
 				title {
 					english
 					userPreferred
@@ -59,13 +60,13 @@ function AnimeSearchResults() {
 				variables: variables
 			})
 			.then(({data: {data}}) => {
-				setData(data.Page);
-				window.scrollTo(0, 0)
+				setData({...data.Page, search});
+				window.scrollTo(0, 0);
 			});
 	}, [search]);
 
 	return (
-		<div className="animes" key={`${search}`}>
+		<div className="animes" key={`${data.search}`}>
 			{data.media?.map((animeData, i) => <AnimeResultElement data={animeData} key={animeData.id} />)}
 			{data?.pageInfo?.hasNextPage ? <BottomAnimeResultElem query={query} variables={variables} /> : null}
 		</div>
@@ -73,3 +74,55 @@ function AnimeSearchResults() {
 }
 
 export default AnimeSearchResults;
+
+
+const stats = `query ($id: Int = 131681, $page: Int, $perPage: Int, $search: String) {
+  Page (page: $page, perPage: $perPage) {
+    pageInfo {
+      total
+      currentPage
+      lastPage
+      hasNextPage
+      perPage
+    }
+    media (id: $id, search: $search) {
+      id 
+      rankings {
+        id 
+        rank 
+        type 
+        format 
+        year 
+        season 
+        allTime
+        context
+      }
+      trends(sort:ID_DESC) {
+        nodes {
+          averageScore 
+          date 
+          trending 
+          popularity
+        }
+      }
+      airingTrends:trends(releasing:true,sort:EPISODE_DESC) {
+        nodes {
+          averageScore 
+          inProgress 
+          episode
+        }
+      }
+      distribution:stats {
+        status:statusDistribution {
+          status 
+          amount
+        }
+        score:scoreDistribution {
+          score 
+          amount
+        }
+      }
+    }
+  }
+}
+`

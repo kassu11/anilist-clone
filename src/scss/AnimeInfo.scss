@@ -8,8 +8,7 @@ nav {
 	top: 0px;
 	left: 0px;
 	
-	> .banner {
-		height: 342px;
+	.banner {
 		position: relative;
 		width: 100%;
 		top: 0px;
@@ -18,32 +17,48 @@ nav {
 		justify-content: space-around;
 		overflow: hidden;
 		color: #a0b1c5;
+		min-height: 200px;
+
+		img:not(img[src]) {
+			display: none;
+		}
 
 		img {
+			position: relative;
 			object-fit: cover;
 			width: 100%;
+			height: 342px;
 			filter: brightness(.9);
 		}
 	}
 
 	.info {
-		background-color: #151F2E;
 		position: relative;
+		background-color: #151F2E;
 		display: grid;
 		place-items: center;
-
+		width: 100%;
+		
 		.container {
 			position: relative;
-			max-width: 1520px;
-			width: 100%;
-			margin: 0px 40px;
+			width: clamp(200px, 100% - 100px, 1520px);
+			display: flex;
+			gap: 25px;
+
+			.left {
+				position: relative;
+				width: 250px;
+			}
+
+			.right {
+				position: relative;
+				width: 100%;
+			}
 		}
 
 		.textContainer {
 			position: relative;
-			left: 265px;
-			top: -340px;
-			width: calc(100% - 280px);
+			width: min(100%, 925px);
 		}
 
 		h1 {
@@ -63,6 +78,11 @@ nav {
 				height: 300;
 				object-fit: cover;
 			}
+		}
+
+		.relations {
+			display: flex;
+			flex-wrap: wrap;
 		}
 	}
 

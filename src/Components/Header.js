@@ -10,8 +10,8 @@ function Header({setData}) {
 				<img src={logo}></img>
 			</Link>
 			<Link to="/">Home</Link>
-			<Link to="/about">About</Link>
-			<Link to="/contact">Contact</Link>
+			<Link to="/search?type=anime">Animes</Link>
+			<Link to="/search?type=manga">Mangas</Link>
 		</nav>
 	)
 }

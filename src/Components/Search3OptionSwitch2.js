@@ -6,7 +6,7 @@ function Search3OptionSwitch({urlvariables, setUrlvariables}) {
 	const emojis = ["🎥", "🙏", "📖"];
 	const myRef = useRef();
 	const dValue = urlvariables.type == "anime" ? 0 : urlvariables.type == "manga" ? 2 : 1;
-	const [myText, setMyText] = useState(emojis[dValue]); 
+	const [myText, setMyText] = useState(emojis[dValue]);
 	
 	const navigate = useNavigate();
 
@@ -26,7 +26,6 @@ function Search3OptionSwitch({urlvariables, setUrlvariables}) {
 	);
 
 	function rangeOptions(e) {
-		console.log("??")
 		if(e.target.value == 0) urlvariables.type = "anime";
 		 else if(e.target.value == 1) urlvariables.type = undefined;
 		 else if(e.target.value == 2) urlvariables.type = "manga";

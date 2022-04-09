@@ -26,7 +26,6 @@ function Search3OptionSwitch({urlvariables, setUrlvariables}) {
 	);
 
 	function rangeOptions(e) {
-		console.log("??")
 		if(e.target.value == 0) urlvariables.isAdult = undefined;
 		 else if(e.target.value == 1) urlvariables.isAdult = "both";
 		 else if(e.target.value == 2) urlvariables.isAdult = "only";

@@ -5,6 +5,7 @@ import {useEffect, useState} from "react";
 import "./scss/tyyli.scss";
 import AnimeInfo from "./Pages/AnimeInfo";
 import AnimeSearchPage from "./Pages/AnimeSearchPage";
+import Characters from "./Pages/Characters";
 
 function App() {
   const [siteData, setSiteData] = useState([]);
@@ -19,8 +20,11 @@ function App() {
           } />
           <Route path="/about" element={<h1>About</h1>} />
           <Route path="/contact" element={<h1>Contact</h1>} />
-          <Route path="/anime/:id" element={
+          <Route path="/media/:id" element={
             <AnimeInfo siteData={siteData} setSiteData={setSiteData} />
+          } />
+          <Route path="/media/:id/characters" element={
+            <Characters />
           } />
           <Route path="/search" element={
             <AnimeSearchPage />

@@ -1,16 +1,16 @@
-import "../scss/SearchBar.scss";
+import "../scss/searchBar.scss";
 import SearchInput from "./SearchInput";
 import formatSearchUrlToObject from "../Lib/formatSearchUrlToObject";
 import Search3OptionSwitch from "./Search3OptionSwitch";
 import Search3OptionSwitch2 from "./Search3OptionSwitch2";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import { useLocation } from "react-router";
 
-function AnimeSearchBar({setData}) {
+function AnimeSearchBar() {
 	const {search} = useLocation();
 	const searchResults = formatSearchUrlToObject(search);
 
-	const [urlvariables, setUrlvariables] = useState({
+	const baseSearch = {
 		"sort": undefined,
 		"type": undefined,
 		"genre_in": undefined,
@@ -22,19 +22,19 @@ function AnimeSearchBar({setData}) {
 		"isAdult": false,
 		"status": undefined,
 		"search": undefined,
-		...searchResults
-	});
+	}
+
+	const [urlvariables, setUrlvariables] = useState({...baseSearch, ...searchResults});
+
+	useEffect(() => {
+		setUrlvariables({...baseSearch, ...searchResults});
+	}, [search]);
 
 	return (
 		<div className="search-bar">
 			<SearchInput urlvariables={urlvariables} setUrlvariables={setUrlvariables} />
-			<br></br>
 			<Search3OptionSwitch urlvariables={urlvariables} setUrlvariables={setUrlvariables} />
 			<Search3OptionSwitch2 urlvariables={urlvariables} setUrlvariables={setUrlvariables} />
-			<br></br>
-			{/* <select>
-				<option>Lol</option>
-			</select> */}
 		</div>
 	);
 }
