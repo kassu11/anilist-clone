@@ -12,6 +12,7 @@ function Header({setData}) {
 			<Link to="/">Home</Link>
 			<Link to="/search?type=anime">Animes</Link>
 			<Link to="/search?type=manga">Mangas</Link>
+			<Link to="/users">Users</Link>
 		</nav>
 	)
 }

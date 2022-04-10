@@ -1,0 +1,164 @@
+.usersPage {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	top: 75px;
+	width: 100%;
+	height: max-content;
+	place-content: center;
+
+	.container {
+		position: relative;
+		background-color: #151F2E;
+		border-radius: 10px;
+		width: min(100%, 1000px);
+		padding: 10px;
+		margin-inline: auto;
+
+		.userSearch {
+			position: relative;
+			width: 100%;
+			display: flex;
+			place-content: center;
+			margin-bottom: 15px;
+
+			input {
+				position: relative;
+				width: 200px;
+				height: 35px;
+				background-color: #0B1622;
+				outline: none;
+				border: none;
+				margin-left: 10px;
+				font-size: 14px;
+				border-radius: 5px;
+				font-family: Helvetica;
+				font-weight: 600;
+				color: rgb(139,160,178);
+				padding-left: 15px;
+	
+				&::placeholder {
+					color: #516170;
+				}
+			}
+
+			p {
+				color: #a0b1c5;
+				font-family: Helvetica;
+				font-weight: 700;
+				margin: auto 0px;
+			}
+		}
+	}
+
+	.userList {
+		position: relative;
+		width: 100%;
+		// place-content: center;
+
+		.user {
+			position: relative;
+			display: grid;
+			width: calc(100% - 20px);
+			border-radius: 5px;
+			grid-template-columns: 150px 1fr 150px;
+			gap: 10px;
+			background-color: #0b1622;
+			color: #a0b1c5;
+			font-family: Overpass,-apple-system,BlinkMacSystemFont,Segoe UI,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif;
+			font-size: 16px;
+			font-weight: 600;
+			text-decoration: none;
+			margin-bottom: 5px;
+			padding: 10px;
+
+			> div {
+				position: relative;
+			}
+
+			.left {
+				background: #151F2E;
+				display: grid;
+
+				p {
+					margin: auto 0px;
+					font-size: 20px;
+					font-weight: 500;
+					font-family: Overpass, -apple-system, BlinkMacSystemFont, Segoe UI, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+					width: 100%;
+					text-align: center;
+					text-shadow: black 0px 0px 5px;
+				}
+
+				.avatar {
+					width: 100px;
+					height: 100px;
+					object-fit: cover;
+					margin-inline: auto;
+				}
+			}
+
+			.middle {
+				display: flex;
+				place-content: space-evenly;
+				text-align: center;
+
+				div {
+					width: 100%;
+				}
+
+				.type {
+					padding: 3px;
+					text-align: center;
+					border-radius: 5px;
+					font-weight: 700;
+					background-color: #171e33;
+				}
+
+				p {
+					margin: 0px;
+					background-color: hsl(211, 51%, 16%);
+					border-radius: 5px;
+					margin: 3px;
+					padding: 5px;
+				}
+			}
+
+			.right {
+				position: relative;
+				background: #151f2e;
+				height: 35px;
+				border-radius: 5px;
+				display: flex;
+				place-content: center;
+				cursor: pointer;
+				transition: background .2s;
+
+				&:hover {
+					background-color: hsl(216, 37%, 20%);
+				}
+
+				p {
+					margin: 5px;
+				}
+			}
+		}
+	}
+
+	.compare {
+		position: relative;
+		background-color: #0B1622;
+		border-radius: 5px;
+		width: max-content;
+		margin-inline: auto;
+		cursor: pointer;
+
+		p {
+			color: #a0b1c5;
+			font-family: Helvetica;
+			font-weight: 700;
+			margin: auto 0px;
+			padding: 10px;
+		}
+	}
+}
