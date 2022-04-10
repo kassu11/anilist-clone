@@ -11,9 +11,10 @@
 		position: relative;
 		background-color: #151F2E;
 		border-radius: 10px;
-		width: min(100%, 1000px);
+		width: min(100%, 1300px);
 		padding: 10px;
 		margin-inline: auto;
+		box-sizing: border-box;
 
 		.userSearch {
 			position: relative;
@@ -152,6 +153,15 @@
 		width: max-content;
 		margin-inline: auto;
 		cursor: pointer;
+		transition: background .2s;
+
+		&:hover {
+			background-color: #a0b1c5;
+			
+			p {
+				color: #0B1622;
+			}
+		}
 
 		p {
 			color: #a0b1c5;
@@ -159,6 +169,141 @@
 			font-weight: 700;
 			margin: auto 0px;
 			padding: 10px;
+			transition: color .2s;
+		}
+	}
+
+	p.totalAnimes {
+		color: #a0b1c5;
+		font-family: Overpass, -apple-system, BlinkMacSystemFont, Segoe UI, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+		font-weight: 700;
+		margin: auto 0px;
+		font-size: 20px;
+		text-align: center;
+		margin: 10px;
+	}
+
+	.userAnimes {
+		position: relative;
+		width: 100%;
+		top: 0px;
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+		background-color: #0b1622;
+		box-sizing: border-box;
+		border-radius: 5px;
+		gap: 15px;
+		padding: 10px;
+
+		.anime {
+			position: relative;
+			width: 100%;
+			height: 200px;
+			display: flex;
+			flex-grow: 1;
+			background-color: #151f2e;
+			border-radius: 5px;
+			overflow: hidden;
+			box-shadow: 0px 0px 10px rgb(0 0 0 / 50%);
+
+			.imgContainer {
+				position: relative;
+				width: 150px;
+				height: 100%;
+				flex-shrink: 0;
+
+				img {
+					position: relative;
+					width: 100%;
+					height: 100%;
+					object-fit: cover;
+				}
+
+				.meanScore {
+					position: absolute;
+					bottom: 0px;
+					text-align: center;
+					border-radius: 0px 10px 0px 0px;
+					font-weight: 700;
+					background-color: #0b1622de;
+					font-size: 20px;
+					color: rgb(139, 160, 178);
+					font-family: Helvetica;
+					padding: 5px;
+					margin: 0px;
+				}
+			}
+
+			.info {
+				position: relative;
+				width: 100%;
+				height: 100%;
+				display: flex;
+				flex-direction: column;
+
+				.title {
+					position: relative;
+					width: 100%;
+					font-size: 20px;
+					font-weight: 700;
+					font-family: Overpass, -apple-system, BlinkMacSystemFont, Segoe UI, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+					color: #a0b1c5;
+					text-decoration: none;
+					text-shadow: black 0px 0px 5px;
+					margin: 5px;
+					margin-top: 0px;
+				}
+
+				.userScores {
+					position: relative;
+					width: 100%;
+					height: 100%;
+					overflow-y: auto;
+					background-color: #0d1117;
+
+					.userScore {
+						position: relative;
+						display: flex;
+						padding-left: 5px;
+						margin-bottom: 5px;
+
+						p {
+							position: relative;
+							width: 100%;
+							font-size: 16px;
+							font-weight: 500;
+							font-family: Overpass, -apple-system, BlinkMacSystemFont, Segoe UI, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+							color: #a0b1c5;
+							text-decoration: none;
+							text-shadow: black 0px 0px 5px;
+							margin: 0px;
+							margin-top: 3px;
+							margin-left: 5px;
+
+							&.score {
+								text-align: right;
+								padding-right: 10px;
+							}
+						}
+
+						img {
+							height: 30px;
+							width: 30px;
+						}
+					}
+				}
+
+				.wmde-markdown {
+					overflow: hidden;
+					padding: 10px;
+					height: 100%;
+
+					&:hover {
+						overflow-y: auto;
+					}
+				}
+			}
+
 		}
 	}
 }
