@@ -1,12 +1,12 @@
 import { useParams } from "react-router";
 import axios from "axios";
 import {useEffect, useState} from "react";
-import MDEditor from '@uiw/react-md-editor';
-import rehypeSanitize from "rehype-sanitize";
 
 import YoutubeTrailer from "../Components/YoutubeTrailer";
 import Description from "../Components/AnimeInfo/Description";
 import Score from "../Components/AnimeInfo/Score";
+import Genres from "../Components/AnimeInfo/Genres";
+import Tags from "../Components/AnimeInfo/Tags";
 
 import "../scss/animeInfo.scss";
 
@@ -21,6 +21,13 @@ function AnimeInfo() {
 			type
 			format
 			genres
+			tags {
+        name
+        description
+        category
+        rank
+        isMediaSpoiler
+      }
 			trailer {
 				id
 			}
@@ -28,6 +35,18 @@ function AnimeInfo() {
         nodes {
           name
           siteUrl
+        }
+      }
+			staff(sort: [RELEVANCE, ROLE, FAVOURITES]) {
+        edges{
+          node {
+            siteUrl
+            name {
+              native
+              userPreferred
+            }
+          }
+          role
         }
       }
 			stats {
@@ -140,6 +159,8 @@ function AnimeInfo() {
 						<a className="coverImage" href={`https://anilist.co/${siteData.type?.toLowerCase()}/${siteData?.id}`}>
 							<img src={siteData?.coverImage?.extraLarge} key={siteData?.id}></img>
 						</a>
+						{siteData?.genres?.length && (<Genres genres={siteData?.genres} />)}
+						{siteData?.tags?.length && (<Tags tags={siteData?.tags} />)}
 					</div>
 
 					<div className="right">
@@ -147,11 +168,7 @@ function AnimeInfo() {
 						<Description title={siteData.title} description={siteData.description} />
 
 						<YoutubeTrailer videoID={siteData?.trailer?.id} />
-						<div className="genres">{siteData?.genres?.map(e => (
-							<div className="genre" key={e}>
-								<p>{e}</p>
-							</div>
-						))}</div>
+
 						<div className="relations">{siteData?.relations?.edges.map(data => (
 							<div className="relation" key={data.id}>
 								<img src={data.node.coverImage.large}></img>
