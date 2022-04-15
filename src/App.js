@@ -9,8 +9,6 @@ import Characters from "./Pages/Characters";
 import UsersPage from "./Pages/UsersPage";
 
 function App() {
-  const [siteData, setSiteData] = useState([]);
-
   return (
     <div className="App">
       <HashRouter>
@@ -22,7 +20,7 @@ function App() {
           <Route path="/about" element={<h1>About</h1>} />
           <Route path="/contact" element={<h1>Contact</h1>} />
           <Route path="/media/:id" element={
-            <AnimeInfo siteData={siteData} setSiteData={setSiteData} />
+            <AnimeInfo/>
           } />
           <Route path="/media/:id/characters" element={
             <Characters />

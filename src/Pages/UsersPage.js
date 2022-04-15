@@ -6,79 +6,81 @@ import MDEditor from '@uiw/react-md-editor';
 
 import "../scss/userPage.scss";
 
+import UserScores from "../Components/UserScores";
+
+const query = `
+query ($search: String) {
+	User (search: $search) {
+		id
+		name
+		bannerImage
+		avatar {
+			large
+			medium
+		}
+		statistics {
+			anime {
+				count
+				meanScore
+				minutesWatched
+				episodesWatched
+			}
+			manga {
+				count
+				meanScore
+				chaptersRead
+				volumesRead
+			}
+		}
+	}
+}`
+
+const mediaQuery = `
+query ($id: Int, $type: MediaType) {
+	MediaListCollection(userId: $id, type:$type) {
+		lists {
+			name
+			isCustomList
+			isSplitCompletedList
+			status
+			entries {
+				id
+				score
+				progress
+				media {
+					id
+					title {
+						romaji
+						english
+						native
+						userPreferred
+					}
+					coverImage {
+						large
+					}
+					season
+					seasonYear
+					description
+					startDate {
+						year
+						month
+						day
+					}
+					endDate {
+						year
+						month
+						day
+					}
+				} 
+			}
+		}
+	}
+}`;
+
 function UsersPage() {
 	const [users, setUsers] = useState([]);
 	const [userAnimes, setUserAnimes] = useState([]);
 	const [sameAnime, setSameAnime] = useState([]);
-
-	const query = `
-	query ($search: String) {
-		User (search: $search) {
-			id
-			name
-			bannerImage
-			avatar {
-				large
-				medium
-			}
-			statistics {
-				anime {
-					count
-					meanScore
-					minutesWatched
-					episodesWatched
-				}
-				manga {
-					count
-					meanScore
-					chaptersRead
-					volumesRead
-				}
-			}
-		}
-	}`
-
-	const mediaQuery = `
-	query ($id: Int, $type: MediaType) {
-		MediaListCollection(userId: $id, type:$type) {
-			lists {
-				name
-				isCustomList
-				isSplitCompletedList
-				status
-				entries {
-					id
-					score
-					progress
-          media {
-            id
-            title {
-							romaji
-							english
-							native
-							userPreferred
-          	}
-						coverImage {
-							large
-						}
-						season
-						seasonYear
-						description
-						startDate {
-							year
-							month
-							day
-						}
-						endDate {
-							year
-							month
-							day
-						}
-					} 
-				}
-			}
-		}
-	}`;
 
 	useEffect(() => {
 		if(users.length == 0 || userAnimes.length >= users.length) return;
@@ -227,6 +229,8 @@ function UsersPage() {
 						</div>
 					))}
 				</div>
+
+				<UserScores users={users} />
 			</div>
 		</div>
 	)

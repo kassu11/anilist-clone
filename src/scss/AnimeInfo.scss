@@ -7,6 +7,8 @@ nav {
 	width: 100%;
 	top: 0px;
 	left: 0px;
+	background-color: #0B1622;
+	overflow: hidden;
 	
 	.banner {
 		position: relative;
@@ -34,7 +36,6 @@ nav {
 
 	.info {
 		position: relative;
-		background-color: #151F2E;
 		display: grid;
 		place-items: center;
 		width: 100%;
@@ -43,6 +44,7 @@ nav {
 			position: relative;
 			width: clamp(200px, 100% - 100px, 1520px);
 			display: flex;
+			place-content: center;
 			gap: 25px;
 
 			.left {
@@ -52,19 +54,107 @@ nav {
 
 			.right {
 				position: relative;
-				width: 100%;
+				display: grid;
+				width: min(100%, 750px);
+
+				.textContainer {
+					position: relative;
+					margin-top: 25px;
+					width: min(100%, 925px);
+					background-color: #151F2E;
+					border-radius: 5px;
+					padding: 15px;
+				}
+
+				.scores {
+					background-color: #151f2e;
+					border-radius: 5px;
+					padding: 12px;
+					display: flex;
+					margin-top: 25px;
+					width: 100%;
+					position: relative;
+		
+					.meanScore {
+						height: max-content;
+						border-right: 2px solid #0B1622;
+						position: relative;
+						font-family: Overpass,-apple-system,BlinkMacSystemFont,Segoe UI,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif;
+						font-size: 14px;
+						font-weight: 400;
+						color: #a0b1c5;
+						margin: 0px;
+						width: max-content;
+						margin: auto 0px;
+						text-align: center;
+						line-height: 1.05;
+						padding-right: 25px;
+		
+						.title {
+							padding: 3px;
+							background: #0b1622;
+							border-radius: 3px;
+							font-weight: 500;
+						}
+		
+						.score {
+							font-size: 30px;
+							font-weight: 700;
+						}
+					}
+		
+					.stats {
+						position: relative;
+						height: max-content;
+						margin: auto 0px;
+						padding: 0px 25px;
+		
+						p {
+							font-size: 20px;
+							margin: 0px;
+						}
+		
+						span {
+							font-weight: 700;
+						}
+		
+						.top, .bottom {
+							display: flex;
+							gap: 25px;
+						}
+		
+						.bottom {
+							margin-top: 15px;
+							gap: 15px;
+
+							.format {
+								display: grid;
+    						place-content: center;
+							}
+
+							.studio {
+								display: flex;
+								column-gap: 15px;
+								flex-wrap: wrap;
+							}
+							div:not(:last-child) {
+								border-right: 2px solid #0b1622;
+								padding-right: 15px;
+							}
+							p {
+								font-size: 18px;
+							}
+						}
+					}
+				}
 			}
 		}
 
-		.textContainer {
-			position: relative;
-			width: min(100%, 925px);
-		}
 
 		h1 {
 			font-family: Overpass, -apple-system, BlinkMacSystemFont, Segoe UI, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
-			font-size: 25px;
-			font-weight: 700;
+			font-size: 21px;
+			font-weight: 400;
 			text-decoration: none;
 			color: #a0b1c5;
 			margin: 0px;
@@ -77,6 +167,7 @@ nav {
 				width: 250px;
 				height: 300;
 				object-fit: cover;
+				border-radius: 5px;
 			}
 		}
 
@@ -88,7 +179,15 @@ nav {
 
 
 	div.wmde-markdown {
-		background: none
+		background: none;
+		margin-top: 12px;
+
+		li {
+			color: #a0b1c5;
+			font-family: Overpass,-apple-system,BlinkMacSystemFont,Segoe UI,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif;
+			font-size: 14px;
+			font-weight: 400;
+		}
 	}
 
 	p {

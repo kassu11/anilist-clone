@@ -5,21 +5,48 @@ import MDEditor from '@uiw/react-md-editor';
 import rehypeSanitize from "rehype-sanitize";
 
 import YoutubeTrailer from "../Components/YoutubeTrailer";
+import Description from "../Components/AnimeInfo/Description";
+import Score from "../Components/AnimeInfo/Score";
 
 import "../scss/animeInfo.scss";
 
-function AnimeInfo({siteData, setSiteData}) {
+function AnimeInfo() {
 	const {id} = useParams();
+	const [siteData, setSiteData] = useState(null);
 
 	const query = `
 	query media($id:Int, $type:MediaType) {
 		Media (id: $id, type: $type) {
 			id
 			type
+			format
 			genres
 			trailer {
 				id
 			}
+			studios(isMain: true) {
+        nodes {
+          name
+          siteUrl
+        }
+      }
+			stats {
+        scoreDistribution {
+          score
+          amount
+      	}
+        statusDistribution {
+          status
+          amount
+        }
+      }
+			popularity
+			meanScore
+			rankings {
+        rank
+        type
+        allTime
+      }
 			title {
 				romaji
 				english
@@ -75,9 +102,10 @@ function AnimeInfo({siteData, setSiteData}) {
 				extraLarge
 			}
 			description
+			season
 			startDate {
-				year
-			}
+        year
+      }
 			endDate {
 				year
 			}
@@ -98,8 +126,9 @@ function AnimeInfo({siteData, setSiteData}) {
 				setSiteData(data.Media);
 				document.title = data.Media?.title?.english || data.Media?.title?.userPreferred
 			});
-	}, []);
+	}, [id]);
 
+	if(!siteData) return null;
 	return (
 		<div className="animeInfoBody" key={siteData?.id}>
 			<div className="banner">
@@ -114,10 +143,8 @@ function AnimeInfo({siteData, setSiteData}) {
 					</div>
 
 					<div className="right">
-						<div className="textContainer">
-							<h1>{siteData?.title?.english || siteData?.title?.userPreferred}</h1>
-							<MDEditor.Markdown source={siteData?.description} />
-						</div>
+						<Score siteData={siteData}/>
+						<Description title={siteData.title} description={siteData.description} />
 
 						<YoutubeTrailer videoID={siteData?.trailer?.id} />
 						<div className="genres">{siteData?.genres?.map(e => (

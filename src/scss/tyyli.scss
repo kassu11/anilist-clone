@@ -2,6 +2,10 @@ body {
 	background-color: #0B1622;
 }
 
+*, ::after, ::before {
+	box-sizing: border-box;
+}
+
 img[src=""], img:not(img[src]) {
 	visibility: hidden;
 }
@@ -68,6 +72,7 @@ nav {
 		justify-content: space-between;
 		align-items: center;
 		min-height: 325px;
+		box-sizing: content-box;
 
 		a {
 			position: relative;
