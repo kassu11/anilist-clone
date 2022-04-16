@@ -2,7 +2,7 @@ import Header from "./Components/Header";
 import {Route, Routes, HashRouter} from "react-router-dom";
 import {useEffect, useState} from "react";
 
-import "./scss/tyyli.scss";
+import "./Styles/Pages/tyyli.scss";
 import AnimeInfo from "./Pages/AnimeInfo";
 import AnimeSearchPage from "./Pages/AnimeSearchPage";
 import Characters from "./Pages/Characters";

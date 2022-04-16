@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import searchVariablesToUrl from "../Lib/searchVariablesToUrl";
+import searchVariablesToUrl from "../Libraries/searchVariablesToUrl";
 
 function SearchInput({urlvariables, setUrlvariables}) {
 	const navigate = useNavigate();

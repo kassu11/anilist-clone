@@ -1,6 +1,6 @@
-import "../scss/searchBar.scss";
+import "../Styles/Components/searchBar.scss";
 import SearchInput from "./SearchInput";
-import formatSearchUrlToObject from "../Lib/formatSearchUrlToObject";
+import formatSearchUrlToObject from "../Libraries/formatSearchUrlToObject";
 import Search3OptionSwitch from "./Search3OptionSwitch";
 import Search3OptionSwitch2 from "./Search3OptionSwitch2";
 import {useEffect, useState} from "react";

@@ -4,7 +4,7 @@ import { useLocation } from "react-router";
 
 import AnimeResultElement from "./AnimeResultElement";
 import BottomAnimeResultElem from "./BottomAnimeResultElem";
-import formatSearchUrlToObject from "../Lib/formatSearchUrlToObject";
+import formatSearchUrlToObject from "../Libraries/formatSearchUrlToObject";
 
 function AnimeSearchResults() {
 	const {search} = useLocation();

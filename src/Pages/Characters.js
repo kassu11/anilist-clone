@@ -3,7 +3,7 @@ import axios from "axios";
 import {useEffect, useState} from "react";
 import {Link} from "react-router-dom";
 
-import "../scss/character.scss";
+import "../Styles/Pages/character.scss";
 import CharacterBottomElem from "../Components/CharacterBottomElem";
 
 

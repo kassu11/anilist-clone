@@ -1,4 +1,4 @@
-import numberToText from "../../Lib/numberToText";
+import numberToText from "../../Libraries/numberToText";
 
 function Score({siteData}) {
 	const usersAmount = siteData?.stats?.scoreDistribution.reduce((acc, cur) => acc + cur.amount, 0) ?? 0;
@@ -43,10 +43,7 @@ function Score({siteData}) {
 						<div className="staff">
 							{siteData.staff.edges.slice(0, 2).map(({node, role}) => {
 								const name = node.name.userPreferred || node.name.native;
-
-								return (
-									<p key={name}>{`${name}`} <span>{role}</span></p>
-								)
+								return <p key={name}>{`${name}`} <span>{role}</span></p>
 							})}
 						</div>
 					)}

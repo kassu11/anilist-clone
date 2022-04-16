@@ -7,8 +7,9 @@ import Description from "../Components/AnimeInfo/Description";
 import Score from "../Components/AnimeInfo/Score";
 import Genres from "../Components/AnimeInfo/Genres";
 import Tags from "../Components/AnimeInfo/Tags";
+import Relations from "../Components/AnimeInfo/Relations";
 
-import "../scss/animeInfo.scss";
+import "../Styles/Pages/animeInfo.scss";
 
 function AnimeInfo() {
 	const {id} = useParams();
@@ -103,8 +104,10 @@ function AnimeInfo() {
           node {
             id 
             title {
+							english
               userPreferred
             }
+						source(version: 3)
             format 
             type 
             status(version:2)
@@ -149,40 +152,35 @@ function AnimeInfo() {
 
 	if(!siteData) return null;
 	return (
-		<div className="animeInfoBody" key={siteData?.id}>
+		<div className="animeInfoBody">
 			<div className="banner">
-				<img src={siteData.bannerImage} key={siteData?.id}></img>
+				<img src={siteData.bannerImage} />
 			</div>
 			<div className="info">
 				<div className="container">
 					<div className="left">
 						<a className="coverImage" href={`https://anilist.co/${siteData.type?.toLowerCase()}/${siteData?.id}`}>
-							<img src={siteData?.coverImage?.extraLarge} key={siteData?.id}></img>
+							<img src={siteData?.coverImage?.extraLarge} />
 						</a>
-						{siteData?.genres?.length && (<Genres genres={siteData?.genres} />)}
-						{siteData?.tags?.length && (<Tags tags={siteData?.tags} />)}
+						{siteData?.genres?.length > 0 && (<Genres genres={siteData?.genres} />)}
+						{siteData?.tags?.length > 0 && (<Tags tags={siteData?.tags} />)}
 					</div>
 
 					<div className="right">
-						<Score siteData={siteData}/>
+						<Score siteData={siteData} />
 						<Description title={siteData.title} description={siteData.description} />
-
+						<Relations relations={siteData?.relations} />
 						<YoutubeTrailer videoID={siteData?.trailer?.id} />
 
-						<div className="relations">{siteData?.relations?.edges.map(data => (
-							<div className="relation" key={data.id}>
-								<img src={data.node.coverImage.large}></img>
-								<p>{data.node.title.userPreferred}</p>
-								<p>{data.relationType}</p>
-							</div>
-						))}</div>
-						<div className="characters">{siteData?.characterPreview?.edges.map(data => (
-							<div className="character" key={data.id}>
-								<img src={data.node.image.large}></img>
-								<p>{data.node.name.userPreferred}</p>
-								<p>{data.role}</p>
-							</div>
-						))}</div>
+						<div className="characters">
+							{siteData?.characterPreview?.edges.map(data => (
+								<div className="character" key={data.id}>
+									<img src={data.node.image.large}></img>
+									<p>{data.node.name.userPreferred}</p>
+									<p>{data.role}</p>
+								</div>
+							))}
+						</div>
 					</div>
 				</div>
 

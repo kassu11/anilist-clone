@@ -1,11 +1,14 @@
 import {Link} from "react-router-dom";
-import axios from "axios";
 import {useEffect, useState} from "react";
+import { useLocation } from "react-router";
 import logo from "../img/anilistLogo.svg";
+import "../Styles/Components/Header.scss";
 
-function Header({setData}) {
+function Header() {
+	const {pathname} = useLocation();
+	
 	return (
-		<nav className="header">
+		<nav className={"header " + (pathname.startsWith("/media") ? "media" : "normal")} >
 			<Link to="/">
 				<img src={logo}></img>
 			</Link>

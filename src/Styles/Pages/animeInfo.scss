@@ -1,7 +1,3 @@
-nav {
-	background-color: rgba(35,38,67,.5);
-}
-
 .animeInfoBody {
 	position: absolute;
 	width: 100%;
@@ -185,6 +181,7 @@ nav {
 				position: relative;
 				display: grid;
 				width: min(100%, 750px);
+				height: max-content;
 
 				.textContainer {
 					position: relative;
@@ -193,6 +190,48 @@ nav {
 					background-color: #151F2E;
 					border-radius: 5px;
 					padding: 15px;
+					overflow: hidden;
+					// max-height: 250px;
+
+					div.wmde-markdown {
+						background: none;
+						margin-top: 12px;
+				
+						li {
+							color: #a0b1c5;
+							font-family: Overpass,-apple-system,BlinkMacSystemFont,Segoe UI,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif;
+							font-size: 14px;
+							font-weight: 400;
+						}
+					}
+
+					.moreInfo {
+						position: absolute;
+						bottom: 0px;
+						left: 0px;
+						width: 100%;
+						height: 25px;
+						background-color: #151f2e;
+						transition: background .1s, opacity .1s, box-shadow .1s;
+						cursor: pointer;
+						
+						&:hover {
+							box-shadow: 0 0 7px 3px #080f18, 0 0 7px 3px #080f18, 0 0 7px 3px #080f18, 0 0 7px 3px #080f18;
+							opacity: 1;
+							background-color: #080f18;
+						}
+
+						p {
+							position: relative;
+							text-align: center;
+							bottom: 15px;
+							font-weight: 700;
+						}
+					}
+
+					&.show .moreInfo {
+						visibility: hidden;
+					}
 				}
 
 				.scores {
@@ -288,11 +327,73 @@ nav {
 						}
 					}
 				}
+
+				.relationsContainer {
+
+
+					.relations {
+						display: flex;
+						flex-wrap: wrap;
+						margin-top: 25px;
+						border-radius: 5px;
+						gap: 25px;
+						
+						.relation {
+							position: relative;
+							display: flex;
+							height: 120px;
+							background-color: #151f2e;
+							border-radius: 5px;
+							overflow: hidden;
+							text-decoration: none;
+							max-width: 400px;
+
+							img {
+								width: 85px;
+								object-fit: cover;
+							}
+
+							.relationInfo {
+								display: flex;
+								flex-direction: column;
+								margin-left: 10px;
+								margin-top: 5px;
+								margin-bottom: 5px;
+								padding-right: 10px;
+							}
+
+							.bottom {
+								display: flex;
+								gap: 5px;
+								margin-top: auto;
+								opacity: .8;
+							}
+
+							.firstLetter::first-letter {
+								text-transform: uppercase
+							}
+
+							h4 {
+								color: rgb(61,180,242);
+								font-weight: 500;
+								font-size: 14px;
+								background-color: #0B1622;
+								width: max-content;
+								padding: 2px 5px 3px;
+								border-radius: 3px;
+							}
+
+							p {
+								margin: 0px;
+							}
+						}
+					}
+				}
 			}
 		}
 
 
-		h1 {
+		h1, h2, h3, h4 {
 			font-family: Overpass, -apple-system, BlinkMacSystemFont, Segoe UI, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 			font-size: 21px;
 			font-weight: 600;
@@ -300,25 +401,9 @@ nav {
 			color: #a0b1c5;
 			margin: 0px;
 		}
-		
-
-		.relations {
-			display: flex;
-			flex-wrap: wrap;
-		}
-	}
-
-
-	div.wmde-markdown {
-		background: none;
-		margin-top: 12px;
-
-		li {
-			color: #a0b1c5;
-			font-family: Overpass,-apple-system,BlinkMacSystemFont,Segoe UI,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif;
-			font-size: 14px;
-			font-weight: 400;
-		}
+		h2 {font-size: 18px}
+		h3 {font-size: 16px}
+		h4 {font-size: 14px}
 	}
 
 	p {

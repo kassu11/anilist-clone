@@ -4,7 +4,7 @@ import {useEffect, useState} from "react";
 import {Link} from "react-router-dom";
 import MDEditor from '@uiw/react-md-editor';
 
-import "../scss/userPage.scss";
+import "../Styles/Pages/userPage.scss";
 
 import UserScores from "../Components/UserScores";
 
