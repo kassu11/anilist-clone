@@ -128,7 +128,6 @@ function UserScores({users}) {
 	// 	})
 	// }, [users])
 	
-	console.log(users)
 	if(users.length == 0) return null;
 	const text = "query{" + users.map(user => query.replace("NIMI", user.name)).join("") + "}";
 

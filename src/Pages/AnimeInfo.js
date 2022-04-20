@@ -141,13 +141,11 @@ function AnimeInfo({fastData}) {
 		"id": id
 	}
 
-	console.log(animeInfoHistory)
-
 	useEffect(() => {
 		const index = animeInfoHistory.findIndex(data => data?.id == id);
 		if(index !== -1) {
 			setSiteData(animeInfoHistory[index]);
-			document.title = animeInfoHistory[index].Media?.title?.english || animeInfoHistory[index].Media?.title?.userPreferred;
+			document.title = animeInfoHistory[index]?.title?.english || animeInfoHistory[index]?.title?.userPreferred;
 			return;
 		};
 		axios
@@ -236,7 +234,7 @@ function AnimeInfo({fastData}) {
 
 					<div className="right">
 						<Score siteData={siteData} />
-						<Description title={siteData.title} description={siteData.description} />
+						<Description title={siteData.title} description={siteData.description} key={siteData.id} />
 						<Relations relations={siteData?.relations} />
 						<YoutubeTrailer videoID={siteData?.trailer?.id} />
 
@@ -251,8 +249,6 @@ function AnimeInfo({fastData}) {
 						</div>
 					</div>
 				</div>
-
-				
 			</div>
 		</div>
 	)

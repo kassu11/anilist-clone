@@ -91,7 +91,6 @@ function UsersPage() {
 			const listIndex = data.MediaListCollection.lists.findIndex(list => list.name == "Completed");
 			userAnimes.push(data.MediaListCollection.lists[listIndex])
 			setUserAnimes([...userAnimes]);
-			console.log(userAnimes);
 		})
 	}, [users])
 
@@ -194,7 +193,6 @@ function UsersPage() {
 								}
 
 								allAnimesArray.forEach(row => row.avarageScore = row.users.reduce((acc, {score}) => acc + score, 0) / row.users.length);
-								console.log(allAnimesArray)
 								setSameAnime(allAnimesArray.sort((e1, e2) => e2.avarageScore - e1.avarageScore));
 							}
 
