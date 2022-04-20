@@ -1,5 +1,6 @@
 body {
 	background-color: #0B1622;
+	overflow-y: scroll;
 }
 
 *, ::after, ::before {
@@ -37,6 +38,32 @@ img[src=""], img:not(img[src]) {
 		min-height: 325px;
 		box-sizing: content-box;
 
+		&.bottom {
+			position: relative;
+			&::after, &::before {
+				content: "";
+				display: block;
+				position: absolute;
+				background-color: #0B1622;
+				border-radius: 5px;
+				width: 180px;
+			}
+
+			&::before {
+				inset: 0px;
+				margin: 25px auto;
+				height: 250px;
+			}	
+
+			&::after {
+				inset-inline: 0px;
+				bottom: 40px;
+				margin: auto;
+				height: 20px;
+				box-shadow: 0 25px #0B1622;
+			}
+		}
+
 		a {
 			position: relative;
 			width: 180px;
@@ -53,6 +80,8 @@ img[src=""], img:not(img[src]) {
 			height: 250px;
 			object-fit: cover;
 			border-radius: 5px;
+			pointer-events: none;
+			user-select: none;
 		}
 
 		p {

@@ -6,7 +6,9 @@ import AnimeResultElement from "./AnimeResultElement";
 import BottomAnimeResultElem from "./BottomAnimeResultElem";
 import formatSearchUrlToObject from "../Libraries/formatSearchUrlToObject";
 
-function AnimeSearchResults() {
+const searchHistory = []
+
+function AnimeSearchResults({setMediaData}) {
 	const {search} = useLocation();
 	const [data, setData] = useState([]);
 
@@ -41,6 +43,7 @@ function AnimeSearchResults() {
 			media (search: $search, sort: $sort, isAdult: $isAdult, type: $type, genre_in: $genre_in, genre_not_in: $genre_not_in, tag_in: $tag_in, season: $season, seasonYear: $seasonYear, format_in: $format_in, status: $status, onList: true) {
 				id
 				type
+				bannerImage
 				title {
 					english
 					userPreferred
@@ -54,20 +57,29 @@ function AnimeSearchResults() {
 	}`
 	
 	useEffect(() => {
+		const index = searchHistory.findIndex(data => data?.search == search);
+		window.scrollTo(0, 0);
+		if(index !== -1) {
+			setData(searchHistory[index]);
+			return;
+		};
+
 		axios
 			.post("https://graphql.anilist.co", {
 				query: query,
 				variables: variables
 			})
 			.then(({data: {data}}) => {
-				setData({...data.Page, search});
-				window.scrollTo(0, 0);
+				const newData = {...data.Page, search};
+				setData(newData);
+				searchHistory.unshift(newData);
+				searchHistory.length = 50;
 			});
 	}, [search]);
 
 	return (
-		<div className="animes" key={`${data.search}`}>
-			{data.media?.map((animeData, i) => <AnimeResultElement data={animeData} key={animeData.id} />)}
+		<div className="animes">
+			{data.media?.map((animeData, i) => <AnimeResultElement data={animeData} key={animeData.id} setMediaData={setMediaData} />)}
 			{data?.pageInfo?.hasNextPage ? <BottomAnimeResultElem query={query} variables={variables} /> : null}
 		</div>
 	);

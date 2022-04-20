@@ -11,7 +11,9 @@ import Relations from "../Components/AnimeInfo/Relations";
 
 import "../Styles/Pages/animeInfo.scss";
 
-function AnimeInfo() {
+const animeInfoHistory = [];
+
+function AnimeInfo({fastData}) {
 	const {id} = useParams();
 	const [siteData, setSiteData] = useState(null);
 
@@ -22,6 +24,7 @@ function AnimeInfo() {
 			type
 			format
 			genres
+			siteUrl
 			tags {
         name
         description
@@ -138,19 +141,84 @@ function AnimeInfo() {
 		"id": id
 	}
 
+	console.log(animeInfoHistory)
+
 	useEffect(() => {
+		const index = animeInfoHistory.findIndex(data => data?.id == id);
+		if(index !== -1) {
+			setSiteData(animeInfoHistory[index]);
+			document.title = animeInfoHistory[index].Media?.title?.english || animeInfoHistory[index].Media?.title?.userPreferred;
+			return;
+		};
 		axios
 			.post("https://graphql.anilist.co", {
 				query: query,
 				variables: variables
 			})
 			.then(({data: {data}}) => {
+				animeInfoHistory.unshift(data.Media);
+				animeInfoHistory.length = 50;
 				setSiteData(data.Media);
-				document.title = data.Media?.title?.english || data.Media?.title?.userPreferred
+				document.title = data.Media?.title?.english || data.Media?.title?.userPreferred;
 			});
 	}, [id]);
 
-	if(!siteData) return null;
+	if(!siteData && !fastData) return null;
+	if(!siteData) {
+		return (
+			<div className="animeInfoBody">
+			<div className="banner">
+				<img src={fastData.bannerImage} />
+			</div>
+			<div className="info">
+				<div className="container">
+					<div className="left">
+						<a className="coverImage">
+							<img src={fastData?.coverImage?.large} />
+						</a>
+					</div>
+
+					<div className="right">
+						<div className="scores">
+							<div className="meanScore">
+								<div className="title">Mean Score</div>
+								<div className="score">4.20</div>
+								<div className="users">69,420 users</div>
+							</div>
+							<div className="stats">
+								<div className="top">
+									<div className="rank">
+										<p>Ranked <span>#80085</span></p>
+									</div>
+									<div className="popularity">
+										<p>Popularity <span>#101</span></p>
+									</div>
+									<div className="members">
+										<p>Members <span>123,404</span></p>
+									</div>
+								</div>
+								<div className="bottom">
+									<div className="releaseYear">
+										<p>Year</p>
+									</div>
+									<div className="format">
+										<p>{fastData.type}</p>
+									</div>
+									<div className="studio">
+										<p>Studio name</p>
+									</div>
+								</div>
+							</div>
+						</div>
+						<Description title={fastData.title} description={fastData.description} />
+					</div>
+				</div>
+
+				
+			</div>
+		</div>
+		);
+	}
 	return (
 		<div className="animeInfoBody">
 			<div className="banner">
@@ -159,7 +227,7 @@ function AnimeInfo() {
 			<div className="info">
 				<div className="container">
 					<div className="left">
-						<a className="coverImage" href={`https://anilist.co/${siteData.type?.toLowerCase()}/${siteData?.id}`}>
+						<a className="coverImage" href={siteData.siteUrl}>
 							<img src={siteData?.coverImage?.extraLarge} />
 						</a>
 						{siteData?.genres?.length > 0 && (<Genres genres={siteData?.genres} />)}

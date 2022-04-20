@@ -30,7 +30,7 @@ function Score({siteData}) {
 				</div>
 				<div className="bottom">
 					<div className="releaseYear">
-						<p>{`${season} ${siteData.startDate.year}`}</p>
+						<p>{`${season} ${siteData.startDate?.year || ""}`}</p>
 					</div>
 					<div className="format">
 						<p>{`${siteData.format}`}</p>
@@ -41,7 +41,7 @@ function Score({siteData}) {
 						</div>
 					) : (
 						<div className="staff">
-							{siteData.staff.edges.slice(0, 2).map(({node, role}) => {
+							{siteData.staff?.edges.slice(0, 2).map(({node, role}) => {
 								const name = node.name.userPreferred || node.name.native;
 								return <p key={name}>{`${name}`} <span>{role}</span></p>
 							})}

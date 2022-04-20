@@ -1,6 +1,6 @@
 import Header from "./Components/Header";
 import {Route, Routes, HashRouter} from "react-router-dom";
-import {useEffect, useState} from "react";
+import {useEffect, useState, useMemo} from "react";
 
 import "./Styles/Pages/tyyli.scss";
 import AnimeInfo from "./Pages/AnimeInfo";
@@ -9,25 +9,28 @@ import Characters from "./Pages/Characters";
 import UsersPage from "./Pages/UsersPage";
 
 function App() {
+  const [mediaData, setMediaData] = useState(null);
+
   return (
     <div className="App">
       <HashRouter>
         <Header />
         <Routes>
           <Route path="/" element={
+            <AnimeSearchPage setMediaData={setMediaData} />
+          } />
+          <Route path="/search" element={
             <AnimeSearchPage />
           } />
           <Route path="/about" element={<h1>About</h1>} />
           <Route path="/contact" element={<h1>Contact</h1>} />
           <Route path="/media/:id" element={
-            <AnimeInfo/>
+            <AnimeInfo fastData={mediaData}/>
           } />
           <Route path="/media/:id/characters" element={
             <Characters />
           } />
-          <Route path="/search" element={
-            <AnimeSearchPage />
-          } />
+          
           <Route path="/users" element={
             <UsersPage />
           } />
