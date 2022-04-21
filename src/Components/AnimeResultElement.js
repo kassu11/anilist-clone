@@ -6,7 +6,7 @@ function formatTitleToUrl(title) {
 
 function AnimeResultElement({data, setMediaData}) {
 	return (
-		<div className="anime" key={data.id}>
+		<div className="anime">
 			<Link to={`/media/${data.id}`} onClick={e => {
 				setMediaData?.(data);
 			}}>

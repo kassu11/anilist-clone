@@ -8,6 +8,8 @@ import Score from "../Components/AnimeInfo/Score";
 import Genres from "../Components/AnimeInfo/Genres";
 import Tags from "../Components/AnimeInfo/Tags";
 import Relations from "../Components/AnimeInfo/Relations";
+import Character from "../Components/AnimeInfo/Character";
+import Characters from "../Components/AnimeInfo/Characters";
 
 import "../Styles/Pages/animeInfo.scss";
 
@@ -76,29 +78,35 @@ function AnimeInfo({fastData}) {
 				native
 				userPreferred
 			}
-			characterPreview:characters(perPage:12,sort:[ROLE,RELEVANCE,ID]) {
+			characterPreview:characters(perPage:6, sort:[ROLE,RELEVANCE,ID]) {
         edges {
-          id 
-          role 
-          voiceActors(language:JAPANESE,sort:[RELEVANCE,ID]) {
-            id 
-            name {
-              userPreferred
-            }
-            language:languageV2 
-            image {
-              large
-            }
-          }
-          node {
-            id 
-            name {
-              userPreferred }
-            image {
-              large
-            }
-          }
-        }
+					id 
+					role 
+					name 
+					voiceActorRoles(language:JAPANESE, sort:[RELEVANCE,ID]) {
+						roleNotes 
+						dubGroup 
+						voiceActor {
+							id 
+							name {
+								userPreferred
+							}
+							language:languageV2 
+							image {
+								large
+							}
+						}
+					}
+					node {
+						id 
+						name {
+							userPreferred
+						}
+						image {
+							large
+						}
+					}
+				}
       }
 			relations {
         edges {
@@ -224,7 +232,7 @@ function AnimeInfo({fastData}) {
 			</div>
 			<div className="info">
 				<div className="container">
-					<div className="left">
+					<div className="left-container">
 						<a className="coverImage" href={siteData.siteUrl}>
 							<img src={siteData?.coverImage?.extraLarge} />
 						</a>
@@ -232,21 +240,13 @@ function AnimeInfo({fastData}) {
 						{siteData?.tags?.length > 0 && (<Tags tags={siteData?.tags} />)}
 					</div>
 
-					<div className="right">
+					<div className="right-container">
 						<Score siteData={siteData} />
 						<Description title={siteData.title} description={siteData.description} key={siteData.id} />
 						<Relations relations={siteData?.relations} />
 						<YoutubeTrailer videoID={siteData?.trailer?.id} />
 
-						<div className="characters">
-							{siteData?.characterPreview?.edges.map(data => (
-								<div className="character" key={data.id}>
-									<img src={data.node.image.large}></img>
-									<p>{data.node.name.userPreferred}</p>
-									<p>{data.role}</p>
-								</div>
-							))}
-						</div>
+						<Characters characterPreview={siteData?.characterPreview} />
 					</div>
 				</div>
 			</div>

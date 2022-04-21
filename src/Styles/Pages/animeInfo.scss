@@ -43,7 +43,7 @@
 			place-content: center;
 			gap: 25px;
 
-			.left {
+			.left-container {
 				position: relative;
 				width: 250px;
 				top: -100px;
@@ -67,6 +67,7 @@
 					display: flex;
 					flex-wrap: wrap;
 					gap: 5px;
+					box-shadow: 3px 3px 7px #0000004a;
 
 					.title {
 						width: 100%;
@@ -106,6 +107,7 @@
 					padding: 10px;
 					border-radius: 5px;
 					margin-top: 25px;
+					box-shadow: 3px 3px 7px rgb(0 0 0 / 57%);				
 
 					&:not(.spoilers) .hide {display: none}
 					&.spoilers {
@@ -196,21 +198,22 @@
 				}
 			}
 
-			.right {
+			.right-container {
 				position: relative;
 				display: grid;
-				width: min(100%, 750px);
+				width: min(100%, 950px);
 				height: max-content;
+				padding-bottom: 100px;
 
 				.textContainer {
 					position: relative;
 					margin-top: 25px;
-					width: min(100%, 925px);
+					width: 100%;
 					background-color: #151F2E;
 					border-radius: 5px;
 					padding: 15px;
 					overflow: hidden;
-					// max-height: 250px;
+					box-shadow: 3px 3px 7px #0000004a;
 
 					div.wmde-markdown {
 						background: none;
@@ -262,6 +265,7 @@
 					width: 100%;
 					position: relative;
 					min-height: 90px;
+					box-shadow: 3px 3px 7px #0000004a;
 		
 					.meanScore {
 						height: calc(100% - 20px);
@@ -353,14 +357,41 @@
 				}
 
 				.relationsContainer {
-
+					margin-top: 25px;
 
 					.relations {
-						display: flex;
+						display: grid;
 						flex-wrap: wrap;
-						margin-top: 25px;
+						margin-top: 5px;
 						border-radius: 5px;
-						gap: 25px;
+						gap: 15px;
+						grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+
+						&.small {
+							grid-template-columns: repeat(auto-fill, 90px);
+							gap: 17px;
+
+							.relation {
+								inset: 0px;
+								// &:hover {
+								// 	width: 400px;
+								// 	z-index: 1;
+								// }
+
+								h4 {
+									position: absolute;
+									left: 50%;
+									transform: translateX(-50%);
+									margin-inline: auto;
+									bottom: 5px;
+								}
+
+
+								img {
+									width: 90px;
+								}
+							}
+						}
 						
 						.relation {
 							position: relative;
@@ -370,11 +401,12 @@
 							border-radius: 5px;
 							overflow: hidden;
 							text-decoration: none;
-							max-width: 400px;
+							box-shadow: 3px 3px 7px #0000004a;
 
 							img {
 								width: 85px;
 								object-fit: cover;
+								flex-shrink: 0;
 							}
 
 							.relationInfo {
@@ -400,7 +432,7 @@
 							h4 {
 								color: rgb(61,180,242);
 								font-weight: 500;
-								font-size: 14px;
+								font-size: 11px;
 								background-color: #0B1622;
 								width: max-content;
 								padding: 2px 5px 3px;
@@ -409,10 +441,117 @@
 
 							p {
 								margin: 0px;
+								margin-top: 5px;
+								font-size: 13px;
+								max-height: 55px;
+								overflow: hidden;
 							}
 						}
 					}
 				}
+
+				.trailerContainer {
+					h2 {
+						margin-top: 25px;
+						margin-bottom: 5px;
+					}
+				}
+
+				.character-container {
+
+					h2 {
+						margin-top: 25px;
+						margin-bottom: 8px;
+					}
+
+					.characters {
+						position: relative;
+						display: grid;
+						grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+						place-content: center;
+						gap: 15px;
+						width: min(100%, 1300px);
+						margin-inline: auto;
+					
+						.character {
+							position: relative;
+							height: 90px;
+							width: 100%;
+							background-color: #151F2E;
+							display: flex;
+							border-radius: 5px;
+							overflow: hidden;
+							box-shadow: 3px 3px 5px rgb(0 0 0 / 50%);
+	
+							.right, .left {
+								position: relative;
+								width: 100%;
+								flex-grow: 1;
+								display: flex;
+								text-decoration: none;
+									
+								div {
+									display: flex;
+									flex-direction: column;
+									margin: 10px;
+					
+									p.name {
+										font-size: 14px;
+										font-weight: 500;
+										color: #a0b1c5;
+									}
+									p.actor {
+										font-size: 12px;
+										color: #a0b1c5;
+									}
+									p {
+										font-size: 12px;
+										color: hsl(212, 24%, 60%);
+										&.notes {
+											font-size: 10px;
+											color: hsl(212, 24%, 50%);
+										}
+									}
+					
+									p:last-child {
+										margin-top: auto;
+									}
+								}
+					
+								&.right {
+									text-align: right;
+									justify-content: end;
+								}
+					
+								img {
+									position: relative;
+									left: 0px;
+									height: 100%;
+									width: 60px;
+									object-fit: cover;
+									transition: filter .2s;
+						
+									&:not([src]) {
+										display: none;
+									}
+								}
+					
+								p {
+									color: #a0b1c5;
+									margin: 0px;
+									font-size: 14px;
+									font-family: Overpass,-apple-system,BlinkMacSystemFont,Segoe UI,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif;
+									margin-inline: 5px;
+									word-break: break-word;
+									text-decoration: none;
+									&.role::first-letter {text-transform: uppercase}
+								}
+							}
+						}
+					}
+				}
+
+				
 			}
 		}
 

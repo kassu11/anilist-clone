@@ -4,6 +4,7 @@ import {useEffect, useState} from "react";
 import {Link} from "react-router-dom";
 
 import "../Styles/Pages/character.scss";
+import Character from "../Components/AnimeInfo/Character";
 import CharacterBottomElem from "../Components/CharacterBottomElem";
 
 
@@ -78,28 +79,8 @@ function Characters() {
 		<div className="characters">
 			{data?.characters?.edges.map(edge => (
 				(edge.voiceActorRoles.length ? edge.voiceActorRoles : [1]).map(role => {
-					if(role.voiceActor?.language.length && role.voiceActor?.language !== selectedLanguage) return null;
-					return (
-						<div className="character" key={edge.id + role.roleNotes}>
-							<Link to={`/character/${edge.node.id}`} className="left">
-								<img src={edge.node.image.large} />
-								<div>
-									<p className="name">{edge.node.name.userPreferred}</p>
-									<p className="role">{edge.role.toLowerCase()}</p>
-								</div>
-							</Link>
-							{role.voiceActor ? (
-								<Link to={`/staff/${role.voiceActor.id}`} className="right">
-									<div>
-										<p className="actor">{role.voiceActor?.name.userPreferred}</p>
-										{role.roleNotes ? <p className="notes">({role.roleNotes})</p> : null}
-										<p>{role.voiceActor?.language}</p>
-									</div>
-									<img src={role.voiceActor?.image.large}/>
-								</Link>
-							) : null}
-						</div>
-					)
+					if(role.voiceActor?.language.length && role.voiceActor?.language !== "Japanese") return null;
+					return <Character edge={edge} role={role} key={edge.id + role.roleNotes + role.voiceActor?.name.userPreferred} />
 				})
 			))}
 			{data?.characters?.pageInfo.hasNextPage ? <CharacterBottomElem query={query} variables={variables} data={data} setData={setData} /> : null}

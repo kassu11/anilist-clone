@@ -228,7 +228,7 @@ function UsersPage() {
 					))}
 				</div>
 
-				<UserScores users={users} />
+				{/* <UserScores users={users} /> */}
 			</div>
 		</div>
 	)

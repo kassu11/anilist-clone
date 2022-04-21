@@ -5,7 +5,7 @@ import {useEffect, useState, useMemo} from "react";
 import "./Styles/Pages/tyyli.scss";
 import AnimeInfo from "./Pages/AnimeInfo";
 import AnimeSearchPage from "./Pages/AnimeSearchPage";
-import Characters from "./Pages/Characters";
+// import Characters from "./Pages/Characters";
 import UsersPage from "./Pages/UsersPage";
 
 function App() {
@@ -27,9 +27,9 @@ function App() {
           <Route path="/media/:id" element={
             <AnimeInfo fastData={mediaData}/>
           } />
-          <Route path="/media/:id/characters" element={
+          {/* <Route path="/media/:id/characters" element={
             <Characters />
-          } />
+          } /> */}
           
           <Route path="/users" element={
             <UsersPage />
