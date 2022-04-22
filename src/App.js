@@ -1,6 +1,6 @@
 import Header from "./Components/Header";
 import {Route, Routes, HashRouter} from "react-router-dom";
-import {useEffect, useState, useMemo} from "react";
+import {useState} from "react";
 
 import "./Styles/Pages/tyyli.scss";
 import AnimeInfo from "./Pages/AnimeInfo";

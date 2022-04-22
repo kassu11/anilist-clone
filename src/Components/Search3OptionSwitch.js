@@ -5,7 +5,7 @@ import searchVariablesToUrl from "../Libraries/searchVariablesToUrl";
 function Search3OptionSwitch({urlvariables, setUrlvariables}) {
 	const emojis = ["😄", "😎", "🙄"];
 	const myRef = useRef();
-	const dValue = urlvariables.isAdult == "only" ? 2 : urlvariables.isAdult == "both" ? 1 : 0;
+	const dValue = urlvariables.isAdult === "only" ? 2 : urlvariables.isAdult === "both" ? 1 : 0;
 	const [myText, setMyText] = useState(emojis[dValue]); 
 	
 	const navigate = useNavigate();
@@ -26,9 +26,9 @@ function Search3OptionSwitch({urlvariables, setUrlvariables}) {
 	);
 
 	function rangeOptions(e) {
-		if(e.target.value == 0) urlvariables.isAdult = undefined;
-		 else if(e.target.value == 1) urlvariables.isAdult = "both";
-		 else if(e.target.value == 2) urlvariables.isAdult = "only";
+		if(e.target.value === "0") urlvariables.isAdult = undefined;
+		else if(e.target.value === "1") urlvariables.isAdult = "both";
+		else if(e.target.value === "2") urlvariables.isAdult = "only";
 		
 		setMyText(emojis[e.target.value]);
 		setUrlvariables({...urlvariables});

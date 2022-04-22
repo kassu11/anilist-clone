@@ -25,7 +25,7 @@ function AnimeSearchResults({setMediaData}) {
 		"format_in": undefined,
 		"seasonYear": undefined,
 		"season": undefined,
-		"isAdult": searchResults["isAdult"] == "only" ? true : searchResults["isAdult"] == "both" ? undefined : false,
+		"isAdult": searchResults["isAdult"] === "only" ? true : searchResults["isAdult"] === "both" ? undefined : false,
 		"status": undefined,
 		"search": searchResults["search"] || undefined,
 	};
@@ -57,7 +57,7 @@ function AnimeSearchResults({setMediaData}) {
 	}`
 	
 	useEffect(() => {
-		const index = searchHistory.findIndex(data => data?.search == search);
+		const index = searchHistory.findIndex(data => data?.search === search);
 		window.scrollTo(0, 0);
 		if(index !== -1) {
 			setData(searchHistory[index]);

@@ -1,4 +1,3 @@
-import { useParams } from "react-router";
 import axios from "axios";
 import {useEffect, useState} from "react";
 import {Link} from "react-router-dom";
@@ -6,7 +5,7 @@ import MDEditor from '@uiw/react-md-editor';
 
 import "../Styles/Pages/userPage.scss";
 
-import UserScores from "../Components/UserScores";
+// import UserScores from "../Components/UserScores";
 
 const query = `
 query ($search: String) {
@@ -83,17 +82,16 @@ function UsersPage() {
 	const [sameAnime, setSameAnime] = useState([]);
 
 	useEffect(() => {
-		if(users.length == 0 || userAnimes.length >= users.length) return;
+		if(users.length === 0 || userAnimes.length >= users.length) return;
 		axios.post("https://graphql.anilist.co", {
 			query: mediaQuery,
 			variables: {id: users.at(-1)?.id, type: "ANIME"}
 		}).then(({data: {data}}) => {
-			const listIndex = data.MediaListCollection.lists.findIndex(list => list.name == "Completed");
+			const listIndex = data.MediaListCollection.lists.findIndex(list => list.name === "Completed");
 			userAnimes.push(data.MediaListCollection.lists[listIndex])
 			setUserAnimes([...userAnimes]);
 		})
-	}, [users])
-
+	}, [users, userAnimes]);
 
 	return (
 		<div className="usersPage">
@@ -160,8 +158,8 @@ function UsersPage() {
 				{users.length > 0 ? (
 					<>
 						<div className="compare" onClick={e => {
-							if(userAnimes.length == 0) return;
-							if(userAnimes.length == 1) {
+							if(userAnimes.length === 0) return;
+							if(userAnimes.length === 1) {
 								userAnimes[0].entries.sort((a, b) => b.score - a.score);
 								setSameAnime(userAnimes[0].entries.map(e => ({users: [e]})))
 							} else {
@@ -177,10 +175,10 @@ function UsersPage() {
 		
 								for(let i = 0; i < userAnimes.length; i++) {
 									const length = userAnimes.length - 1
-									const isLast = i == length;
+									const isLast = i === length;
 									if(isLast) {
 										for(const entry of userAnimes[i].entries) {
-											if(animeList[entry.media.id]?.length == length) {
+											if(animeList[entry.media.id]?.length === length) {
 												animeList[entry.media.id].push(entry);
 												allAnimesArray.push({users: animeList[entry.media.id]})
 											}
@@ -205,18 +203,18 @@ function UsersPage() {
 
 				<div className="userAnimes" style={{display: sameAnime.length ? null : "none"}}>
 					{sameAnime.map(({users: allUsersData, avarageScore}, i) => (
-						<div key={allUsersData[0].id} className="anime">
-							<div className="imgContainer">
-								<img src={allUsersData[0].media.coverImage.large}></img>
+						<div key={allUsersData[0].media.id} className="anime">
+							<Link className="imgContainer" to={`/media/${allUsersData[0].media.id}`} >
+								<img src={allUsersData[0].media.coverImage.large} alt="" />
 								<p className="meanScore">{avarageScore?.toFixed(2) ?? allUsersData[0].score}</p>
-							</div>
+							</Link>
 							<div className="info">
 								<p className="title">{allUsersData[0].media.title.english || allUsersData[0].media.title.userPreferred}</p>
 								{allUsersData.length > 1 ? (
 									<div className="userScores">
 										{allUsersData.map((user, i) => (
 											<div key={user.id} className="userScore">
-												<img className="avatar" src={users[i]?.avatar.medium}></img>
+												<img className="avatar" src={users[i]?.avatar.medium} alt="" />
 												<p>{users[i]?.name}</p>
 												<p className="score">{user.score}</p>
 											</div>

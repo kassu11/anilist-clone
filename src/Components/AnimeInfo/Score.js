@@ -1,12 +1,12 @@
 import numberToText from "../../Libraries/numberToText";
 
 function Score({siteData}) {
-	const usersAmount = siteData?.stats?.scoreDistribution.reduce((acc, cur) => acc + cur.amount, 0) ?? 0;
+	const usersAmount = siteData?.stats?.scoreDistribution?.reduce((acc, cur) => acc + cur.amount, 0) ?? 0;
 	const ranking = siteData?.rankings?.find(({type, allTime}) => type === "RATED" && allTime)?.rank ?? 9999;
 	const popularity = siteData?.rankings?.find(({type, allTime}) => type === "POPULAR" && allTime)?.rank ?? 9999;
-	const season = siteData.season?.split("").map((v, i) => i == 0 ? v.toUpperCase() : v.toLowerCase()).join("") ?? "";
+	const season = siteData.season?.split("").map((v, i) => i === 0 ? v.toUpperCase() : v.toLowerCase()).join("") ?? "";
 
-	const customAvarageScore = siteData?.stats?.scoreDistribution.reduce((acc, cur) => acc + cur.amount * cur.score, 0) / usersAmount;
+	const customAvarageScore = siteData?.stats?.scoreDistribution?.reduce((acc, cur) => acc + cur.amount * cur.score, 0) / usersAmount;
 	const avarageScore = (customAvarageScore + siteData?.meanScore) / 10 / 2 || siteData?.meanScore / 10;
 
 	return (

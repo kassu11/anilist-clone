@@ -8,8 +8,8 @@ import {
   Tooltip,
   Legend,
 } from "chart.js";
-import { Bar } from "react-chartjs-2";
-import {useEffect, useState} from "react";
+// import { Bar } from "react-chartjs-2";
+import {useState} from "react";
 
 
 const query = `
@@ -113,7 +113,7 @@ const data = {
 
 function UserScores({users}) {
 
-	const [chartData, setChartData] = useState(null);
+	// const [chartData, setChartData] = useState(null);
 
 	// useEffect(() => {
 	// 	if(users.length == 0 || userAnimes.length >= users.length) return;
@@ -128,8 +128,8 @@ function UserScores({users}) {
 	// 	})
 	// }, [users])
 	
-	if(users.length == 0) return null;
-	const text = "query{" + users.map(user => query.replace("NIMI", user.name)).join("") + "}";
+	if(users.length === 0) return null;
+	// const text = "query{" + users.map(user => query.replace("NIMI", user.name)).join("") + "}";
 
 	return <Bar options={options} data={data} />;
 }

@@ -1,13 +1,10 @@
 import AnimeSearchResults from "../Components/AnimeSearchResults";
 import AnimeSearchBar from "../Components/AnimeSearchBar";
-import { Helmet } from "react-helmet";
 
 function AnimeSearchPage({setMediaData}) {
+	document.title = "Anime Search"
 	return (
 		<>
-			<Helmet>
-				<title>Anime Search</title>
-			</Helmet>
 			<AnimeSearchBar />
 			<AnimeSearchResults setMediaData={setMediaData} />
 		</>

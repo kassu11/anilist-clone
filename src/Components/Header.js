@@ -1,5 +1,4 @@
 import {Link} from "react-router-dom";
-import {useEffect, useState} from "react";
 import { useLocation } from "react-router";
 import logo from "../img/anilistLogo.svg";
 import "../Styles/Components/Header.scss";
@@ -10,7 +9,7 @@ function Header() {
 	return (
 		<nav className={"header " + (pathname.startsWith("/media") ? "media" : "normal")} >
 			<Link to="/">
-				<img src={logo}></img>
+				<img src={logo} alt="Home." ></img>
 			</Link>
 			<Link to="/">Home</Link>
 			<Link to="/search?type=anime">Animes</Link>

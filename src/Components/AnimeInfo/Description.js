@@ -1,5 +1,4 @@
 import MDEditor from '@uiw/react-md-editor';
-import rehypeSanitize from "rehype-sanitize";
 import {useEffect, useRef} from "react";
 
 function Description({title, description}) {
