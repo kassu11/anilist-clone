@@ -3,34 +3,32 @@ import { useNavigate } from "react-router-dom";
 import searchVariablesToUrl from "../Libraries/searchVariablesToUrl";
 
 function Search3OptionSwitch({urlvariables, setUrlvariables}) {
-	const emojis = ["😄", "😎", "🙄"];
+	const emojis = ["🎥", "🙏", "📖"];
 	const myRef = useRef();
-	const dValue = urlvariables.isAdult === "only" ? 2 : urlvariables.isAdult === "both" ? 1 : 0;
-	const [myText, setMyText] = useState(emojis[dValue]); 
+	const dValue = urlvariables.type === "anime" ? 0 : urlvariables.type === "manga" ? 2 : 1;
 	
 	const navigate = useNavigate();
 
 	return (
-		<div className="ageRating">
+		<div className="searchType">
 			<div className="text">
-				<p>{"+13"}</p>
+				<p>🎥</p>
 				<p>/</p>
-				<p>+18</p>
+				<p>📖</p>
 			</div>
 			<div className="custom-range">
-				<p ref={myRef} style={{"left": `calc(${dValue / 2 * 100}%)`}}>{myText}</p>
+				<p ref={myRef} style={{"left": `calc(${dValue / 2 * 100}%)`}}>{emojis[dValue]}</p>
 			</div>
 			<input type="range" min="0" max="2" defaultValue={dValue} onChange={rangeOptions} />
-			<p className="bottomText">Age rating</p>
+			<p className="bottomText">Media Type</p>
 		</div>
 	);
 
 	function rangeOptions(e) {
-		if(e.target.value === "0") urlvariables.isAdult = undefined;
-		else if(e.target.value === "1") urlvariables.isAdult = "both";
-		else if(e.target.value === "2") urlvariables.isAdult = "only";
+		if(e.target.value === "0") urlvariables.type = "anime";
+		else if(e.target.value === "1") urlvariables.type = undefined;
+		else if(e.target.value === "2") urlvariables.type = "manga";
 		
-		setMyText(emojis[e.target.value]);
 		setUrlvariables({...urlvariables});
 		myRef.current.style.left = `calc(${(+e.target.value) / 2 * 100}%)`;
 		const url = searchVariablesToUrl(urlvariables);

@@ -4,7 +4,7 @@ import {useState} from "react";
 
 import "./Styles/Pages/tyyli.scss";
 import AnimeInfo from "./Pages/AnimeInfo";
-import AnimeSearchPage from "./Pages/AnimeSearchPage";
+import Search from "./Pages/Search";
 // import Characters from "./Pages/Characters";
 import UsersPage from "./Pages/UsersPage";
 import NotFound from "./Pages/NotFound";
@@ -17,8 +17,8 @@ function App() {
       <HashRouter>
         <Header />
         <Routes>
-          <Route path="/" element={<AnimeSearchPage setMediaData={setMediaData} />} />
-          <Route path="/search" element={<AnimeSearchPage />} />
+          <Route path="/" element={<Search setMediaData={setMediaData} />} />
+          <Route path="/search" element={<Search />} />
           <Route path="/users" element={<UsersPage />} />
           <Route path="/media/:id" element={<AnimeInfo fastData={mediaData} />} />          
           <Route path="*" element={<NotFound />} />
