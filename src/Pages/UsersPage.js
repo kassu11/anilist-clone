@@ -7,6 +7,11 @@ import "../Styles/Pages/userPage.scss";
 
 // import UserScores from "../Components/UserScores";
 
+let usersHistory = [];
+let userAnimesHistory = [];
+let sameAnimeHistory = [];
+
+
 const query = `
 query ($search: String) {
 	User (search: $search) {
@@ -77,9 +82,9 @@ query ($id: Int, $type: MediaType) {
 }`;
 
 function UsersPage() {
-	const [users, setUsers] = useState([]);
-	const [userAnimes, setUserAnimes] = useState([]);
-	const [sameAnime, setSameAnime] = useState([]);
+	const [users, setUsers] = useState(usersHistory);
+	const [userAnimes, setUserAnimes] = useState(userAnimesHistory);
+	const [sameAnime, setSameAnime] = useState(sameAnimeHistory);
 
 	useEffect(() => {
 		if(users.length === 0 || userAnimes.length >= users.length) return;
@@ -88,7 +93,8 @@ function UsersPage() {
 			variables: {id: users.at(-1)?.id, type: "ANIME"}
 		}).then(({data: {data}}) => {
 			const listIndex = data.MediaListCollection.lists.findIndex(list => list.name === "Completed");
-			userAnimes.push(data.MediaListCollection.lists[listIndex])
+			userAnimes.push(data.MediaListCollection.lists[listIndex]);
+			userAnimesHistory = [...userAnimes];
 			setUserAnimes([...userAnimes]);
 		})
 	}, [users, userAnimes]);
@@ -96,27 +102,7 @@ function UsersPage() {
 	return (
 		<div className="usersPage">
 			<div className="container">
-				<div className="userSearch">
-					<p>Search for user</p>
-					<input type="text" placeholder="User name" spellCheck="false" onKeyDown={e => {
-						if(e.keyCode === 13) {
-							const search = e.target.value;
-							e.target.value = "";
-							if(search.length > 0) {
-								axios.post("https://graphql.anilist.co", {
-									query: query,
-									variables: {search}
-								}).then(({data: {data}}) => {
-									if(users.find(user => user.id === data.User.id)) return;
-									users.push(data.User);
-									setUsers([...users]);
-								}).catch(e => {
-									console.log("Invalid user")
-								})
-							}
-						}
-					}} />
-				</div>
+				<UserSearch users={users} setUsers={setUsers} />
 				<div className="userList">
 					{users.map((user, i) => (
 						<div key={user.id} className="user">
@@ -145,6 +131,8 @@ function UsersPage() {
 									e.stopPropagation();
 									users.splice(i, 1);
 									userAnimes.splice(i, 1);
+									usersHistory = [...users];
+									userAnimesHistory = [...userAnimes];
 									setUsers([...users]);
 									setUserAnimes([...userAnimes]);
 								}}>
@@ -161,7 +149,8 @@ function UsersPage() {
 							if(userAnimes.length === 0) return;
 							if(userAnimes.length === 1) {
 								userAnimes[0].entries.sort((a, b) => b.score - a.score);
-								setSameAnime(userAnimes[0].entries.map(e => ({users: [e]})))
+								sameAnimeHistory = userAnimes[0].entries.map(e => ({users: [e]}));
+								setSameAnime(sameAnimeHistory);
 							} else {
 								const minIndex = userAnimes.reduce((acc, {entries}, i) => {
 									if(acc.length < entries.length) return acc;
@@ -191,7 +180,8 @@ function UsersPage() {
 								}
 
 								allAnimesArray.forEach(row => row.avarageScore = row.users.reduce((acc, {score}) => acc + score, 0) / row.users.length);
-								setSameAnime(allAnimesArray.sort((e1, e2) => e2.avarageScore - e1.avarageScore));
+								sameAnimeHistory = allAnimesArray.sort((e1, e2) => e2.avarageScore - e1.avarageScore);
+								setSameAnime(sameAnimeHistory);
 							}
 
 						}}>
@@ -228,6 +218,43 @@ function UsersPage() {
 
 				{/* <UserScores users={users} /> */}
 			</div>
+		</div>
+	)
+}
+
+function UserSearch({users, setUsers}) {
+	return (
+		<div className="userSearch">
+			<p>Search for user</p>
+			<input type="text" placeholder="User name" spellCheck="false" onKeyDown={e => {
+				if(e.keyCode === 13) {
+					const search = e.target.value;
+					e.target.value = "";
+					if(search.length > 0) {
+						axios.post("https://graphql.anilist.co", {
+							query: query,
+							variables: {search}
+						}).then(({data: {data}}) => {
+							if(users.find(user => user.id === data.User.id)) return;
+							users.push(data.User);
+							usersHistory = [...users];
+							setUsers([...users]);
+						}).catch(e => {
+							console.log("Invalid user")
+						});
+					}
+				}
+			}} />
+			<div className="userSearchResults"></div>
+		</div>
+	)
+}
+
+function TestElem({value}) {
+	console.log("???")
+	return (
+		<div>
+			<p>{value}</p>
 		</div>
 	)
 }

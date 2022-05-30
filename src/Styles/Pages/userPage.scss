@@ -89,6 +89,13 @@
 					width: 100%;
 					text-align: center;
 					text-shadow: black 0px 0px 5px;
+					overflow: hidden;
+					word-wrap: break-word;
+					word-break: break-all;
+					-webkit-line-clamp: 2;
+					text-overflow: ellipsis;
+					display: -webkit-box;
+					-webkit-box-orient: vertical;
 				}
 
 				.avatar {

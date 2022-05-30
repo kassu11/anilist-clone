@@ -236,9 +236,8 @@ function AnimeInfo({fastData}) {
 						<Score siteData={siteData} />
 						<Description title={siteData.title} description={siteData.description} key={siteData.id} />
 						<Relations relations={siteData?.relations} />
-						<YoutubeTrailer videoID={siteData?.trailer?.id} />
-
 						<Characters characterPreview={siteData?.characterPreview} />
+						<YoutubeTrailer videoID={siteData?.trailer?.id} />
 					</div>
 				</div>
 			</div>

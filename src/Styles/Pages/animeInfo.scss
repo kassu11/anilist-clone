@@ -5,6 +5,7 @@
 	left: 0px;
 	background-color: #0B1622;
 	overflow: hidden;
+	--gap: 25px;
 	
 	.banner {
 		position: relative;
@@ -41,7 +42,7 @@
 			width: clamp(200px, 100% - 100px, 1520px);
 			display: flex;
 			place-content: center;
-			gap: 25px;
+			gap: var(--gap);
 
 			.left-container {
 				position: relative;
@@ -63,7 +64,7 @@
 					position: relative;
 					padding: 10px;
 					border-radius: 5px;
-					margin-top: 25px;
+					margin-top: var(--gap);
 					display: flex;
 					flex-wrap: wrap;
 					gap: 5px;
@@ -106,7 +107,7 @@
 					position: relative;
 					padding: 10px;
 					border-radius: 5px;
-					margin-top: 25px;
+					margin-top: var(--gap);
 					box-shadow: 3px 3px 7px rgb(0 0 0 / 57%);				
 
 					&:not(.spoilers) .hide {display: none}
@@ -207,7 +208,7 @@
 
 				.textContainer {
 					position: relative;
-					margin-top: 25px;
+					margin-top: var(--gap);
 					width: 100%;
 					background-color: #151F2E;
 					border-radius: 5px;
@@ -261,7 +262,7 @@
 					border-radius: 5px;
 					padding: 12px;
 					display: flex;
-					margin-top: 25px;
+					margin-top: var(--gap);
 					width: 100%;
 					position: relative;
 					min-height: 90px;
@@ -318,7 +319,7 @@
 		
 						.top, .bottom {
 							display: flex;
-							gap: 25px;
+							gap: var(--gap);
 						}
 		
 						.bottom {
@@ -357,7 +358,7 @@
 				}
 
 				.relationsContainer {
-					margin-top: 25px;
+					margin-top: var(--gap);
 
 					.relations {
 						display: grid;
@@ -452,7 +453,7 @@
 
 				.trailerContainer {
 					h2 {
-						margin-top: 25px;
+						margin-top: var(--gap);
 						margin-bottom: 5px;
 					}
 				}
@@ -460,7 +461,7 @@
 				.character-container {
 
 					h2 {
-						margin-top: 25px;
+						margin-top: var(--gap);
 						margin-bottom: 8px;
 					}
 
