@@ -6,7 +6,59 @@ import AnimeResultElement from "./AnimeResultElement";
 import BottomAnimeResultElem from "./BottomAnimeResultElem";
 import formatSearchUrlToObject from "../Libraries/formatSearchUrlToObject";
 
-const searchHistory = []
+const searchHistory = [];
+const query = `
+query ($page: Int, $search: String, $sort:[MediaSort], $isAdult: Boolean, $type: MediaType, $genre_in: [String], $genre_not_in: [String], $tag_in: [String], $season: MediaSeason, $seasonYear: Int, $format_in: [MediaFormat], $status: MediaStatus) {
+	Page (page: $page) {
+		pageInfo {
+			total
+			currentPage
+			lastPage
+			hasNextPage
+			perPage
+		}
+		media (search: $search, sort: $sort, isAdult: $isAdult, type: $type, genre_in: $genre_in, genre_not_in: $genre_not_in, tag_in: $tag_in, season: $season, seasonYear: $seasonYear, format_in: $format_in, status: $status, onList: true) {
+			id
+			type
+			bannerImage
+			genres
+			format
+			title {
+				english
+				userPreferred
+			}
+			coverImage {
+				extraLarge
+				large
+				color
+			}
+			description
+			stats {
+				scoreDistribution {
+					score
+					amount
+				}
+				statusDistribution {
+					status
+					amount
+				}
+			}
+			season
+			startDate {
+				year
+			}
+			popularity
+			meanScore
+			rankings {
+				rank
+				type
+				allTime
+				year
+				season
+			}
+		}
+	}
+}`
 
 function AnimeSearchResults({setMediaData}) {
 	const {search} = useLocation();
@@ -29,32 +81,6 @@ function AnimeSearchResults({setMediaData}) {
 		"status": undefined,
 		"search": searchResults["search"] || undefined,
 	};
-
-	const query = `
-	query ($page: Int, $search: String, $sort:[MediaSort], $isAdult: Boolean, $type: MediaType, $genre_in: [String], $genre_not_in: [String], $tag_in: [String], $season: MediaSeason, $seasonYear: Int, $format_in: [MediaFormat], $status: MediaStatus) {
-		Page (page: $page) {
-			pageInfo {
-				total
-				currentPage
-				lastPage
-				hasNextPage
-				perPage
-			}
-			media (search: $search, sort: $sort, isAdult: $isAdult, type: $type, genre_in: $genre_in, genre_not_in: $genre_not_in, tag_in: $tag_in, season: $season, seasonYear: $seasonYear, format_in: $format_in, status: $status, onList: true) {
-				id
-				type
-				bannerImage
-				title {
-					english
-					userPreferred
-				}
-				coverImage {
-					large
-					color
-				}
-			}
-		}
-	}`
 	
 	useEffect(() => {
 		const index = searchHistory.findIndex(data => data?.search === search);

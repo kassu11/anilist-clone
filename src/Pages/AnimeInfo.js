@@ -144,7 +144,7 @@ query media($id:Int, $type:MediaType) {
 
 function AnimeInfo({fastData}) {
 	const {id} = useParams();
-	const [siteData, setSiteData] = useState(null);
+	const [siteData, setSiteData] = useState(fastData);
 	
 	useEffect(() => {
 		const index = animeInfoHistory.findIndex(data => data?.id === +id);
@@ -166,59 +166,7 @@ function AnimeInfo({fastData}) {
 			});
 	}, [id]);
 
-	if(!siteData && !fastData) return null;
-	if(!siteData) {
-		return (
-			<div className="animeInfoBody">
-				<div className="banner">
-					<img src={fastData.bannerImage} alt="Media banner." />
-				</div>
-				<div className="info">
-					<div className="container">
-						<div className="left-container">
-							<a className="coverImage" href="https://anilist.co/home">
-								<img src={fastData?.coverImage?.large} alt="Media cover." />
-							</a>
-						</div>
-						<div className="right-container">
-							<div className="scores">
-								<div className="meanScore">
-									<div className="title">Mean Score</div>
-									<div className="score">4.20</div>
-									<div className="users">69,420 users</div>
-								</div>
-								<div className="stats">
-									<div className="top">
-										<div className="rank">
-											<p>Ranked <span>#80085</span></p>
-										</div>
-										<div className="popularity">
-											<p>Popularity <span>#101</span></p>
-										</div>
-										<div className="members">
-											<p>Members <span>123,404</span></p>
-										</div>
-									</div>
-									<div className="bottom">
-										<div className="releaseYear">
-											<p>Year</p>
-										</div>
-										<div className="format">
-											<p>{fastData.type}</p>
-										</div>
-										<div className="studio">
-											<p>Studio name</p>
-										</div>
-									</div>
-								</div>
-							</div>
-							<Description title={fastData.title} description={fastData.description} />
-						</div>
-					</div>
-				</div>
-			</div>
-		);
-	}
+	if(!siteData) return null;
 	return (
 		<div className="animeInfoBody">
 			<div className="banner">

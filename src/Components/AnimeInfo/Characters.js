@@ -1,7 +1,7 @@
 import Character from "./Character";
 
 function Characters({characterPreview}) {
-	if(characterPreview.edges?.length === 0) return null;
+	if(!characterPreview?.edges?.length) return null;
 	return (
 		<div className="character-container">
 			<h2>Characters</h2>
