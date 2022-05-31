@@ -24,7 +24,7 @@ function Relations({relations}) {
 					const status = edge.node?.status?.replaceAll("_", " ").toLowerCase();
 
 					return (
-						<Link className="relation" key={edge.id} to={`/media/${edge.node.id}`}>
+						<Link className="relation" key={edge.id} to={`/media/${edge.node.id}`} onClick={window.scrollTo(0, 0)}>
 							<img src={edge.node.coverImage.large} alt="Media cover" />
 							<div className="relationInfo">
 								<h4 className="firstLetter">{edge.relationType.replaceAll("_", " ").toLowerCase()}</h4>

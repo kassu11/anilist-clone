@@ -309,6 +309,7 @@
 						p {
 							font-size: 20px;
 							margin: 0px;
+							position: relative;
 						}
 		
 						span {
@@ -322,20 +323,19 @@
 							gap: var(--gap);
 						}
 
-						.rank {
+						.top .type {
+							background-color: #080f18;
+							font-size: 14px;
+							font-weight: 500;
+							width: max-content;
+							/* position: absolute; */
+							padding-inline: 5px;
+							border-radius: 5px;
+							margin-top: -19px;
+							top: 3px;
 							position: relative;
-							// text-align: center;
-							.type {
-								background-color: #080f18;
-								font-size: 14px;
-								font-weight: 500;
-								width: max-content;
-								/* position: absolute; */
-								padding-inline: 5px;
-								border-radius: 5px;
-								margin-top: -17px;
-							}
 						}
+						
 		
 						.bottom {
 							margin-top: 15px;
@@ -355,7 +355,7 @@
 									background-color: #0b1622;
 									font-size: 12px;
 									font-weight: 500;
-									padding: 1px 5px;
+									padding: 1px 5px 2px;
 									border-radius: 5px;
 									white-space: nowrap;
 								}
@@ -418,6 +418,11 @@
 							overflow: hidden;
 							text-decoration: none;
 							box-shadow: 3px 3px 7px #0000004a;
+							transition: background-color 0.2s;
+
+							&:hover {
+								background-color: hsl(216, 37%, 15%);
+							}
 
 							img {
 								width: 85px;
