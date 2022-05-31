@@ -19,9 +19,9 @@ function Relations({relations}) {
 					if(e2 === -1) return -1;
 					return e1 - e2;
 				}).map(edge => {
-					const formatBase = edge.node.format.replaceAll("_", " ").toLowerCase();
+					const formatBase = edge.node?.format?.replaceAll("_", " ").toLowerCase();
 					const format = formatBase === "novel" ? "light novel" : formatBase;
-					const status = edge.node.status.replaceAll("_", " ").toLowerCase();
+					const status = edge.node?.status?.replaceAll("_", " ").toLowerCase();
 
 					return (
 						<Link className="relation" key={edge.id} to={`/media/${edge.node.id}`}>

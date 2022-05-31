@@ -2,7 +2,10 @@ import numberToText from "../../Libraries/numberToText";
 
 function Score({siteData}) {
 	const usersAmount = siteData?.stats?.scoreDistribution?.reduce((acc, cur) => acc + cur.amount, 0) ?? 0;
-	const ranking = siteData?.rankings?.find(({type, allTime}) => type === "RATED" && allTime)?.rank ?? 9999;
+	const rankingArray = siteData?.rankings?.filter(({type}) => type === "RATED") ?? [];
+	const rankingScore = rankingArray[0]?.rank ?? "N/A";
+	const rankingInfo = rankingArray[0]?.allTime ?? {};
+
 	const popularity = siteData?.rankings?.find(({type, allTime}) => type === "POPULAR" && allTime)?.rank ?? 9999;
 	const season = siteData.season?.split("").map((v, i) => i === 0 ? v.toUpperCase() : v.toLowerCase()).join("") ?? "";
 
@@ -19,7 +22,12 @@ function Score({siteData}) {
 			<div className="stats">
 				<div className="top">
 					<div className="rank">
-						<p>Ranked <span>{`#${ranking}`}</span></p>
+						{
+							rankingArray[0]?.allTime && ( <p className="type">Of all time</p> ) ||
+							rankingArray[0]?.season === null && ( <p className="type">{`In ${rankingArray[0]?.year}`}</p> ) ||
+							rankingArray[0]?.year && ( <p className="type">{`In ${rankingArray[0]?.season.at(0)}${rankingArray[0]?.season.slice(1).toLowerCase()} ${rankingArray[0]?.year}`}</p> )
+						}
+						<p>Ranked <span>{`#${rankingScore}`}</span></p>
 					</div>
 					<div className="popularity">
 						<p>Popularity <span>{`#${popularity}`}</span></p>
@@ -30,10 +38,10 @@ function Score({siteData}) {
 				</div>
 				<div className="bottom">
 					<div className="releaseYear">
-						<p>{`${season} ${siteData.startDate?.year || ""}`}</p>
+						<p>{`${season} ${siteData.startDate?.year || "TBA"}`}</p>
 					</div>
 					<div className="format">
-						<p>{`${siteData.format}`}</p>
+						<p>{`${siteData.format || "unknown"}`}</p>
 					</div>
 					{siteData.studios?.nodes?.length ? (
 						<div className="studio">

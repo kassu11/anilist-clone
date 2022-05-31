@@ -8,8 +8,7 @@ function Characters({characterPreview}) {
 			<div className="characters">
 				{characterPreview.edges.map(edge => {
 					const [role] = edge.voiceActorRoles;
-					// if(!role?.voiceActor?.language) return null;
-					return <Character edge={edge} role={role} key={`${edge.id}${role?.roleNotes}${role?.voiceActor?.name.userPreferred}`} />
+					return <Character edge={edge} role={role} key={`${edge.id}${role?.roleNotes || ""}${role?.voiceActor?.name.userPreferred}`} />
 				})}
 			</div>
 		</div>

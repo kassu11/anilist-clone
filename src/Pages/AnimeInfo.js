@@ -66,6 +66,8 @@ query media($id:Int, $type:MediaType) {
 			rank
 			type
 			allTime
+			year
+			season
 		}
 		title {
 			romaji
