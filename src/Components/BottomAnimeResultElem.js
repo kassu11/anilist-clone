@@ -3,7 +3,7 @@ import axios from "axios";
 
 import AnimeResultElement from "./AnimeResultElement";
 
-function BottomAnimeResultElem({animeData, query, variables}) {
+function BottomAnimeResultElem({animeData, query, variables, setMediaData}) {
 	const [data, setData] = useState(null);
 	const myRef = useRef();
 
@@ -29,8 +29,8 @@ function BottomAnimeResultElem({animeData, query, variables}) {
 	else {
 		return (
 			<>
-				{data.media?.map((animeData, i) => <AnimeResultElement data={animeData} key={animeData.id} />)}
-				{data?.pageInfo?.hasNextPage ? <BottomAnimeResultElem query={query} variables={variables} /> : null}
+				{data.media?.map((animeData, i) => <AnimeResultElement data={animeData} key={animeData.id} setMediaData={setMediaData} />)}
+				{data?.pageInfo?.hasNextPage ? <BottomAnimeResultElem query={query} variables={variables} setMediaData={setMediaData} /> : null}
 			</>
 		)
 	}

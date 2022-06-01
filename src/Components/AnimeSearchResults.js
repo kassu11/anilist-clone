@@ -106,7 +106,7 @@ function AnimeSearchResults({setMediaData}) {
 	return (
 		<div className="animes">
 			{data.media?.map((animeData, i) => <AnimeResultElement data={animeData} key={animeData.id} setMediaData={setMediaData} />)}
-			{data?.pageInfo?.hasNextPage ? <BottomAnimeResultElem query={query} variables={variables} /> : null}
+			{data?.pageInfo?.hasNextPage ? <BottomAnimeResultElem query={query} variables={variables} setMediaData={setMediaData} /> : null}
 		</div>
 	);
 }

@@ -18,7 +18,7 @@ function App() {
         <Header />
         <Routes>
           <Route path="/" element={<Search setMediaData={setMediaData} />} />
-          <Route path="/search" element={<Search />} />
+          <Route path="/search" element={<Search setMediaData={setMediaData} />} />
           <Route path="/users" element={<UsersPage />} />
           <Route path="/media/:id" element={<AnimeInfo fastData={mediaData} />} />          
           <Route path="*" element={<NotFound />} />

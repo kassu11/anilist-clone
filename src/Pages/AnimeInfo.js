@@ -144,7 +144,10 @@ query media($id:Int, $type:MediaType) {
 
 function AnimeInfo({fastData}) {
 	const {id} = useParams();
-	const [siteData, setSiteData] = useState(fastData);
+	const [mediaQueryData, setSiteData] = useState(null);
+	const currentMedia = mediaQueryData?.id == id ? mediaQueryData : fastData;
+
+	if(fastData && fastData.id != id) console.log("??", fastData);
 	
 	useEffect(() => {
 		const index = animeInfoHistory.findIndex(data => data?.id === +id);
@@ -166,28 +169,28 @@ function AnimeInfo({fastData}) {
 			});
 	}, [id]);
 
-	if(!siteData) return null;
+	if(!currentMedia) return null;
 	return (
 		<div className="animeInfoBody">
 			<div className="banner">
-				<img src={siteData.bannerImage} alt="Media banner." />
+				<img src={currentMedia.bannerImage} alt="Media banner." />
 			</div>
 			<div className="info">
 				<div className="container">
 					<div className="left-container">
-						<a className="coverImage" href={siteData.siteUrl}>
-							<img src={siteData?.coverImage?.extraLarge} alt="Media cover." />
+						<a className="coverImage" href={currentMedia.siteUrl}>
+							<img src={currentMedia?.coverImage?.extraLarge} alt="Media cover." />
 						</a>
-						{siteData?.genres?.length > 0 && (<Genres genres={siteData?.genres} />)}
-						{siteData?.tags?.length > 0 && (<Tags tags={siteData?.tags} />)}
+						{currentMedia?.genres?.length > 0 && (<Genres genres={currentMedia?.genres} />)}
+						{currentMedia?.tags?.length > 0 && (<Tags tags={currentMedia?.tags} />)}
 					</div>
 
 					<div className="right-container">
-						<Score siteData={siteData} />
-						<Description title={siteData.title} description={siteData.description} key={siteData.id} />
-						<Relations relations={siteData?.relations} />
-						<Characters characterPreview={siteData?.characterPreview} />
-						<YoutubeTrailer videoID={siteData?.trailer?.id} />
+						<Score siteData={currentMedia} />
+						<Description title={currentMedia.title} description={currentMedia.description} key={currentMedia.id} />
+						<Relations relations={currentMedia?.relations} />
+						<Characters characterPreview={currentMedia?.characterPreview} />
+						<YoutubeTrailer videoID={currentMedia?.trailer?.id} />
 					</div>
 				</div>
 			</div>

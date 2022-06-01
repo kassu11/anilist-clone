@@ -1,4 +1,5 @@
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
+import capitalize from "../../Libraries/capitalize";
 
 const sortOrder = ["SOURCE", "ADAPTATION", "ALTERNATIVE", "SIDE_STORY", "SUMMARY", "CHARACTER", "OTHER"]
 
@@ -27,11 +28,11 @@ function Relations({relations}) {
 						<Link className="relation" key={edge.id} to={`/media/${edge.node.id}`} onClick={window.scrollTo(0, 0)}>
 							<img src={edge.node.coverImage.large} alt="Media cover" />
 							<div className="relationInfo">
-								<h4 className="firstLetter">{edge.relationType.replaceAll("_", " ").toLowerCase()}</h4>
+								<h4>{capitalize(edge.relationType.replaceAll("_", " "))}</h4>
 								<p>{edge.node.title.english || edge.node.title.userPreferred}</p>
 								<div className="bottom">
-									<p className="firstLetter">{format} •</p>
-									<p className="firstLetter">{status}</p>
+									<p>{capitalize(format) || "unknown"} •</p>
+									<p>{capitalize(status)}</p>
 								</div>
 							</div>
 						</Link>
