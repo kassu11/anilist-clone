@@ -63,8 +63,10 @@ query ($page: Int, $search: String, $sort:[MediaSort], $isAdult: Boolean, $type:
 function AnimeSearchResults({setMediaData}) {
 	const {search} = useLocation();
 	const [data, setData] = useState([]);
+	const [loading, setLoading] = useState(true);
 
 	const searchResults = formatSearchUrlToObject(search);
+	const historyIndex = searchHistory.findIndex(data => data?.search === search);
 
 	const variables = {
 		"page": 1,
@@ -80,33 +82,47 @@ function AnimeSearchResults({setMediaData}) {
 		"isAdult": searchResults["isAdult"] === "only" ? true : searchResults["isAdult"] === "both" ? undefined : false,
 		"status": undefined,
 		"search": searchResults["search"] || undefined,
-	};
-	
+	};	
 	useEffect(() => {
-		const index = searchHistory.findIndex(data => data?.search === search);
-		window.scrollTo(0, 0);
-		if(index !== -1) {
-			setData(searchHistory[index]);
+		if(historyIndex !== -1) {
+			if(data?.search !== search) window.scrollTo(0, 0);
+			setLoading(false);
+			setData(searchHistory[historyIndex]);
 			return;
 		};
+		setLoading(true);
+		setData([]);
 
 		axios
 			.post("https://graphql.anilist.co", {
 				query: query,
-				variables: variables
+				variables: variables,
 			})
 			.then(({data: {data}}) => {
+				window.scrollTo(0, 0);
 				const newData = {...data.Page, search};
-				setData(newData);
 				searchHistory.unshift(newData);
 				searchHistory.length = 50;
+				setLoading(false);
+				setData(newData);
 			});
 	}, [search]);
 
 	return (
 		<div className="animes">
+			{loading && ([...Array(10)].map((_, i) => <div className="anime bottom" key={`loading${i}`}></div>))}
 			{data.media?.map((animeData, i) => <AnimeResultElement data={animeData} key={animeData.id} setMediaData={setMediaData} />)}
-			{data?.pageInfo?.hasNextPage ? <BottomAnimeResultElem query={query} variables={variables} setMediaData={setMediaData} /> : null}
+			{data?.pageInfo?.hasNextPage ? (
+				<BottomAnimeResultElem 
+					query={query} 
+					variables={variables} 
+					setMediaData={setMediaData} 
+					searchHistory={searchHistory} 
+					historyIndex={historyIndex}
+					search={search}
+					key={search}
+				/>
+			) : null}
 		</div>
 	);
 }

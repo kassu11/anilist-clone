@@ -47,7 +47,7 @@ function Score({siteData}) {
 						<p>{`${season} ${siteData.startDate?.year || "TBA"}`}</p>
 					</div>
 					<div className="format">
-						<p>{`${siteData.format || "unknown"}`}</p>
+						<p>{`${siteData.format.replaceAll("_", " ") || "unknown"}`}</p>
 					</div>
 					{siteData.studios?.nodes?.length ? (
 						<div className="studio">
