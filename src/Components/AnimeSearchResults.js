@@ -4,6 +4,7 @@ import { useLocation } from "react-router";
 
 import AnimeResultElement from "./AnimeResultElement";
 import BottomAnimeResultElem from "./BottomAnimeResultElem";
+import AnimeSearchLoading from "./AnimeSearchLoading";
 import formatSearchUrlToObject from "../Libraries/formatSearchUrlToObject";
 
 const searchHistory = [];
@@ -93,10 +94,13 @@ function AnimeSearchResults({setMediaData}) {
 		setLoading(true);
 		setData([]);
 
+		const controller = new AbortController();
+
 		axios
 			.post("https://graphql.anilist.co", {
 				query: query,
 				variables: variables,
+				signal: controller.signal
 			})
 			.then(({data: {data}}) => {
 				window.scrollTo(0, 0);
@@ -106,11 +110,12 @@ function AnimeSearchResults({setMediaData}) {
 				setLoading(false);
 				setData(newData);
 			});
+			controller.abort()
 	}, [search]);
 
 	return (
 		<div className="animes">
-			{loading && ([...Array(10)].map((_, i) => <div className="anime bottom" key={`loading${i}`}></div>))}
+			{loading && ([...Array(10)].map((_, i) => <AnimeSearchLoading key={`loading${i}`} />))}
 			{data.media?.map((animeData, i) => <AnimeResultElement data={animeData} key={animeData.id} setMediaData={setMediaData} />)}
 			{data?.pageInfo?.hasNextPage ? (
 				<BottomAnimeResultElem 

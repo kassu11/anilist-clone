@@ -21,29 +21,53 @@
 		min-height: 325px;
 		box-sizing: content-box;
 
-		&.bottom {
+		&.loading {
 			position: relative;
-			&::after, &::before {
-				content: "";
+			.image, .title, .description {
 				display: block;
 				position: absolute;
 				background-color: #0B1622;
+				background-image: repeating-linear-gradient(45deg, #0000001f, transparent 100px);
 				border-radius: 5px;
 				width: 180px;
+				background-size: 500%;
+				animation: animeGradient 2s ease-in-out infinite;
 			}
 
-			&::before {
+			.image {
+				--offset: 0%;
 				inset: 0px;
 				margin: 25px auto;
 				height: 250px;
+				// background-image: repeating-linear-gradient(45deg, black, transparent 100px);
+				// animation: animeGradient 1s ease-in-out infinite;
 			}	
-
-			&::after {
+			
+			.title {
+				--offset: 7%;
 				inset-inline: 0px;
 				bottom: 40px;
 				margin: auto;
 				height: 20px;
-				box-shadow: 0 25px #0B1622;
+				// background-image: repeating-linear-gradient(45deg, black, transparent 100px);
+				// animation: animeGradient 1s ease-in-out infinite;
+			}
+			.description {
+				--offset: 14%;
+				inset-inline: 0px;
+				bottom: 15px;
+				margin: auto;
+				height: 20px;
+				// background-image: repeating-linear-gradient(45deg, black, transparent 100px);
+				// animation: animeGradient 1s ease-in-out infinite;
+			}
+			@keyframes animeGradient {
+				0% {
+					background-position-x: calc(79% + var(--offset) + 3px);
+				}
+				100% {
+					background-position-x: calc(0% + var(--offset));
+				}
 			}
 		}
 

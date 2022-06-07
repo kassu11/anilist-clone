@@ -2,6 +2,7 @@ import {useEffect, useState, useRef} from "react";
 import axios from "axios";
 
 import AnimeResultElement from "./AnimeResultElement";
+import AnimeSearchLoading from "./AnimeSearchLoading";
 
 function BottomAnimeResultElem({animeData, query, variables, setMediaData, searchHistory, historyIndex: index, search}) {
 	const [data, setData] = useState(null);
@@ -31,8 +32,8 @@ function BottomAnimeResultElem({animeData, query, variables, setMediaData, searc
 
 	if(!data) return (
 		<>
-			<div className="anime bottom" ref={myRef}></div>
-			{[...Array(10)].map((_, i) => <div className="anime bottom" key={`loading${i}`}></div>)}
+			<div className="loader" ref={myRef}/>
+			{[...Array(10)].map((_, i) => <AnimeSearchLoading key={`loading${i}`} />)}
 		</>
 	)
 	else {
