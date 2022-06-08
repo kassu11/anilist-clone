@@ -9,25 +9,32 @@ function BottomAnimeResultElem({animeData, query, variables, setMediaData, searc
 	const myRef = useRef();
 
 	const historyIndex = index === -1 ? searchHistory.findIndex(data => data?.search === search) : index;
+	const newVaribles = {...variables, page: variables.page + 1};
 
 	useEffect(() => {
+		let cancel;
 		const observer = new IntersectionObserver(entries => {
 			if(entries[0].isIntersecting) {
 				observer.disconnect();
-				variables.page++;
-
-				axios.post("https://graphql.anilist.co", {
-					query: query,
-					variables: variables
+				
+				axios({
+					url: "https://graphql.anilist.co",
+					method: "POST",
+					params: {query, variables: newVaribles},
+					cancelToken: new axios.CancelToken(c => cancel = c)
 				}).then(({data: {data}}) => {
-					setData(data.Page);
 					searchHistory[historyIndex].media.push(...data.Page.media);
 					searchHistory[historyIndex].pageInfo = data.Page.pageInfo;
+					setData(data.Page);
+				}).catch(error => {
+					if(axios.isCancel(error)) return;
+					console.error(error);
 				});
 			}
 		}, {rootMargin: "200px"});
-
 		observer.observe(myRef.current);
+
+		return () => cancel();
 	}, []);
 
 	if(!data) return (
@@ -43,7 +50,7 @@ function BottomAnimeResultElem({animeData, query, variables, setMediaData, searc
 				{data?.pageInfo?.hasNextPage ? (
 					<BottomAnimeResultElem 
 						query={query} 
-						variables={variables} 
+						variables={newVaribles} 
 						setMediaData={setMediaData} 
 						searchHistory={searchHistory} 
 						historyIndex={historyIndex} 

@@ -3,7 +3,8 @@ import AnimeSearchBar from "../Components/AnimeSearchBar";
 import "../Styles/Pages/search.scss";
 
 function AnimeSearchPage({setMediaData}) {
-	document.title = "Anime Search"
+	document.title = "Anime Search";
+
 	return (
 		<>
 			<AnimeSearchBar />

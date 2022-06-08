@@ -61,16 +61,16 @@ query ($page: Int, $search: String, $sort:[MediaSort], $isAdult: Boolean, $type:
 	}
 }`
 
+
 function AnimeSearchResults({setMediaData}) {
 	const {search} = useLocation();
-	const [data, setData] = useState([]);
-	const [loading, setLoading] = useState(true);
+	const [{loading, ...data}, setData] = useState({loading: true});
 
 	const searchResults = formatSearchUrlToObject(search);
 	const historyIndex = searchHistory.findIndex(data => data?.search === search);
 
 	const variables = {
-		"page": 1,
+		"page": historyIndex !== -1 ? data.pageInfo?.currentPage : 1,
 		"sort": searchResults["search"] ? "SEARCH_MATCH" : "TRENDING_DESC",
 		// "sort": ["TITLE_ENGLISH", "ID_DESC"],
 		"type": searchResults["type"]?.toUpperCase(), // "ANIME", "MANGA"
@@ -87,32 +87,31 @@ function AnimeSearchResults({setMediaData}) {
 	useEffect(() => {
 		if(historyIndex !== -1) {
 			if(data?.search !== search) window.scrollTo(0, 0);
-			setLoading(false);
-			setData(searchHistory[historyIndex]);
+			setData({...searchHistory[historyIndex], loading: false});
 			return;
 		};
-		setLoading(true);
-		setData([]);
+		setData({loading: true});
 
-		const controller = new AbortController();
+		let cancel;
+		axios({
+			url: "https://graphql.anilist.co",
+			method: "POST",
+			params: {query, variables},
+			cancelToken: new axios.CancelToken(c => cancel = c)
+		}).then(({data: {data}}) => {
+			window.scrollTo(0, 0);
+			const newData = {...data.Page, search};
+			searchHistory.unshift(newData);
+			searchHistory.length = 50;
+			setData({...newData, loading: false});
+		}).catch(error => {
+			if(axios.isCancel(error)) return;
+			console.error(error);
+		});
 
-		axios
-			.post("https://graphql.anilist.co", {
-				query: query,
-				variables: variables,
-				signal: controller.signal
-			})
-			.then(({data: {data}}) => {
-				window.scrollTo(0, 0);
-				const newData = {...data.Page, search};
-				searchHistory.unshift(newData);
-				searchHistory.length = 50;
-				setLoading(false);
-				setData(newData);
-			});
-			controller.abort()
+		return () => cancel();
 	}, [search]);
-
+	
 	return (
 		<div className="animes">
 			{loading && ([...Array(10)].map((_, i) => <AnimeSearchLoading key={`loading${i}`} />))}
@@ -125,7 +124,7 @@ function AnimeSearchResults({setMediaData}) {
 					searchHistory={searchHistory} 
 					historyIndex={historyIndex}
 					search={search}
-					key={search}
+					key={search + variables.page}
 				/>
 			) : null}
 		</div>
