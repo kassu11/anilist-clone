@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/anilist-clone/static/css/main.9592b445.css",
-    "main.js": "/anilist-clone/static/js/main.f8900981.js",
+    "main.js": "/anilist-clone/static/js/main.db15a21d.js",
     "static/media/anilistLogo.svg": "/anilist-clone/static/media/anilistLogo.52d45a2b909c140964ea6f264c2f45e7.svg",
     "index.html": "/anilist-clone/index.html",
     "main.9592b445.css.map": "/anilist-clone/static/css/main.9592b445.css.map",
-    "main.f8900981.js.map": "/anilist-clone/static/js/main.f8900981.js.map"
+    "main.db15a21d.js.map": "/anilist-clone/static/js/main.db15a21d.js.map"
   },
   "entrypoints": [
     "static/css/main.9592b445.css",
-    "static/js/main.f8900981.js"
+    "static/js/main.db15a21d.js"
   ]
 }
