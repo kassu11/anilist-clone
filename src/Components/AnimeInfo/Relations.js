@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
 import capitalize from "../../Libraries/capitalize";
 
+import fastData from "./fastData";
+
 const sortOrder = ["SOURCE", "ADAPTATION", "ALTERNATIVE", "SIDE_STORY", "SUMMARY", "CHARACTER", "OTHER"]
 
 function Relations({relations}) {
@@ -25,7 +27,10 @@ function Relations({relations}) {
 					const status = edge.node?.status?.replaceAll("_", " ").toLowerCase();
 
 					return (
-						<Link className="relation" key={edge.id} to={`/media/${edge.node.id}`} onClick={window.scrollTo(0, 0)}>
+						<Link className="relation" key={edge.id} to={`/media/${edge.node.id}`} onClick={e => {
+							fastData.data = edge.node;
+							window.scrollTo(0, 0);
+						}}>
 							<img src={edge.node.coverImage.large} alt="Media cover" />
 							<div className="relationInfo">
 								<h4>{capitalize(edge.relationType.replaceAll("_", " "))}</h4>

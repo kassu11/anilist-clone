@@ -4,7 +4,7 @@ import axios from "axios";
 import AnimeResultElement from "./AnimeResultElement";
 import AnimeSearchLoading from "./AnimeSearchLoading";
 
-function BottomAnimeResultElem({animeData, query, variables, setMediaData, searchHistory, historyIndex: index, search}) {
+function BottomAnimeResultElem({animeData, query, variables, searchHistory, historyIndex: index, search}) {
 	const [data, setData] = useState(null);
 	const myRef = useRef();
 
@@ -34,7 +34,7 @@ function BottomAnimeResultElem({animeData, query, variables, setMediaData, searc
 		}, {rootMargin: "200px"});
 		observer.observe(myRef.current);
 
-		return () => cancel();
+		return () => cancel?.();
 	}, []);
 
 	if(!data) return (
@@ -46,12 +46,11 @@ function BottomAnimeResultElem({animeData, query, variables, setMediaData, searc
 	else {
 		return (
 			<>
-				{data.media?.map((animeData, i) => <AnimeResultElement data={animeData} key={animeData.id} setMediaData={setMediaData} />)}
+				{data.media?.map((animeData, i) => <AnimeResultElement data={animeData} key={animeData.id} />)}
 				{data?.pageInfo?.hasNextPage ? (
 					<BottomAnimeResultElem 
 						query={query} 
 						variables={newVaribles} 
-						setMediaData={setMediaData} 
 						searchHistory={searchHistory} 
 						historyIndex={historyIndex} 
 						search={search}

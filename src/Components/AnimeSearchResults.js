@@ -62,7 +62,7 @@ query ($page: Int, $search: String, $sort:[MediaSort], $isAdult: Boolean, $type:
 }`
 
 
-function AnimeSearchResults({setMediaData}) {
+function AnimeSearchResults() {
 	const {search} = useLocation();
 	const [{loading, ...data}, setData] = useState({loading: true});
 
@@ -115,12 +115,11 @@ function AnimeSearchResults({setMediaData}) {
 	return (
 		<div className="animes">
 			{loading && ([...Array(10)].map((_, i) => <AnimeSearchLoading key={`loading${i}`} />))}
-			{data.media?.map((animeData, i) => <AnimeResultElement data={animeData} key={animeData.id} setMediaData={setMediaData} />)}
+			{data.media?.map((animeData, i) => <AnimeResultElement data={animeData} key={animeData.id} />)}
 			{data?.pageInfo?.hasNextPage ? (
 				<BottomAnimeResultElem 
 					query={query} 
 					variables={variables} 
-					setMediaData={setMediaData} 
 					searchHistory={searchHistory} 
 					historyIndex={historyIndex}
 					search={search}

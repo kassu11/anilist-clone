@@ -10,6 +10,8 @@ import Tags from "../Components/AnimeInfo/Tags";
 import Relations from "../Components/AnimeInfo/Relations";
 import Characters from "../Components/AnimeInfo/Characters";
 
+import fastData from "../Components/AnimeInfo/fastData";
+
 import "../Styles/Pages/animeInfo.scss";
 
 const animeInfoHistory = [];
@@ -111,18 +113,43 @@ query media($id:Int, $type:MediaType) {
 				relationType(version:2)
 				node {
 					id 
+					season
+					description
+					popularity
+					meanScore
+					source(version: 3)
+					format 
+					genres
+					type 
+					status(version:2)
+					bannerImage 
 					title {
 						english
 						userPreferred
 					}
-					source(version: 3)
-					format 
-					type 
-					status(version:2)
-					bannerImage 
+					stats {
+						scoreDistribution {
+							score
+							amount
+						}
+						statusDistribution {
+							status
+							amount
+						}
+					}
+					rankings {
+						rank
+						type
+						allTime
+						year
+						season
+					}
+					startDate {
+						year
+					}
 					coverImage {
+						extraLarge
 						large
-						medium
 					}
 				}
 			}
@@ -142,18 +169,21 @@ query media($id:Int, $type:MediaType) {
 	}
 }`;
 
-function AnimeInfo({fastData}) {
+function AnimeInfo() {
 	const {id} = useParams();
 	const [mediaQueryData, setSiteData] = useState(null);
-	const currentMedia = mediaQueryData?.id == id ? mediaQueryData : fastData;
+	const historyIndex = animeInfoHistory.findIndex(data => data?.id === +id);
+	
+	let currentMedia = null;
+	if(mediaQueryData?.id === id) currentMedia = mediaQueryData;
+	else if(historyIndex !== -1) currentMedia = animeInfoHistory[historyIndex];
+	else currentMedia = fastData.data;
 
-	if(fastData && fastData.id != id) console.log("??", fastData);
+	if(currentMedia?.title) document.title = currentMedia?.title?.english || currentMedia?.title?.userPreferred;
 	
 	useEffect(() => {
-		const index = animeInfoHistory.findIndex(data => data?.id === +id);
-		if(index !== -1) {
-			setSiteData(animeInfoHistory[index]);
-			document.title = animeInfoHistory[index]?.title?.english || animeInfoHistory[index]?.title?.userPreferred;
+		if(historyIndex !== -1) {
+			setSiteData(animeInfoHistory[historyIndex]);
 			return;
 		};
 		axios
@@ -164,8 +194,8 @@ function AnimeInfo({fastData}) {
 			.then(({data: {data}}) => {
 				animeInfoHistory.unshift(data.Media);
 				animeInfoHistory.length = 50;
+				fastData.data = data.Media;
 				setSiteData(data.Media);
-				document.title = data.Media?.title?.english || data.Media?.title?.userPreferred;
 			});
 	}, [id]);
 

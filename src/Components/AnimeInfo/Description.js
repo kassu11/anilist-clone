@@ -6,12 +6,14 @@ function Description({title, description}) {
 
 	useEffect(() => {
 		const height = myRef?.current?.getBoundingClientRect().height;
-		if(height < 270) myRef.current.classList.add("show");
-		else myRef.current.style.maxHeight = "250px"
+		if(height > 270) {
+			myRef.current.classList.remove("show");
+			myRef.current.style.maxHeight = "250px";
+		}
 	}, []);
 
 	return (
-		<div className="textContainer" ref={myRef}>
+		<div className="textContainer show" ref={myRef}>
 			<h1>{title?.english || title?.userPreferred}</h1>
 			{description && (<MDEditor.Markdown source={description} />)}
 			<div className="moreInfo" onClick={v => {

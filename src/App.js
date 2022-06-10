@@ -10,17 +10,15 @@ import UsersPage from "./Pages/UsersPage";
 import NotFound from "./Pages/NotFound";
 
 function App() {
-  const [mediaData, setMediaData] = useState(null);
-
   return (
     <div className="App">
       <HashRouter>
         <Header />
         <Routes>
-          <Route path="/" element={<Search setMediaData={setMediaData} />} />
-          <Route path="/search" element={<Search setMediaData={setMediaData} />} />
+          <Route path="/" element={<Search />} />
+          <Route path="/search" element={<Search />} />
           <Route path="/users" element={<UsersPage />} />
-          <Route path="/media/:id" element={<AnimeInfo fastData={mediaData} />} />          
+          <Route path="/media/:id" element={<AnimeInfo />} />          
           <Route path="*" element={<NotFound />} />
         </Routes>
       </HashRouter>
