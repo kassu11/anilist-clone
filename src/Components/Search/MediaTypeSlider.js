@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import searchVariablesToUrl from "../Libraries/searchVariablesToUrl";
+import searchVariablesToUrl from "../../Libraries/searchVariablesToUrl";
 
 function Search3OptionSwitch({urlvariables, setUrlvariables}) {
 	const emojis = ["🎥", "🙏", "📖"];

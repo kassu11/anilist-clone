@@ -5,7 +5,7 @@ import { useLocation } from "react-router";
 import AnimeResultElement from "./AnimeResultElement";
 import BottomAnimeResultElem from "./BottomAnimeResultElem";
 import AnimeSearchLoading from "./AnimeSearchLoading";
-import formatSearchUrlToObject from "../Libraries/formatSearchUrlToObject";
+import formatSearchUrlToObject from "../../Libraries/formatSearchUrlToObject";
 
 const searchHistory = [];
 const query = `

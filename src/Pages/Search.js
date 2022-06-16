@@ -1,5 +1,5 @@
-import AnimeSearchResults from "../Components/AnimeSearchResults";
-import AnimeSearchBar from "../Components/AnimeSearchBar";
+import AnimeSearchResults from "../Components/Search/AnimeSearchResults";
+import AnimeSearchBar from "../Components/Search/AnimeSearchBar";
 import "../Styles/Pages/search.scss";
 
 function AnimeSearchPage() {

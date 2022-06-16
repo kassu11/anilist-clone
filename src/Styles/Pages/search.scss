@@ -2,10 +2,10 @@
 	display: flex;
 	flex-wrap: wrap;
 	place-content: center;
-	right: 0px;
+	left: 0px;
 	position: absolute;
-	width: calc(100% - 250px);
-	top: 75px;
+	width: 100%;
+	top: 190px;
 
 	.anime {
 		width: 200px;

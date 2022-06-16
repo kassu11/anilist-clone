@@ -1,5 +1,5 @@
 import {Link} from "react-router-dom";
-import fastData from "./AnimeInfo/fastData";
+import fastData from "../AnimeInfo/fastData";
 
 function AnimeResultElement({data}) {
 	return (

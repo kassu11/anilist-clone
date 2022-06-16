@@ -1,8 +1,9 @@
-import "../Styles/Components/searchBar.scss";
+import "../../Styles/Components/searchBar.scss";
 import SearchInput from "./SearchInput";
-import formatSearchUrlToObject from "../Libraries/formatSearchUrlToObject";
-import AgeSlider from "./AgeSlider";
+import formatSearchUrlToObject from "../../Libraries/formatSearchUrlToObject";
+import AgeSlider from "../AgeSlider";
 import MediaTypeSlider from "./MediaTypeSlider";
+import SearchPopup from "./SearchPopup";
 import {useEffect, useState} from "react";
 import { useLocation } from "react-router";
 
@@ -31,10 +32,11 @@ function AnimeSearchBar() {
 	}, [search]);
 
 	return (
-		<div className="search-bar">
+		<div className="search-container open">
 			<SearchInput urlvariables={urlvariables} setUrlvariables={setUrlvariables} />
-			<AgeSlider urlvariables={urlvariables} setUrlvariables={setUrlvariables} />
-			<MediaTypeSlider urlvariables={urlvariables} setUrlvariables={setUrlvariables} />
+			<SearchPopup />
+			{/* <AgeSlider urlvariables={urlvariables} setUrlvariables={setUrlvariables} /> */}
+			{/* <MediaTypeSlider urlvariables={urlvariables} setUrlvariables={setUrlvariables} /> */}
 		</div>
 	);
 }
