@@ -1,11 +1,24 @@
-import {useState} from "react";
+import {useRef, useState} from "react";
 
 function CustomSelect({values, selectedValue, customChange, text}) {
 	const [isOpen, setIsOpen] = useState(false);
 	const [selected, setSelected] = useState(selectedValue);
+	const selectElem = useRef();
+
+	window.onmousedown = e => {
+		const target = e.target;
+		const parent = target.closest("div.customSelect.open");
+
+		console.log(parent, selectElem.current)
+
+		if(parent !== selectElem.current) {
+			setIsOpen(false);
+			window.onclick = null;
+		}
+	}
 
 	return (
-		<div className={`customSelect${isOpen ? " open" : ""}`} onClick={e => setIsOpen(!isOpen)}>
+		<div className={`customSelect${isOpen ? " open" : ""}`} onClick={e => setIsOpen(!isOpen)} ref={selectElem}>
 			<div className="preview">
 				<p>{text} <span>{selected}</span></p>
 			</div>

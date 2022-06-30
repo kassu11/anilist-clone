@@ -9,7 +9,7 @@ function SearchPopup() {
 			<p>Sorting</p>
 			<CustomSelect values={["Adults", "Teens", "All ages"]} text={"Age range: "} selectedValue={"Teens"}></CustomSelect>
 			<p>Genres</p>
-			<CustomMultiSelect values={["Adults", "Teens", "All ages"]} text={"Age range: "} selectedValue={"Teens"}></CustomMultiSelect>
+			<CustomMultiSelect values={["Adults", "Teens"]} text={"Age range: "} selectedValue={"Teens"}></CustomMultiSelect>
 			<p>Tags</p>
 			<p>Media type</p>
 

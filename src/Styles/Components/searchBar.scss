@@ -1,3 +1,5 @@
+@use "colors.scss" as *;
+
 .search-container {
 	position: absolute;
 	left: 50%;
@@ -10,14 +12,14 @@
 	border-radius: 5px;
 
 	&.open {
-		background: #0b1622;
+		background: $color-primary;
 		box-shadow: 0 0 0px 100vmax #00000085;
 	}
 
 	.searchBar {
 		position: relative;
 		display: flex;
-		background-color: #151F2E;
+		background-color: $color-primary-light;
 		border-radius: 50px;
 		height: 55px;
 		box-shadow: 2px 2px 5px rgb(0 0 0 / 50%);
@@ -26,7 +28,7 @@
 
 		.search-input {
 			position: relative;
-			// background-color: #151F2E;
+			// background-color: $color-primary-light;
 			height: 100%;
 			width: 100%;
 			// box-shadow: 2px 2px 5px rgb(0 0 0 / 50%);
@@ -137,17 +139,22 @@
 				width: 100%;
 				display: none;
 				box-shadow: inset 0 17px 5px -16px black;
+				z-index: 1;
 				
 				.option {
 					padding: 5px;
-					padding-bottom: 2px;
+					padding-top: 2px;
+					padding-bottom: 4px;
 
 					&.selected {
 						background: hsl(216deg 37% 12%);
 					}
 					
 					&:hover {
-						background-color: red;
+						background: hsl(216deg 37% 10%);
+					}
+					&.selected:hover {
+						background: hsl(216deg 37% 14%);
 					}
 				}
 			}
@@ -206,18 +213,20 @@
 				width: 100%;
 				display: none;
 				box-shadow: inset 0 17px 5px -16px black;
+				z-index: 1;
 				
 				.option {
 					padding: 5px;
+					padding-top: 3px;
 					padding-bottom: 2px;
 					display: flex;
 
 					.checkBox {
 						position: relative;
-						background: #151f2e;
+						background: $color-primary-light;
 						width: 15px;
 						height: 15px;
-						border: 2px solid #0b1622;
+						border: 2px solid $color-primary;
 						display: block;
 						border-radius: 5px;
 						margin-right: 10px;
@@ -236,11 +245,27 @@
 						.checkBox {
 							background: #263954;
 							border: 2px solid #0d131c;
+
+							&::before {
+								content: "";
+								position: absolute;
+								width: 10px;
+								height: 5px;
+								--color: #add9ff;
+								border-bottom: 2px solid var(--color);
+								border-left: 2px solid var(--color);
+								transform: rotate(315deg);
+								left: 1px;
+								top: 1px;
+							}
 						}
 					}
 					
 					&:hover {
-						background-color: red;
+						background: hsl(216deg 37% 10%);
+					}
+					&.selected:hover {
+						background: hsl(216deg 37% 14%);
 					}
 				}
 			}
@@ -256,7 +281,7 @@
 				position: relative;
 				width: max-content;
 				display: block;
-				background-color: #151f2e;
+				background-color: $color-primary-light;
 				padding: 5px;
 				padding-inline: 20px;
 			}
@@ -267,7 +292,7 @@
 		position: relative;
 		width: 100px;
 		height: 30px;
-		background-color: #151F2E;
+		background-color: $color-primary-light;
 		display: flex;
 		border-radius: 50px;
 		box-shadow: 2px 2px 5px rgb(0 0 0 / 50%);

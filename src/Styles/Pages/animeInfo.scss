@@ -1,9 +1,11 @@
+@use "../Components/colors.scss" as *;
+
 .animeInfoBody {
 	position: absolute;
 	width: 100%;
 	top: 0px;
 	left: 0px;
-	background-color: #0B1622;
+	background-color: $color-primary;
 	overflow: hidden;
 	--gap: 25px;
 	
@@ -15,7 +17,7 @@
 		display: flex;
 		justify-content: space-around;
 		overflow: hidden;
-		color: #a0b1c5;
+		color: $font-color-primary;
 		min-height: 200px;
 
 		img:not(img[src]) {
@@ -60,7 +62,7 @@
 				}
 
 				.genres {
-					background-color: #151F2E;
+					background-color: $color-primary-light;
 					position: relative;
 					padding: 10px;
 					border-radius: 5px;
@@ -75,8 +77,8 @@
 						p {
 							font-size: 14px;
 							font-weight: 500;
-							color: #a0b1c5;
-							background: #0b1622;
+							color: $font-color-primary;
+							background: $color-primary;
 							width: max-content;
 							padding: 2px 10px;
 							border-radius: 5px;
@@ -114,7 +116,7 @@
 				}
 
 				.tags {
-					background-color: #080f18;
+					background-color: $color-primary-dark;
 					position: relative;
 					padding: 10px;
 					border-radius: 5px;
@@ -137,7 +139,7 @@
 						margin: 0px;
 						font-size: 21px;
 						font-weight: 600;
-						color: #a0b1c5;
+						color: $font-color-primary;
 						margin: 0px;
 						margin-top: -5px;
 					}
@@ -146,7 +148,7 @@
 						display: flex;
 						justify-content: space-between;
 						align-items: center;
-						background-color: #151F2E;
+						background-color: $color-primary-light;
 						position: relative;
 						width: 100%;
 						padding: 3px 5px;
@@ -227,7 +229,7 @@
 					position: relative;
 					margin-top: var(--gap);
 					width: 100%;
-					background-color: #151F2E;
+					background-color: $color-primary-light;
 					border-radius: 5px;
 					padding: 15px;
 					overflow: hidden;
@@ -238,8 +240,8 @@
 						margin-top: 12px;
 				
 						li {
-							color: #a0b1c5;
-							font-family: Overpass,-apple-system,BlinkMacSystemFont,Segoe UI,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif;
+							color: $font-color-primary;
+							font-family: $font-family;
 							font-size: 14px;
 							font-weight: 400;
 						}
@@ -251,14 +253,14 @@
 						left: 0px;
 						width: 100%;
 						height: 25px;
-						background-color: #151f2e;
+						background-color: $color-primary-light;
 						transition: background .1s, opacity .1s, box-shadow .1s;
 						cursor: pointer;
 						
 						&:hover {
-							box-shadow: 0 0 7px 3px #080f18, 0 0 7px 3px #080f18, 0 0 7px 3px #080f18, 0 0 7px 3px #080f18;
+							box-shadow: 0 0 7px 3px $color-primary-dark, 0 0 7px 3px $color-primary-dark, 0 0 7px 3px $color-primary-dark, 0 0 7px 3px $color-primary-dark;
 							opacity: 1;
-							background-color: #080f18;
+							background-color: $color-primary-dark;
 						}
 
 						p {
@@ -275,7 +277,7 @@
 				}
 
 				.scores {
-					background-color: #151f2e;
+					background-color: $color-primary-light;
 					border-radius: 5px;
 					padding: 12px;
 					display: flex;
@@ -287,12 +289,12 @@
 		
 					.meanScore {
 						height: calc(100% - 20px);
-						border-right: 2px solid #0B1622;
+						border-right: 2px solid $color-primary;
 						position: relative;
-						font-family: Overpass,-apple-system,BlinkMacSystemFont,Segoe UI,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif;
+						font-family: $font-family;
 						font-size: 14px;
 						font-weight: 400;
-						color: #a0b1c5;
+						color: $font-color-primary;
 						margin: 0px;
 						width: max-content;
 						margin: auto 0px;
@@ -304,7 +306,7 @@
 		
 						.title {
 							padding: 3px 5px;
-							background: #0b1622;
+							background: $color-primary;
 							border-radius: 3px;
 							font-weight: 500;
 							white-space: pre;
@@ -319,7 +321,7 @@
 						.score {
 							font-size: 30px;
 							font-weight: 700;
-							color: rgba(255, 255, 255, 0.95);
+							color: $font-color-light;
 						}
 					}
 		
@@ -337,8 +339,7 @@
 		
 						span {
 							font-weight: 700;
-							color: rgba(255, 255, 255, 0.85);
-							// filter: brightness(1.3);
+							color: $font-color-light;
 						}
 		
 						.top, .bottom {
@@ -347,7 +348,7 @@
 						}
 
 						.top .type {
-							background-color: #080f18;
+							background-color: $color-primary-dark;
 							font-size: 14px;
 							font-weight: 500;
 							width: max-content;
@@ -381,7 +382,7 @@
 								flex-wrap: wrap;
 
 								span {
-									background-color: #0b1622;
+									background-color: $color-primary;
 									font-size: 12px;
 									font-weight: 500;
 									padding: 1px 5px 2px;
@@ -391,7 +392,7 @@
 							}
 
 							div:not(:last-child) {
-								border-right: 2px solid #0b1622;
+								border-right: 2px solid $color-primary;
 								padding-right: 15px;
 							}
 							p {
@@ -442,7 +443,7 @@
 							position: relative;
 							display: flex;
 							height: 120px;
-							background-color: #151f2e;
+							background-color: $color-primary-light;
 							border-radius: 5px;
 							overflow: hidden;
 							text-decoration: none;
@@ -479,7 +480,7 @@
 								color: rgb(61,180,242);
 								font-weight: 500;
 								font-size: 11px;
-								background-color: #0B1622;
+								background-color: $color-primary;
 								width: max-content;
 								padding: 2px 5px 3px 5px;
 								border-radius: 3px;
@@ -507,6 +508,12 @@
 						margin-top: var(--gap);
 						margin-bottom: 5px;
 					}
+
+					iframe {
+						max-width: 100%;
+						height: auto;
+						aspect-ratio: 16 / 9;
+					}
 				}
 
 				.character-container {
@@ -529,7 +536,7 @@
 							position: relative;
 							height: 90px;
 							width: 100%;
-							background-color: #151F2E;
+							background-color: $color-primary-light;
 							display: flex;
 							border-radius: 5px;
 							overflow: hidden;
@@ -550,7 +557,7 @@
 									p.name {
 										font-size: 14px;
 										font-weight: 500;
-										color: #a0b1c5;
+										color: $font-color-primary;
 
 										@-moz-document url-prefix() {
 											& {font-weight: 700}
@@ -558,7 +565,7 @@
 									}
 									p.actor {
 										font-size: 12px;
-										color: #a0b1c5;
+										color: $font-color-primary;
 									}
 									p {
 										font-size: 12px;
@@ -593,10 +600,10 @@
 								}
 					
 								p {
-									color: #a0b1c5;
+									color: $font-color-primary;
 									margin: 0px;
 									font-size: 14px;
-									font-family: Overpass,-apple-system,BlinkMacSystemFont,Segoe UI,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif;
+									font-family: $font-family;
 									margin-inline: 5px;
 									word-break: break-word;
 									text-decoration: none;
@@ -613,11 +620,11 @@
 
 
 		h1, h2, h3, h4 {
-			font-family: Overpass, -apple-system, BlinkMacSystemFont, Segoe UI, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+			font-family: $font-family;
 			font-size: 21px;
 			font-weight: 600;
 			text-decoration: none;
-			color: #a0b1c5;
+			color: $font-color-primary;
 			margin: 0px;
 		}
 		h2 {font-size: 18px}
@@ -626,11 +633,11 @@
 	}
 
 	p {
-		font-family: Overpass,-apple-system,BlinkMacSystemFont,Segoe UI,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif;
+		font-family: $font-family;
 		font-size: 14px;
 		font-weight: 400;
 		text-decoration: none;
-		color: #a0b1c5;
+		color: $font-color-primary;
 		margin: 0px;
 		margin-top: 15px;
 	}

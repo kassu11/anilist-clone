@@ -1,3 +1,5 @@
+@use "../Components/colors.scss" as *;
+
 .usersPage {
 	position: relative;
 	display: flex;
@@ -9,7 +11,7 @@
 
 	.container {
 		position: relative;
-		background-color: #151F2E;
+		background-color: $color-primary-light;
 		border-radius: 10px;
 		width: min(100%, 1300px);
 		padding: 10px;
@@ -27,7 +29,7 @@
 				position: relative;
 				width: 200px;
 				height: 35px;
-				background-color: #0B1622;
+				background-color: $color-primary;
 				outline: none;
 				border: none;
 				margin-left: 10px;
@@ -44,7 +46,7 @@
 			}
 
 			p {
-				color: #a0b1c5;
+				color: $font-color-primary;
 				font-family: Helvetica;
 				font-weight: 700;
 				margin: auto 0px;
@@ -64,9 +66,9 @@
 			border-radius: 5px;
 			grid-template-columns: 150px 1fr 150px;
 			gap: 10px;
-			background-color: #0b1622;
-			color: #a0b1c5;
-			font-family: Overpass,-apple-system,BlinkMacSystemFont,Segoe UI,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif;
+			background-color: $color-primary;
+			color: $font-color-primary;
+			font-family: $font-family;
 			font-size: 16px;
 			font-weight: 600;
 			text-decoration: none;
@@ -78,14 +80,14 @@
 			}
 
 			.left {
-				background: #151F2E;
+				background: $color-primary-light;
 				display: grid;
 
 				p {
 					margin: auto 0px;
 					font-size: 20px;
 					font-weight: 500;
-					font-family: Overpass, -apple-system, BlinkMacSystemFont, Segoe UI, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+					font-family: $font-family;
 					width: 100%;
 					text-align: center;
 					text-shadow: black 0px 0px 5px;
@@ -134,7 +136,7 @@
 
 			.right {
 				position: relative;
-				background: #151f2e;
+				background: $color-primary-light;
 				height: 35px;
 				border-radius: 5px;
 				display: flex;
@@ -155,7 +157,7 @@
 
 	.compare {
 		position: relative;
-		background-color: #0B1622;
+		background-color: $color-primary;
 		border-radius: 5px;
 		width: max-content;
 		margin-inline: auto;
@@ -166,12 +168,12 @@
 			background-color: #a0b1c5;
 			
 			p {
-				color: #0B1622;
+				color: $color-primary;
 			}
 		}
 
 		p {
-			color: #a0b1c5;
+			color: $font-color-primary;
 			font-family: Helvetica;
 			font-weight: 700;
 			margin: auto 0px;
@@ -181,8 +183,8 @@
 	}
 
 	p.totalAnimes {
-		color: #a0b1c5;
-		font-family: Overpass, -apple-system, BlinkMacSystemFont, Segoe UI, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+		color: $font-color-primary;
+		font-family: $font-family;
 		font-weight: 700;
 		margin: auto 0px;
 		font-size: 20px;
@@ -196,7 +198,7 @@
 		top: 0px;
 		display: grid;
 		grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-		background-color: #0b1622;
+		background-color: $color-primary;
 		box-sizing: border-box;
 		border-radius: 5px;
 		gap: 15px;
@@ -208,7 +210,7 @@
 			height: 200px;
 			display: flex;
 			flex-grow: 1;
-			background-color: #151f2e;
+			background-color: $color-primary-light;
 			border-radius: 5px;
 			overflow: hidden;
 			box-shadow: 0px 0px 10px rgb(0 0 0 / 50%);
@@ -253,8 +255,8 @@
 					width: 100%;
 					font-size: 20px;
 					font-weight: 700;
-					font-family: Overpass, -apple-system, BlinkMacSystemFont, Segoe UI, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
-					color: #a0b1c5;
+					font-family: $font-family;
+					color: $font-color-primary;
 					text-decoration: none;
 					text-shadow: black 0px 0px 5px;
 					margin: 5px;
@@ -279,8 +281,8 @@
 							width: 100%;
 							font-size: 16px;
 							font-weight: 500;
-							font-family: Overpass, -apple-system, BlinkMacSystemFont, Segoe UI, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
-							color: #a0b1c5;
+							font-family: $font-family;
+							color: $font-color-primary;
 							text-decoration: none;
 							text-shadow: black 0px 0px 5px;
 							margin: 0px;
