@@ -55,11 +55,14 @@
 
 				a.coverImage {
 					position: relative;
+					display: flex;
 	
 					img {
 						width: 250px;
 						object-fit: cover;
 						border-radius: 5px;
+						flex-shrink: 0;
+						&:nth-child(2) {transform: translateX(-100%);}
 					}
 				}
 

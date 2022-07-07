@@ -1,2 +1,2 @@
-let fastData = {data: null};
+const fastData = {data: null};
 export default fastData;

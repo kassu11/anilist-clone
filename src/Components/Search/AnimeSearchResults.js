@@ -85,8 +85,8 @@ function AnimeSearchResults() {
 		"search": searchResults["search"] || undefined,
 	};	
 	useEffect(() => {
+		document.querySelector(".App")?.scrollTo(0, 0);
 		if(historyIndex !== -1) {
-			if(data?.search !== search) document.querySelector(".App")?.scrollTo(0, 0);
 			setData({...searchHistory[historyIndex], loading: false});
 			return;
 		};
@@ -111,6 +111,8 @@ function AnimeSearchResults() {
 
 		return () => cancel();
 	}, [search]);
+
+	console.log(loading)
 	
 	return (
 		<div className="animes">

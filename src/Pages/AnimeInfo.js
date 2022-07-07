@@ -175,7 +175,7 @@ function AnimeInfo() {
 	const historyIndex = animeInfoHistory.findIndex(data => data?.id === +id);
 	
 	let currentMedia = null;
-	if(mediaQueryData?.id === id) currentMedia = mediaQueryData;
+	if(mediaQueryData?.id == id) currentMedia = mediaQueryData;
 	else if(historyIndex !== -1) currentMedia = animeInfoHistory[historyIndex];
 	else currentMedia = fastData.data;
 
@@ -195,7 +195,10 @@ function AnimeInfo() {
 			.then(({data: {data}}) => {
 				animeInfoHistory.unshift(data.Media);
 				animeInfoHistory.length = 50;
+
+				const largeImage = data.Media.id == fastData.data?.id ? fastData.data?.coverImage?.large : null;
 				fastData.data = data.Media;
+				fastData.data.coverImage.large = largeImage;
 				setSiteData(data.Media);
 			});
 	}, [id]);
@@ -210,7 +213,17 @@ function AnimeInfo() {
 				<div className="container">
 					<div className="left-container">
 						<a className="coverImage" href={currentMedia.siteUrl}>
-							<img src={currentMedia?.coverImage?.extraLarge} alt="Media cover." />
+							
+							{/* {console.log(fastData.data, fastData.data?.id, id)} */}
+							{(fastData.data?.coverImage.large && fastData.data?.id == id) && (<img src={currentMedia.coverImage.large} alt="Cover image." key={fastData?.data?.coverImage.large} />)}
+							{currentMedia.coverImage?.extraLarge && (<img src={currentMedia.coverImage.extraLarge} alt="Cover image." />)}
+							
+							{/* <img src={currentMedia.coverImage.large} alt="Cover image." />
+							<img src={currentMedia.coverImage.large} alt="Cover image." /> */}
+							{/* <picture>
+								{currentMedia.coverImage?.extraLarge && <source srcset={currentMedia.coverImage.extraLarge} />}
+								<img src={currentMedia.coverImage.large} alt="Cover image." />
+							</picture> */}
 						</a>
 						{currentMedia?.genres?.length > 0 && (<Genres genres={currentMedia?.genres} />)}
 						{currentMedia?.tags?.length > 0 && (<Tags tags={currentMedia?.tags} />)}

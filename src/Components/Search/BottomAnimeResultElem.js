@@ -23,8 +23,9 @@ function BottomAnimeResultElem({animeData, query, variables, searchHistory, hist
 					params: {query, variables: newVaribles},
 					cancelToken: new axios.CancelToken(c => cancel = c)
 				}).then(({data: {data}}) => {
-					searchHistory[historyIndex].media.push(...data.Page.media);
-					searchHistory[historyIndex].pageInfo = data.Page.pageInfo;
+					/* Lisää enemmän kun 50 sivuu historiaan */
+					// searchHistory[historyIndex].media.push(...data.Page.media);
+					// searchHistory[historyIndex].pageInfo = data.Page.pageInfo;
 					setData(data.Page);
 				}).catch(error => {
 					if(axios.isCancel(error)) return;
