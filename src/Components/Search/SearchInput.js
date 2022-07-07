@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import searchVariablesToUrl from "../../Libraries/searchVariablesToUrl";
 
-function SearchInput({urlvariables, setUrlvariables}) {
+function SearchInput({urlvariables, setUrlvariables, buttonText}) {
 	const navigate = useNavigate();
 
 	return (
@@ -23,8 +23,10 @@ function SearchInput({urlvariables, setUrlvariables}) {
 					}
 				}}/>
 			</div>
-			<div className="advancedSearch">
-				<p>Advanced search</p>
+			<div className="advancedSearch" onClick={e => {
+				document.querySelector("#popUpContainer").classList.toggle("hidden");
+			}}>
+				<p>{buttonText}</p>
 			</div>
 		</div>
 	)

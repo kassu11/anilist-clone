@@ -29,7 +29,7 @@ function Relations({relations}) {
 					return (
 						<Link className="relation" key={edge.id} to={`/media/${edge.node.id}`} onClick={e => {
 							fastData.data = edge.node;
-							window.scrollTo(0, 0);
+							document.querySelector(".App")?.scrollTo(0, 0);
 						}}>
 							<img src={edge.node.coverImage.large} alt="Media cover" />
 							<div className="relationInfo">

@@ -182,6 +182,7 @@ function AnimeInfo() {
 	if(currentMedia?.title) document.title = currentMedia?.title?.english || currentMedia?.title?.userPreferred;
 	
 	useEffect(() => {
+		document.querySelector(".App")?.scrollTo(0, 0);
 		if(historyIndex !== -1) {
 			setSiteData(animeInfoHistory[historyIndex]);
 			return;
@@ -199,7 +200,7 @@ function AnimeInfo() {
 			});
 	}, [id]);
 
-	if(!currentMedia) return null;
+	if(!currentMedia) return <div className="animeInfoBody"></div>;
 	return (
 		<div className="animeInfoBody">
 			<div className="banner">

@@ -7,7 +7,8 @@
 	top: 75px;
 	width: 100%;
 	height: max-content;
-	place-content: center;
+	justify-content: flex-start;
+	min-height: 100vh;
 
 	.container {
 		position: relative;

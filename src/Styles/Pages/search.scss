@@ -3,11 +3,14 @@
 .animes {
 	display: flex;
 	flex-wrap: wrap;
-	place-content: center;
+	justify-content: center;
+	align-content: flex-start;
 	left: 0px;
-	position: absolute;
+	top: 0px;
+	position: relative;
 	width: 100%;
-	top: 190px;
+	margin-top: 115px;
+	min-height: 100vh;
 
 	.anime {
 		width: 200px;

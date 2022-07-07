@@ -86,7 +86,7 @@ function AnimeSearchResults() {
 	};	
 	useEffect(() => {
 		if(historyIndex !== -1) {
-			if(data?.search !== search) window.scrollTo(0, 0);
+			if(data?.search !== search) document.querySelector(".App")?.scrollTo(0, 0);
 			setData({...searchHistory[historyIndex], loading: false});
 			return;
 		};
@@ -99,7 +99,7 @@ function AnimeSearchResults() {
 			params: {query, variables},
 			cancelToken: new axios.CancelToken(c => cancel = c)
 		}).then(({data: {data}}) => {
-			window.scrollTo(0, 0);
+			document.querySelector(".App")?.scrollTo(0, 0);
 			const newData = {...data.Page, search};
 			searchHistory.unshift(newData);
 			searchHistory.length = 50;

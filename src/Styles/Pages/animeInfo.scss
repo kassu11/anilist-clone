@@ -1,8 +1,10 @@
 @use "../Components/colors.scss" as *;
 
 .animeInfoBody {
-	position: absolute;
+	position: relative;
 	width: 100%;
+	margin-top: -75px;
+	min-height: 100vh;
 	top: 0px;
 	left: 0px;
 	background-color: $color-primary;

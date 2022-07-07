@@ -1,0 +1,234 @@
+@use "colors.scss" as *;
+
+#popUpContainer {
+	position: absolute;
+	inset: 0px;
+	margin: 0px;
+	z-index: 10;
+	background-color: rgba(0, 0, 0, 0.5);
+	display: grid;
+	place-items: center;
+
+	&.hidden {
+		display: none;
+	}
+
+	.search-container {
+		position: relative;
+		margin-top: 0px;
+		width: 100%;
+
+		.searchBar {
+			margin-bottom: 0px;
+		}
+	}
+}
+
+.searchPopUp {
+	position: relative;
+	top: 0px;
+	padding: 25px;
+	width: max-content;
+	background: $color-primary;
+	width: min(100%, 450px);
+
+	.customSelect {
+		position: relative;
+		width: max-content;
+		height: 35px;
+		background-color: #202f46;
+		cursor: pointer;
+		border-radius: 5px;
+		&.open {
+			background-color: hsl(216, 37%, 18%);
+			border-radius: 5px 5px 0px 0px;
+
+			.subMenu {display: block;}
+		}
+
+		.preview {
+			position: relative;
+			height: 100%;
+			width: 100%;
+			display: grid;
+			padding-right: 50px;
+
+			p {
+				margin: 0px;
+				margin-block: auto;
+				margin-left: 10px;
+
+				span {
+					font-weight: 600;
+				}
+			}
+
+			&::before {
+				content: "";
+				position: absolute;
+				right: 10px;
+				top: 50%;
+				transform: translateY(-50%);
+				--korkeus: 10px;
+				--leveys: 8px;
+				border-left: var(--leveys) solid transparent;
+				border-right: var(--leveys) solid transparent;
+				border-top: var(--korkeus) solid white;
+			}
+		}
+
+		.subMenu {
+			position: absolute;
+			background: hsl(216deg 37% 8%);
+			top: 100%;
+			width: 100%;
+			display: none;
+			box-shadow: inset 0 17px 5px -16px black;
+			z-index: 1;
+			
+			.option {
+				padding: 5px;
+				padding-top: 2px;
+				padding-bottom: 4px;
+
+				&.selected {
+					background: hsl(216deg 37% 12%);
+				}
+				
+				&:hover {
+					background: hsl(216deg 37% 10%);
+				}
+				&.selected:hover {
+					background: hsl(216deg 37% 14%);
+				}
+			}
+		}
+	}
+
+	.customMultiSelect {
+		position: relative;
+		width: max-content;
+		height: 35px;
+		background-color: #202f46;
+		cursor: pointer;
+		border-radius: 5px;
+		left: 10px;
+		&.open {
+			background-color: hsl(216, 37%, 18%);
+			border-radius: 5px 5px 0px 0px;
+
+			.subMenu {display: block;}
+		}
+
+		.preview {
+			position: relative;
+			height: 100%;
+			width: 100%;
+			display: grid;
+			padding-right: 50px;
+
+			p {
+				margin: 0px;
+				margin-block: auto;
+				margin-left: 10px;
+
+				span {
+					font-weight: 600;
+				}
+			}
+
+			&::before {
+				content: "";
+				position: absolute;
+				right: 10px;
+				top: 50%;
+				transform: translateY(-50%);
+				--korkeus: 10px;
+				--leveys: 8px;
+				border-left: var(--leveys) solid transparent;
+				border-right: var(--leveys) solid transparent;
+				border-top: var(--korkeus) solid white;
+			}
+		}
+
+		.subMenu {
+			position: absolute;
+			background: hsl(216deg 37% 8%);
+			top: 100%;
+			width: 100%;
+			display: none;
+			box-shadow: inset 0 17px 5px -16px black;
+			z-index: 1;
+			
+			.option {
+				padding: 5px;
+				padding-top: 3px;
+				padding-bottom: 2px;
+				display: flex;
+
+				.checkBox {
+					position: relative;
+					background: $color-primary-light;
+					width: 15px;
+					height: 15px;
+					border: 2px solid $color-primary;
+					display: block;
+					border-radius: 5px;
+					margin-right: 10px;
+					top: 2px;
+				}
+
+				p {
+					margin: 0px;
+					top: -2px;
+					position: relative;
+				}
+
+				&.selected {
+					background: hsl(216deg 37% 12%);
+
+					.checkBox {
+						background: #263954;
+						border: 2px solid #0d131c;
+
+						&::before {
+							content: "";
+							position: absolute;
+							width: 10px;
+							height: 5px;
+							--color: #add9ff;
+							border-bottom: 2px solid var(--color);
+							border-left: 2px solid var(--color);
+							transform: rotate(315deg);
+							left: 1px;
+							top: 1px;
+						}
+					}
+				}
+				
+				&:hover {
+					background: hsl(216deg 37% 10%);
+				}
+				&.selected:hover {
+					background: hsl(216deg 37% 14%);
+				}
+			}
+		}
+	}
+
+	.buttonContainer {
+		display: flex;
+		width: 100%;
+		position: relative;
+		justify-content: space-between;
+		
+		.button {
+			position: relative;
+			width: max-content;
+			display: block;
+			background-color: $color-primary-light;
+			padding: 5px;
+			padding-inline: 20px;
+		}
+	}
+}

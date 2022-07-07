@@ -9,20 +9,28 @@ import Search from "./Pages/Search";
 import UsersPage from "./Pages/UsersPage";
 import NotFound from "./Pages/NotFound";
 
+import SearchPopup from "./Components/popUp/SearchPopup";
+
 function App() {
   return (
-    <div className="App">
+    <>
       <HashRouter>
-        <Header />
-        <Routes>
-          <Route path="/" element={<Search />} />
-          <Route path="/search" element={<Search />} />
-          <Route path="/users" element={<UsersPage />} />
-          <Route path="/media/:id" element={<AnimeInfo />} />          
-          <Route path="*" element={<NotFound />} />
-        </Routes>
+        <div className="App">
+          <Header />
+          <Routes>
+            <Route path="/" element={<Search />} />
+            <Route path="/search" element={<Search />} />
+            <Route path="/users" element={<UsersPage />} />
+            <Route path="/media/:id" element={<AnimeInfo />} />          
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+          <footer></footer>
+        </div>
+        <div id="popUpContainer" className="hidden">
+          <SearchPopup />
+        </div>
       </HashRouter>
-    </div>
+    </>
   )
 }
 

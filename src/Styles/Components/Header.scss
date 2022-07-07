@@ -1,7 +1,7 @@
 @use "colors.scss" as *;
 
 nav.header {
-	position: fixed;
+	position: sticky;
 	width: 100%;
 	left: 0px;
 	height: 75px;

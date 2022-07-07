@@ -1,4 +1,4 @@
-import {useRef, useState} from "react";
+import {useEffect, useRef, useState} from "react";
 
 function CustomSelect({values, selectedValue, customChange, text}) {
 	const [isOpen, setIsOpen] = useState(false);
@@ -9,13 +9,15 @@ function CustomSelect({values, selectedValue, customChange, text}) {
 		const target = e.target;
 		const parent = target.closest("div.customSelect.open");
 
-		console.log(parent, selectElem.current)
-
 		if(parent !== selectElem.current) {
 			setIsOpen(false);
 			window.onclick = null;
 		}
 	}
+
+	useEffect(() => {
+		setSelected(selectedValue);
+	}, [selectedValue])
 
 	return (
 		<div className={`customSelect${isOpen ? " open" : ""}`} onClick={e => setIsOpen(!isOpen)} ref={selectElem}>
@@ -25,7 +27,10 @@ function CustomSelect({values, selectedValue, customChange, text}) {
 			<div className="subMenu">
 				{values?.map(value => {
 					return (
-						<div key={value} className={`option${value === selected ? " selected" : ""}`} onClick={_ => setSelected(value)}>
+						<div key={value} className={`option${value === selected ? " selected" : ""}`} onClick={_ => {
+							if(selected !== value) customChange?.(value);
+							setSelected(value);
+						}}>
 							{value}
 						</div>
 					);

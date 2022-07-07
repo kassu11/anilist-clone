@@ -3,11 +3,10 @@ import SearchInput from "./SearchInput";
 import formatSearchUrlToObject from "../../Libraries/formatSearchUrlToObject";
 import AgeSlider from "../AgeSlider";
 import MediaTypeSlider from "./MediaTypeSlider";
-import SearchPopup from "./SearchPopup";
 import {useEffect, useState} from "react";
 import { useLocation } from "react-router";
 
-function AnimeSearchBar() {
+function AnimeSearchBar({buttonText = "Advanced search"}) {
 	const {search} = useLocation();
 	const searchResults = formatSearchUrlToObject(search);
 
@@ -32,9 +31,8 @@ function AnimeSearchBar() {
 	}, [search]);
 
 	return (
-		<div className="search-container open">
-			<SearchInput urlvariables={urlvariables} setUrlvariables={setUrlvariables} />
-			<SearchPopup />
+		<div className="search-container">
+			<SearchInput urlvariables={urlvariables} setUrlvariables={setUrlvariables} buttonText={buttonText} />
 			{/* <AgeSlider urlvariables={urlvariables} setUrlvariables={setUrlvariables} /> */}
 			{/* <MediaTypeSlider urlvariables={urlvariables} setUrlvariables={setUrlvariables} /> */}
 		</div>
