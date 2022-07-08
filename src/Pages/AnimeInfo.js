@@ -3,6 +3,7 @@ import axios from "axios";
 import {useEffect, useState} from "react";
 
 import YoutubeTrailer from "../Components/YoutubeTrailer";
+import CoverImage from "../Components/AnimeInfo/CoverImage";
 import Description from "../Components/AnimeInfo/Description";
 import Score from "../Components/AnimeInfo/Score";
 import Genres from "../Components/AnimeInfo/Genres";
@@ -213,17 +214,9 @@ function AnimeInfo() {
 				<div className="container">
 					<div className="left-container">
 						<a className="coverImage" href={currentMedia.siteUrl}>
-							
-							{/* {console.log(fastData.data, fastData.data?.id, id)} */}
-							{(fastData.data?.coverImage.large && fastData.data?.id == id) && (<img src={currentMedia.coverImage.large} alt="Cover image." key={fastData?.data?.coverImage.large} />)}
-							{currentMedia.coverImage?.extraLarge && (<img src={currentMedia.coverImage.extraLarge} alt="Cover image." />)}
-							
-							{/* <img src={currentMedia.coverImage.large} alt="Cover image." />
-							<img src={currentMedia.coverImage.large} alt="Cover image." /> */}
-							{/* <picture>
-								{currentMedia.coverImage?.extraLarge && <source srcset={currentMedia.coverImage.extraLarge} />}
-								<img src={currentMedia.coverImage.large} alt="Cover image." />
-							</picture> */}
+							<CoverImage images={currentMedia.coverImage ?? fastData.data?.coverImage}/>
+							{/* {(fastData.data?.coverImage.large && fastData.data?.id == id) && (<img src={currentMedia.coverImage.large} alt="Cover image." key={fastData?.data?.coverImage.large} />)}
+							{currentMedia.coverImage?.extraLarge && (<img src={currentMedia.coverImage.extraLarge} alt="Cover image." />)} */}
 						</a>
 						{currentMedia?.genres?.length > 0 && (<Genres genres={currentMedia?.genres} />)}
 						{currentMedia?.tags?.length > 0 && (<Tags tags={currentMedia?.tags} />)}
