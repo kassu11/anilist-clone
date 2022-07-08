@@ -1,5 +1,5 @@
 import Header from "./Components/Header";
-import {Route, Routes, HashRouter} from "react-router-dom";
+import {Route, Routes, BrowserRouter } from "react-router-dom";
 import {useState} from "react";
 
 import "./Styles/Pages/tyyli.scss";
@@ -14,7 +14,7 @@ import SearchPopup from "./Components/popUp/SearchPopup";
 function App() {
   return (
     <>
-      <HashRouter>
+      <BrowserRouter basename="/anilist-clone">
         <div className="App">
           <Header />
           <Routes>
@@ -29,7 +29,7 @@ function App() {
         <div id="popUpContainer" className="hidden">
           <SearchPopup />
         </div>
-      </HashRouter>
+      </BrowserRouter>
     </>
   )
 }
