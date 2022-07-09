@@ -1,6 +1,7 @@
 import { useParams } from "react-router";
 import axios from "axios";
 import {useEffect, useState} from "react";
+import {Helmet} from "react-helmet";
 
 import YoutubeTrailer from "../Components/YoutubeTrailer";
 import CoverImage from "../Components/AnimeInfo/CoverImage";
@@ -180,8 +181,6 @@ function AnimeInfo() {
 	else if(historyIndex !== -1) currentMedia = animeInfoHistory[historyIndex];
 	else currentMedia = fastData.data;
 
-	if(currentMedia?.title) document.title = currentMedia?.title?.english || currentMedia?.title?.userPreferred;
-	
 	useEffect(() => {
 		window.scrollTo(0, 0);
 		if(historyIndex !== -1) {
@@ -207,6 +206,23 @@ function AnimeInfo() {
 	if(!currentMedia) return <div className="animeInfoBody"></div>;
 	return (
 		<div className="animeInfoBody">
+			<Helmet>
+				<title>{currentMedia.title?.english || currentMedia.title?.userPreferred}</title>
+				<meta property="og:title" content={currentMedia.title.english || currentMedia.title.userPreferred} />
+				
+				<meta property="og:site_name" content="AniList Clone" />
+				<meta name="theme-color" content="#2b2d42" />
+				<meta name="apple-mobile-web-app-capable" content="yes" />
+				<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+				<meta name="apple-mobile-web-app-title" content="AniList Clone" />
+				
+				<meta property="og:image" content={fastData.data.coverImage.extraLarge} data-vue-meta="true" />
+				<meta property="og:url" content={`https://kassu11.github.io/anilist-clone/media/${id}`} data-vue-meta="true"></meta>
+
+				<meta property="og:description" content={currentMedia.description} data-vue-meta="true" />
+				<meta name="description" content={currentMedia.description} data-vue-meta="true" />
+
+			</Helmet>
 			<div className="banner">
 				<img src={currentMedia.bannerImage} alt="Media banner." />
 			</div>
