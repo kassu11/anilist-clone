@@ -183,7 +183,7 @@ function AnimeInfo() {
 	if(currentMedia?.title) document.title = currentMedia?.title?.english || currentMedia?.title?.userPreferred;
 	
 	useEffect(() => {
-		document.querySelector(".App")?.scrollTo(0, 0);
+		window.scrollTo(0, 0);
 		if(historyIndex !== -1) {
 			setSiteData(animeInfoHistory[historyIndex]);
 			return;

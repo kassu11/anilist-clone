@@ -2,9 +2,9 @@
 
 body {
 	background-color: $color-primary;
-	overflow-y: scroll;
 	color: $font-color-primary;
 	font-family: $font-family;
+	margin: 0px;
 }
 
 *, ::after, ::before {
@@ -15,13 +15,7 @@ img[src=""], img:not(img[src]) {
 	visibility: hidden;
 }
 
-html {overflow: hidden;}
-
 #root .App {
-	position: absolute;
-	inset: 0px;
-	overflow: auto;
-
 	footer {
 		position: relative;
 		height: 300px;
