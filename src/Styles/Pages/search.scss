@@ -122,3 +122,74 @@
 		}
 	}
 }
+
+@media only screen and (max-width: 735px) {
+	.animes {
+		gap: 5px;
+
+		.anime {
+			margin: 0px;
+			width: 150px;
+			background-color: transparent;
+			padding: 0px;
+			min-height: 250px;
+			box-shadow: none;
+
+			a {
+				width: 100%;
+				margin: 0px;
+
+				img {
+					width: 100%;
+					height: unset;
+					aspect-ratio: 5 / 7;
+				}
+
+				p {
+					margin: 0px;
+					margin-bottom: 15px;
+					font-weight: 400;
+					font-size: 14px;
+				}
+			}
+		}
+
+		.anime.loading {
+
+			.image, .title, .description {
+				display: block;
+				position: absolute;
+				background-color: $color-primary;
+				background-image: repeating-linear-gradient(45deg, #0000001f, #152232 100px);
+				border-radius: 5px;
+				width: 100%;
+				background-size: 750px;
+				animation: animeGradient2 2s ease-in-out infinite;
+				margin: 0px;
+			}
+
+			.image {
+				--offset: 0%;
+				height: 200px;
+			}
+
+			.description {
+				bottom: 25px;
+				--offset: 6%;
+			}
+
+			.title {
+				display: none;
+			}
+
+			@keyframes animeGradient2 {
+				0% {
+					background-position-x: calc(79% + var(--offset) - 92px);
+				}
+				100% {
+					background-position-x: calc(0% + var(--offset));
+				}
+			}
+		}
+	}
+}

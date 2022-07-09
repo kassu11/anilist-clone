@@ -214,9 +214,7 @@ function AnimeInfo() {
 				<div className="container">
 					<div className="left-container">
 						<a className="coverImage" href={currentMedia.siteUrl}>
-							<CoverImage images={currentMedia.coverImage ?? fastData.data?.coverImage}/>
-							{/* {(fastData.data?.coverImage.large && fastData.data?.id == id) && (<img src={currentMedia.coverImage.large} alt="Cover image." key={fastData?.data?.coverImage.large} />)}
-							{currentMedia.coverImage?.extraLarge && (<img src={currentMedia.coverImage.extraLarge} alt="Cover image." />)} */}
+							<CoverImage images={currentMedia.coverImage ?? fastData.data?.coverImage} />
 						</a>
 						{currentMedia?.genres?.length > 0 && (<Genres genres={currentMedia?.genres} />)}
 						{currentMedia?.tags?.length > 0 && (<Tags tags={currentMedia?.tags} />)}

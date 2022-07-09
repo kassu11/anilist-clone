@@ -8,9 +8,18 @@ nav.header {
 	top: 0px;
 	background-color: #152232;
 	display: flex;
-	place-content: center;
 	z-index: 1;
 	transition: background-color 1s;
+	overflow-y: clip;
+	overflow-x: auto;
+	scrollbar-width: none;
+
+	>:first-child {margin-left: auto}
+	>:last-child {margin-right: auto}
+
+	&::-webkit-scrollbar {
+		width: 0px;
+	}
 
 	img {
 		width: 75px;
