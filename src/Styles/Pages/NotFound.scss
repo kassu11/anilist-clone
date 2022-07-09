@@ -1,9 +1,9 @@
 @use "../Components/colors.scss" as *;
 
 .not-found {
-	position: absolute;
+	position: relative;
 	inset: 0px;
-	top: 75px;
+	min-height: calc(100vh - 75px);
 	display: grid;
 	place-content: center;
 
@@ -23,5 +23,6 @@
 	}
 	h2 {
 		font-size: 35px;
+		margin-bottom: 200px;
 	}
 }

@@ -225,7 +225,7 @@ function AnimeInfo() {
 						<Description title={currentMedia.title} description={currentMedia.description} key={currentMedia.id} />
 						<Relations relations={currentMedia?.relations} />
 						<Characters characterPreview={currentMedia?.characterPreview} />
-						<YoutubeTrailer videoID={currentMedia?.trailer?.id} />
+						<YoutubeTrailer videoID={currentMedia?.trailer?.id} key={"youtube-" + id} />
 					</div>
 				</div>
 			</div>
