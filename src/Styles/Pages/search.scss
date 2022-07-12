@@ -1,8 +1,8 @@
 @use "../Components/colors.scss" as *;
 
 .animes {
-	display: flex;
-	flex-wrap: wrap;
+	display: grid;
+	grid-template-columns: repeat(auto-fit, 240px);
 	justify-content: center;
 	align-content: flex-start;
 	left: 0px;
@@ -105,10 +105,13 @@
 			word-break: break-word;
 			color: $font-color-primary;
 			margin: 0px;
-			margin-top: 15px;
+			margin-top: 10px;
 			max-height: 100px;
 			overflow: hidden;
 			text-overflow: ellipsis;
+			display: -webkit-box;
+			-webkit-box-orient: vertical;
+			-webkit-line-clamp: 2;
 		}
 
 		.description {
@@ -123,16 +126,23 @@
 	}
 }
 
-@media only screen and (max-width: 735px) {
+@media only screen and (max-width: 870px) {
+	.search-container {
+		margin-top: 100px;
+	}
+
 	.animes {
-		gap: 5px;
+		gap: 15px;
+		padding-inline: 25px;
+		grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
 
 		.anime {
 			margin: 0px;
-			width: 150px;
+			width: 100%;
+			flex-grow: 1;
 			background-color: transparent;
 			padding: 0px;
-			min-height: 250px;
+			min-height: unset;
 			box-shadow: none;
 
 			a {
@@ -155,26 +165,31 @@
 		}
 
 		.anime.loading {
+			display: block;
+			margin-bottom: 25px;
 
 			.image, .title, .description {
 				display: block;
-				position: absolute;
+				position: relative;
 				background-color: $color-primary;
 				background-image: repeating-linear-gradient(45deg, #0000001f, #152232 100px);
 				border-radius: 5px;
 				width: 100%;
-				background-size: 750px;
+				background-size: 1000px;
 				animation: animeGradient2 2s ease-in-out infinite;
 				margin: 0px;
 			}
 
 			.image {
 				--offset: 0%;
-				height: 200px;
+				width: 100%;
+				height: auto;
+				aspect-ratio: 5/7;
 			}
 
 			.description {
-				bottom: 25px;
+				bottom: unset;
+				top: 8px;
 				--offset: 6%;
 			}
 
@@ -184,12 +199,19 @@
 
 			@keyframes animeGradient2 {
 				0% {
-					background-position-x: calc(79% + var(--offset) - 92px);
+					background-position-x: calc(-566px + var(--offset))
 				}
 				100% {
-					background-position-x: calc(0% + var(--offset));
+					background-position-x: calc(0px + var(--offset));
 				}
 			}
 		}
 	}
+}
+
+@media only screen and (max-width: 550px) {
+	.animes {
+		grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+	}
+
 }

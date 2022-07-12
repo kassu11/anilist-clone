@@ -1,7 +1,7 @@
 @use "colors.scss" as *;
 
 #popUpContainer {
-	position: absolute;
+	position: fixed;
 	inset: 0px;
 	margin: 0px;
 	z-index: 10;

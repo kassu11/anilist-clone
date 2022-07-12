@@ -9,10 +9,14 @@ import {useEffect, useState} from "react";
 import { useLocation } from "react-router";
 import { useNavigate } from "react-router-dom";
 
+let preventScroll = true;
+
 function SearchPopup() {
 	const {search} = useLocation();
 	const navigate = useNavigate();
 	const searchResults = formatSearchUrlToObject(search);
+
+	if(preventScroll) addPreventScrollEvent();
 
 	const baseSearch = {
 		"sort": undefined,
@@ -79,6 +83,16 @@ function SearchPopup() {
 			</div>
 		</div>
 	)
+}
+
+function addPreventScrollEvent() {
+	const container = document.getElementById("popUpContainer");
+	if(!container) return 
+	
+	preventScroll = false;
+	document.getElementById("popUpContainer").addEventListener("wheel", function(e) {
+		e.preventDefault();
+	}, {passive: false});
 }
 
 export default SearchPopup;
