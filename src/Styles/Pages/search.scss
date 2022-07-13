@@ -33,9 +33,10 @@
 				position: absolute;
 				background-color: $color-primary;
 				background-image: repeating-linear-gradient(45deg, #0000001f, transparent 100px);
+				background-repeat: repeat;
 				border-radius: 5px;
 				width: 180px;
-				background-size: 500%;
+				background-size: 990px;
 				animation: animeGradient 2s ease-in-out infinite;
 			}
 
@@ -44,8 +45,6 @@
 				inset: 0px;
 				margin: 25px auto;
 				height: 250px;
-				// background-image: repeating-linear-gradient(45deg, black, transparent 100px);
-				// animation: animeGradient 1s ease-in-out infinite;
 			}	
 			
 			.title {
@@ -54,8 +53,6 @@
 				bottom: 40px;
 				margin: auto;
 				height: 20px;
-				// background-image: repeating-linear-gradient(45deg, black, transparent 100px);
-				// animation: animeGradient 1s ease-in-out infinite;
 			}
 			.description {
 				--offset: 14%;
@@ -63,15 +60,13 @@
 				bottom: 15px;
 				margin: auto;
 				height: 20px;
-				// background-image: repeating-linear-gradient(45deg, black, transparent 100px);
-				// animation: animeGradient 1s ease-in-out infinite;
 			}
 			@keyframes animeGradient {
 				0% {
-					background-position-x: calc(79% + var(--offset) + 3px);
+					background-position-x: calc(-566px + var(--offset))
 				}
 				100% {
-					background-position-x: calc(0% + var(--offset));
+					background-position-x: calc(0px + var(--offset));
 				}
 			}
 		}
@@ -169,20 +164,14 @@
 			margin-bottom: 25px;
 
 			.image, .title, .description {
-				display: block;
 				position: relative;
-				background-color: $color-primary;
-				background-image: repeating-linear-gradient(45deg, #0000001f, #152232 100px);
-				border-radius: 5px;
+				background-image: repeating-linear-gradient(45deg, rgb(0 0 0 / 29%), hsl(211deg 51% 7%) 100px);
 				width: 100%;
-				background-size: 1000px;
-				animation: animeGradient2 2s ease-in-out infinite;
 				margin: 0px;
 			}
 
 			.image {
 				--offset: 0%;
-				width: 100%;
 				height: auto;
 				aspect-ratio: 5/7;
 			}
@@ -195,15 +184,6 @@
 
 			.title {
 				display: none;
-			}
-
-			@keyframes animeGradient2 {
-				0% {
-					background-position-x: calc(-566px + var(--offset))
-				}
-				100% {
-					background-position-x: calc(0px + var(--offset));
-				}
 			}
 		}
 	}

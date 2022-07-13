@@ -40,7 +40,9 @@ function BottomAnimeResultElem({animeData, query, variables, searchHistory, hist
 
 	if(!data) return (
 		<>
-			<div className="loader" ref={myRef}/>
+			<div className="loader" ref={myRef}>
+				<AnimeSearchLoading />
+			</div>
 			{[...Array(10)].map((_, i) => <AnimeSearchLoading key={`loading${i}`} />)}
 		</>
 	)
