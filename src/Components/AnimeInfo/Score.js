@@ -1,7 +1,7 @@
 import numberToText from "../../Libraries/numberToText";
 
 function Score({siteData, loading}) {
-	if(loading) return <div className="score loading"></div>;
+	if(loading) return <div className="scores loading"></div>;
 
 	const usersAmount = siteData?.stats?.scoreDistribution?.reduce((acc, cur) => acc + cur.amount, 0) ?? 0;
 	const rankingArray = siteData?.rankings?.filter(({type}) => type === "RATED") ?? [];

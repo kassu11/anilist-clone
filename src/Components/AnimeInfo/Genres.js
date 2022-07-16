@@ -1,5 +1,6 @@
 
-function Genres({genres}) {
+function Genres({genres, loading}) {
+	if(loading) return <div className="genres loading"></div>;
 	return (
 		<div className="genres">
 			<div className="title">

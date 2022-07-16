@@ -211,26 +211,24 @@ function AnimeInfo() {
 	return (
 		<div className="animeInfoBody">
 			<div className="banner">
-				{(loading && !currentMedia?.bannerImage) && <div className="bannerImage"></div>}
+				{(loading && !currentMedia) && <div className="bannerImage"></div>}
 				<img src={currentMedia?.bannerImage} alt="Media banner." />
-				{/* <div className="bannerImage"></div> */}
-				{/* <img src={currentMedia?.bannerImage} alt="Media banner." /> */}
 			</div>
 			<div className="info">
 				<div className="container">
 					<div className="left-container">
 						<a className="coverImage" href={currentMedia?.siteUrl}>
-							<CoverImage images={currentMedia?.coverImage ?? fastData?.data?.coverImage} loading={loading} />
+							<CoverImage images={currentMedia?.coverImage ?? fastData?.data?.coverImage} loading={!currentMedia && loading} />
 						</a>
-						{currentMedia?.genres?.length > 0 && (<Genres genres={currentMedia?.genres} />)}
-						{currentMedia?.tags?.length > 0 && (<Tags tags={currentMedia?.tags} />)}
+						<Genres genres={currentMedia?.genres} loading={!currentMedia?.genres && loading} />
+						<Tags tags={currentMedia?.tags} loading={!currentMedia?.tags && loading} />
 					</div>
 
 					<div className="right-container">
 						<Score siteData={currentMedia} loading={loading && !currentMedia} />
-						<Description title={currentMedia?.title} description={currentMedia?.description} key={currentMedia?.id} />
+						<Description title={currentMedia?.title} description={currentMedia?.description} loading={loading && !currentMedia?.title} key={currentMedia?.id} />
 						<Relations relations={currentMedia?.relations} loading={loading && !currentMedia?.relations} />
-						<Characters characterPreview={currentMedia?.characterPreview} />
+						<Characters characterPreview={currentMedia?.characterPreview} loading={loading && !currentMedia?.characterPreview} />
 						<YoutubeTrailer videoID={currentMedia?.trailer?.id} key={"youtube-" + id} />
 					</div>
 				</div>

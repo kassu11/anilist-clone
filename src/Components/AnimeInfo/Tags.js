@@ -1,6 +1,15 @@
 
-function Tags({tags}) {
+function Tags({tags, loading}) {
 	let hasSpilers = 0;
+	
+	if(loading) {
+		return (
+			<div className="tags loading">
+				<p className="title">Tags</p>
+			</div>
+		)
+	}
+
 	return (
 		<div className="tags">
 			<p className="title">Tags</p>

@@ -1,7 +1,7 @@
 import MDEditor from '@uiw/react-md-editor';
 import {useEffect, useRef} from "react";
 
-function Description({title, description}) {
+function Description({title, description, loading}) {
 	const myRef = useRef();
 
 	useEffect(() => {
@@ -11,6 +11,8 @@ function Description({title, description}) {
 			myRef.current.style.maxHeight = "250px";
 		}
 	}, []);
+
+	if(loading) return <div className="textContainer loading"></div>;
 
 	return (
 		<div className="textContainer show" ref={myRef}>

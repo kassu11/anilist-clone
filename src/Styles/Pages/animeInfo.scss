@@ -10,6 +10,14 @@
 	background-color: $color-primary;
 	overflow: hidden;
 	--gap: 25px;
+
+	.loading {
+		--offset: 0px;
+		background-image: repeating-linear-gradient(45deg, #0000002a, transparent 100px);
+		background-repeat: repeat;
+		background-size: 990px;
+		animation: animeGradient 2s ease-in-out infinite;
+	}
 	
 	.banner {
 		position: relative;
@@ -32,18 +40,6 @@
 			background-repeat: repeat;
 			background-size: 990px;
 			animation: animeGradient 2s ease-in-out infinite;
-			display: grid;
-
-			&:after {
-				content: "BANNER IMAGE";
-				font-size: 100px;
-				font-weight: 900;
-				inset: 0;
-				position: relative;
-				place-self: center;
-				text-align: center;
-				line-height: .8;
-			}
 		}
 
 		img:not(img[src]) {
@@ -98,15 +94,11 @@
 						pointer-events: none;
 
 						&.loading {
-							--offset: 0px;
 							aspect-ratio: 5/7;
 							width: 100%;
 							background-color: $color-primary-light;
 							position: relative;
-							background-image: repeating-linear-gradient(45deg, #0000002a, transparent 100px);
-							background-repeat: repeat;
 							background-size: 990px;
-							animation: animeGradient 2s ease-in-out infinite;
 						}
 					}
 				}
@@ -121,6 +113,10 @@
 					flex-wrap: wrap;
 					gap: 5px;
 					box-shadow: 3px 3px 7px #0000004a;
+
+					&.loading {
+						height: 100px;
+					}
 
 					.title {
 						width: 100%;
@@ -171,16 +167,17 @@
 					padding: 10px;
 					border-radius: 5px;
 					margin-top: var(--gap);
-					box-shadow: 3px 3px 7px rgb(0 0 0 / 57%);				
+					box-shadow: 3px 3px 7px rgb(0 0 0 / 57%);
+
+					&.loading {
+						height: 150px;
+						--offset: 10%;
+					}
 
 					&:not(.spoilers) .hide {display: none}
 					&.spoilers {
 						.show {display: none}
-						
-
-						.tag.spoiler {
-							display: flex;
-						}
+						.tag.spoiler {display: flex}
 					}
 
 					.title {
@@ -284,6 +281,10 @@
 					padding: 15px;
 					overflow: hidden;
 					box-shadow: 3px 3px 7px #0000004a;
+
+					&.loading {
+						height: 200px;
+					}
 
 					div.wmde-markdown {
 						background: none;
@@ -495,16 +496,9 @@
 							text-decoration: none;
 							box-shadow: 3px 3px 7px #0000004a;
 							transition: background-color 0.2s;
+							--offset: 18%;
 
-							&.loading {
-								--offset: 0px;
-								background-image: repeating-linear-gradient(45deg, #0000002a, transparent 100px);
-								background-repeat: repeat;
-								background-size: 990px;
-								animation: animeGradient 2s ease-in-out infinite;
-							}
-
-							&:hover {
+							&:not(.loading):hover {
 								background-color: hsl(216, 37%, 15%);
 							}
 
