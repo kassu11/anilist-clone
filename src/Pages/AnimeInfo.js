@@ -204,25 +204,31 @@ function AnimeInfo() {
 			});
 	}, [id]);
 
-	if(!currentMedia) return <div className="animeInfoBody"></div>;
+	// if(!currentMedia) return <div className="animeInfoBody"></div>;
+	
+	if(!currentMedia?.coverImage && fastData?.data?.coverImage) alert("Cover image is missing");
+
 	return (
 		<div className="animeInfoBody">
 			<div className="banner">
-				<img src={currentMedia.bannerImage} alt="Media banner." />
+				{(loading && !currentMedia?.bannerImage) && <div className="bannerImage"></div>}
+				<img src={currentMedia?.bannerImage} alt="Media banner." />
+				{/* <div className="bannerImage"></div> */}
+				{/* <img src={currentMedia?.bannerImage} alt="Media banner." /> */}
 			</div>
 			<div className="info">
 				<div className="container">
 					<div className="left-container">
-						<a className="coverImage" href={currentMedia.siteUrl}>
-							<CoverImage images={currentMedia.coverImage ?? fastData.data?.coverImage} />
+						<a className="coverImage" href={currentMedia?.siteUrl}>
+							<CoverImage images={currentMedia?.coverImage ?? fastData?.data?.coverImage} loading={loading} />
 						</a>
 						{currentMedia?.genres?.length > 0 && (<Genres genres={currentMedia?.genres} />)}
 						{currentMedia?.tags?.length > 0 && (<Tags tags={currentMedia?.tags} />)}
 					</div>
 
 					<div className="right-container">
-						<Score siteData={currentMedia} />
-						<Description title={currentMedia.title} description={currentMedia.description} key={currentMedia.id} />
+						<Score siteData={currentMedia} loading={loading && !currentMedia} />
+						<Description title={currentMedia?.title} description={currentMedia?.description} key={currentMedia?.id} />
 						<Relations relations={currentMedia?.relations} loading={loading && !currentMedia?.relations} />
 						<Characters characterPreview={currentMedia?.characterPreview} />
 						<YoutubeTrailer videoID={currentMedia?.trailer?.id} key={"youtube-" + id} />

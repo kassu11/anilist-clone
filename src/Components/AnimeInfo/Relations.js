@@ -7,7 +7,6 @@ const sortOrder = ["SOURCE", "ADAPTATION", "ALTERNATIVE", "SIDE_STORY", "SUMMARY
 
 function Relations({relations, loading}) {
 	if(loading) {
-		// return <div className="loading">Loading...</div>
 		return (
 			<div className="relationsContainer">
 				<h2>Relations</h2>

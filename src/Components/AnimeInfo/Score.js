@@ -1,13 +1,14 @@
 import numberToText from "../../Libraries/numberToText";
 
-function Score({siteData}) {
+function Score({siteData, loading}) {
+	if(loading) return <div className="score loading"></div>;
+
 	const usersAmount = siteData?.stats?.scoreDistribution?.reduce((acc, cur) => acc + cur.amount, 0) ?? 0;
 	const rankingArray = siteData?.rankings?.filter(({type}) => type === "RATED") ?? [];
 	const rankingScore = rankingArray[0]?.rank ?? "N/A";
 
 	const popularityArray = siteData?.rankings?.filter(({type}) => type === "POPULAR") ?? [];
 	const popularityScore = popularityArray[0]?.rank ?? "N/A";
-	// const popularity = siteData?.rankings?.find(({type, allTime}) => type === "POPULAR" && allTime)?.rank ?? 9999;
 	const season = siteData.season?.split("").map((v, i) => i === 0 ? v.toUpperCase() : v.toLowerCase()).join("") ?? "";
 
 	const customAvarageScore = siteData?.stats?.scoreDistribution?.reduce((acc, cur) => acc + cur.amount * cur.score, 0) / usersAmount;

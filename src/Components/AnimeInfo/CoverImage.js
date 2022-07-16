@@ -1,4 +1,7 @@
-function CoverImage({images}) {
+function CoverImage({images, loading}) {
+  if(loading) return <div className="image loading"></div>;
+  
+
   const quality = [];
   if(images.extraLarge) quality.push(images.extraLarge);
   if(images.large) quality.push(images.large);
