@@ -24,3 +24,12 @@ img[src=""], img:not(img[src]) {
 		margin-top: 50px;
 	}
 }
+
+@keyframes animeGradient {
+	0% {
+		background-position-x: calc(-566px + var(--offset))
+	}
+	100% {
+		background-position-x: calc(0px + var(--offset));
+	}
+}

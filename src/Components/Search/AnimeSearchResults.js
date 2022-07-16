@@ -85,9 +85,13 @@ function AnimeSearchResults() {
 		"search": searchResults["search"] || undefined,
 	};	
 	useEffect(() => {
-		window.scrollTo(0, 0);
+		if ("scrollRestoration" in window.history) {
+			// Back off, browser, I got this...
+			window.history.scrollRestoration = 'manual';
+			window.scrollTo(0, 0);
+		}
 		if(historyIndex !== -1) {
-			setData({...searchHistory[historyIndex], loading: false});
+			setData({...searchHistory[historyIndex], media: searchHistory[historyIndex].media.slice(0, 50), loading: false});
 			return;
 		};
 		setData({loading: true});
@@ -111,8 +115,6 @@ function AnimeSearchResults() {
 
 		return () => cancel();
 	}, [search]);
-
-	console.log(loading)
 	
 	return (
 		<div className="animes">

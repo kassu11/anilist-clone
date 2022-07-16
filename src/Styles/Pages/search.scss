@@ -61,14 +61,6 @@
 				margin: auto;
 				height: 20px;
 			}
-			@keyframes animeGradient {
-				0% {
-					background-position-x: calc(-566px + var(--offset))
-				}
-				100% {
-					background-position-x: calc(0px + var(--offset));
-				}
-			}
 		}
 
 		a {

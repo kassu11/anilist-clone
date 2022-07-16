@@ -16,6 +16,13 @@ function BottomAnimeResultElem({animeData, query, variables, searchHistory, hist
 		const observer = new IntersectionObserver(entries => {
 			if(entries[0].isIntersecting) {
 				observer.disconnect();
+
+				if(historyIndex !== -1 && newVaribles.page <= searchHistory[historyIndex].loadedPages) {
+					const startIndex = (newVaribles.page - 1) * 50;
+					setData({...searchHistory[historyIndex], media: searchHistory[historyIndex].media.slice(startIndex, startIndex + 50)});
+
+					return;
+				}
 				
 				axios({
 					url: "https://graphql.anilist.co",
@@ -23,9 +30,8 @@ function BottomAnimeResultElem({animeData, query, variables, searchHistory, hist
 					params: {query, variables: newVaribles},
 					cancelToken: new axios.CancelToken(c => cancel = c)
 				}).then(({data: {data}}) => {
-					/* Lisää enemmän kun 50 sivuu historiaan */
-					// searchHistory[historyIndex].media.push(...data.Page.media);
-					// searchHistory[historyIndex].pageInfo = data.Page.pageInfo;
+					searchHistory[historyIndex].media.push(...data.Page.media);
+					searchHistory[historyIndex].loadedPages = data.Page.pageInfo.currentPage;
 					setData(data.Page);
 				}).catch(error => {
 					if(axios.isCancel(error)) return;

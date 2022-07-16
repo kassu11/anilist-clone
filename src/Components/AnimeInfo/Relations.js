@@ -5,7 +5,19 @@ import fastData from "./fastData";
 
 const sortOrder = ["SOURCE", "ADAPTATION", "ALTERNATIVE", "SIDE_STORY", "SUMMARY", "CHARACTER", "OTHER"]
 
-function Relations({relations}) {
+function Relations({relations, loading}) {
+	if(loading) {
+		// return <div className="loading">Loading...</div>
+		return (
+			<div className="relationsContainer">
+				<h2>Relations</h2>
+				<div className="relations">
+					{[...Array(3)].map((_, i) => <a className="relation loading" key={"loading" + i}></a>)}
+				</div>
+			</div>
+		)
+	}
+
 	if(!relations?.edges.length) return null;
 	const relationsClass = relations.edges?.length > 6 ? "relations small" : "relations";
 
